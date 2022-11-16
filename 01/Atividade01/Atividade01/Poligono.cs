@@ -62,7 +62,7 @@ namespace Atividade01
 
             foreach(Vertice vertice in p.Vertices)
             {
-                sum += vertice.Distancia();
+                sum += vertice.Distancia(vertice);
             }
 
             return sum;

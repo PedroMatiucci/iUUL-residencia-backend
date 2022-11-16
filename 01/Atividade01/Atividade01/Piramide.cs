@@ -8,14 +8,23 @@ namespace Atividade01
 {
     internal class Piramide
     {
-        public int N { get; set; }
+        private int n;
+        public int N {
+            get
+            {
+                return n;
+            }
+            set
+            {
+                if(value < 1)
+                {
+                    throw new ArgumentOutOfRangeException("Valor deve ser maior ou igual a 1");
+                }
+            }
+        }
 
         public Piramide(int n)
         {
-            if(n < 1)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
             this.N = n;
         }
 

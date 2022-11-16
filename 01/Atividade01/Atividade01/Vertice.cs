@@ -17,9 +17,9 @@ namespace Atividade01
 			this.Y = Y;
 		}
 
-		public double Distancia()
+		public double Distancia(Vertice v)
 		{
-			return Math.Sqrt((this.X - this.Y) * (this.X - this.Y));
+			return Math.Sqrt((this.X - this.Y) * (v.Y - v.X));
 		}
 
 		public void Move(double x, double y)
@@ -28,6 +28,7 @@ namespace Atividade01
 			this.Y = y;
 		}
 
+		//override Equals (pesquisar)
 		public bool ComparaVertice(Vertice v)
 		{
 			if (this.X == v.X && this.Y == v.Y)

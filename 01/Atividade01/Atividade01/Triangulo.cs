@@ -14,40 +14,10 @@ namespace Atividade01
      
         public Triangulo(Vertice v1, Vertice v2, Vertice v3)
         {
-            double d1 = Math.Abs(v1.Distancia() - v2.Distancia());
-            double d2 = v1.Distancia() + v2.Distancia();
-            double value = v3.Distancia();
-            if(value > d1 && value < d2)
-            {
-                d1 = Math.Abs(v2.Distancia() - v3.Distancia());
-                d2 = v2.Distancia() + v3.Distancia();
-                value = v1.Distancia();
-                if (value > d1 && value < d2)
-                {
-                    d1 = Math.Abs(v1.Distancia() - v3.Distancia());
-                    d2 = v1.Distancia() + v3.Distancia();
-                    value = v2.Distancia();
-                    if (value > d1 && value < d2)
-                    {
-                        this.v1 = v1;
-                        this.v2 = v2;
-                        this.v3 = v3;
-                    }
-                    else
-                    {
-                        throw new ArgumentOutOfRangeException();
-                    }
-
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException();
-                }
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException();
-            }
+            // verificar se é triângulo
+            this.v1 = v1;
+            this.v2 = v2;
+            this.v3 = v3;
         }
 
         public string ComparaTriangulo(Triangulo t1, Triangulo t2)
@@ -58,7 +28,7 @@ namespace Atividade01
 
         public double Perimetro(Triangulo t)
         {
-            return t.v1.Distancia() + t.v2.Distancia() + t.v3.Distancia();
+            return t.v1.Distancia(v2) + t.v2.Distancia(v3) + t.v3.Distancia(v1);
         }
 
         public double Area(Triangulo t)
@@ -86,7 +56,7 @@ namespace Atividade01
 
         static bool TipoEquilatero(Triangulo t)
         {
-            if(t.v1.Distancia() == t.v2.Distancia() && t.v2.Distancia() == t.v3.Distancia())
+            if(t.v1.Distancia(t.v2) == t.v2.Distancia(t.v3) && t.v2.Distancia(t.v3) == t.v3.Distancia(t.v1))
             {
                 return true;
             }
@@ -95,7 +65,7 @@ namespace Atividade01
 
         static bool TipoEscaleno(Triangulo t)
         {
-            if (t.v1.Distancia() != t.v2.Distancia() && t.v2.Distancia() != t.v3.Distancia())
+            if (t.v1.Distancia(t.v2) != t.v2.Distancia(t.v3) && t.v2.Distancia(t.v3) != t.v3.Distancia(t.v1))
             {
                 return true;
             }
@@ -104,9 +74,9 @@ namespace Atividade01
 
         static bool TipoIsosceles(Triangulo t)
         {
-            double d1 = t.v1.Distancia();
-            double d2 = t.v2.Distancia();
-            double d3 = t.v3.Distancia();
+            double d1 = t.v1.Distancia(t.v2);
+            double d2 = t.v2.Distancia(t.v3);
+            double d3 = t.v3.Distancia(t.v1);
 
             if (d1 == d2 || d1 == d3 || d2 == d3)
             {
