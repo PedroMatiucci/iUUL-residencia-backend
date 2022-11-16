@@ -1,0 +1,15 @@
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\bin\Debug\net6.0\Atividade01.exe
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\bin\Debug\net6.0\Atividade01.deps.json
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\bin\Debug\net6.0\Atividade01.runtimeconfig.json
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\bin\Debug\net6.0\Atividade01.dll
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\bin\Debug\net6.0\Atividade01.pdb
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\obj\Debug\net6.0\Atividade01.csproj.AssemblyReference.cache
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\obj\Debug\net6.0\Atividade01.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\obj\Debug\net6.0\Atividade01.AssemblyInfoInputs.cache
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\obj\Debug\net6.0\Atividade01.AssemblyInfo.cs
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\obj\Debug\net6.0\Atividade01.csproj.CoreCompileInputs.cache
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\obj\Debug\net6.0\Atividade01.dll
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\obj\Debug\net6.0\refint\Atividade01.dll
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\obj\Debug\net6.0\Atividade01.pdb
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\obj\Debug\net6.0\Atividade01.genruntimeconfig.cache
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade01\Atividade01\obj\Debug\net6.0\ref\Atividade01.dll
