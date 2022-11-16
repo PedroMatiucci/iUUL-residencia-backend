@@ -21,9 +21,39 @@ namespace Atividade01
 
         public void Desenha(Piramide p)
         {
-            for(int i = 1; i <= p.N; i++)
+            int lines = p.N;
+            int lineCounter = 1;
+            int spaceCounter = 1;
+            int prints = 1;
+            int counter = 1;
+
+            while(lineCounter <= lines)
             {
-                Console.WriteLine(i);
+                for(spaceCounter = lineCounter; spaceCounter < lines; spaceCounter++)
+                {
+                    Console.Write(" ");
+                }
+                if (lineCounter != 1)
+                {
+                    for (prints = 1; prints < lineCounter; prints++)
+                    {
+                        Console.Write(counter);
+                        ++counter;
+                    }
+                    for(prints = 1; prints <= lineCounter; prints++)
+                    {
+                        Console.Write(counter);
+                        --counter;
+                    }
+                }
+                else
+                {
+                    Console.Write(counter);
+                }
+                
+                ++lineCounter;
+                counter = 1;
+                Console.WriteLine();
             }
         }
     }
