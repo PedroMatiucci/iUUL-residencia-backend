@@ -27,7 +27,7 @@ namespace Atividade02
         protected long ValidaCPF(string cpf)
         {
             valida:
-            while (cpf.Length != 11)
+            if(cpf.Length != 11)
             {
                 Console.WriteLine("\n---------ERRO----------");
                 Console.WriteLine("Nome do campo: cpf");
