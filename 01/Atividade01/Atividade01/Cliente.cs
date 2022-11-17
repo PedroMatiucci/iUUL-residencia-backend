@@ -11,12 +11,12 @@ namespace Atividade01
     {
         public string nome;
         public long cpf;
-        public DateTime data_nascimento;
-        public float renda_mensal;
-        public char estado_civil;
-        public int qtd_dependentes;
+        public DateTime dataNascimento;
+        public float rendaMensal;
+        public char estadoCivil;
+        public int qtdDependentes;
 
-        public Cliente(string nome, string cpf, string data_nascimento, string renda_mensal, string estado_civil, string qtd_dependentes)
+        public Cliente(string nome, string cpf, string dataNascimento, string rendaMensal, string estadoCivil, string qtdDependentes)
         {
             String nome_validado = ValidaNome(nome);
             this.nome = nome_validado;
@@ -24,17 +24,17 @@ namespace Atividade01
             long cpf_validado = ValidaCPF(cpf);
             this.cpf = cpf_validado;
 
-            DateTime data_nascimento_validado = ValidaNascimento(data_nascimento);
-            this.data_nascimento = data_nascimento_validado;
+            DateTime dataNascimento_validado = ValidaNascimento(dataNascimento);
+            this.dataNascimento = dataNascimento_validado;
 
-            float renda_mensal_validado = ValidaRendaMensal(renda_mensal);
-            this.renda_mensal = renda_mensal_validado;
+            float rendaMensal_validado = ValidaRendaMensal(rendaMensal);
+            this.rendaMensal = rendaMensal_validado;
 
-            char estado_civil_validado = ValidaEstadoCivil(estado_civil);
-            this.estado_civil = estado_civil_validado;
+            char estadoCivil_validado = ValidaEstadoCivil(estadoCivil);
+            this.estadoCivil = estadoCivil_validado;
 
-            int qtd_dependentes_validado = ValidaQtdDependentes(qtd_dependentes);
-            this.qtd_dependentes = qtd_dependentes_validado;
+            int qtdDependentes_validado = ValidaQtdDependentes(qtdDependentes);
+            this.qtdDependentes = qtdDependentes_validado;
         }
 
         private String ValidaNome(string nome)
@@ -125,7 +125,7 @@ namespace Atividade01
             int dependentes = int.Parse(qtd);
             while(dependentes < 0 || dependentes > 10)
             {
-                Console.WriteLine("Quantidade válida entre 0 e 10: ");
+                Console.WriteLine("Quantidade válida de dependentes entre 0 e 10: ");
                 qtd = Console.ReadLine();
             }
             return dependentes = int.Parse(qtd);
@@ -137,10 +137,10 @@ namespace Atividade01
             Console.WriteLine("==========Imprimindo cliente===========");
             Console.WriteLine("Nome: "+c.nome);
             Console.WriteLine("CPF: " + c.cpf);
-            Console.WriteLine("Nascimento: "+c.data_nascimento);
-            Console.WriteLine("Renda mensal: " + c.renda_mensal);
-            Console.WriteLine("Estado civil: " + c.estado_civil);
-            Console.WriteLine("Quantidade de dependentes: " + c.qtd_dependentes);
+            Console.WriteLine("Nascimento: "+c.dataNascimento);
+            Console.WriteLine("Renda mensal: " + c.rendaMensal);
+            Console.WriteLine("Estado civil: " + c.estadoCivil);
+            Console.WriteLine("Quantidade de dependentes: " + c.qtdDependentes);
         }
     }
 }
