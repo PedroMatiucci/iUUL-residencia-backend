@@ -9,7 +9,25 @@ namespace Atividade02
 {
     abstract class GerenciaAluno
     {
-        public List<Turma> InsereAluno(Aluno a)
+        public Turma InsereAluno(Turma t, Aluno a)
+        {
+            t.Alunos.Add(a);
+            return t;
+        }
+        public Turma RemoveAluno(Turma t, Aluno a)
+        {
+            t.Alunos.Remove(a);
+            return t;
+        }
+
+        public Aluno LancaNota(Aluno a,int nota)
+        {
+
+
+            return a;
+        }
+
+        public void ImprimeTurma(Turma turma)
         {
             
         }

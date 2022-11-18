@@ -8,7 +8,7 @@ namespace Atividade02
 {
     internal class Turma : Cursa
     {
-        List<Aluno> Alunos { get; set; }
+        public List<Aluno> Alunos { get; set; }
 
         public Turma(Aluno a)
         {
