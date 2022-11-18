@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,94 @@ namespace Atividade02
                 cpf = Console.ReadLine();
                 goto valida;
             }
+            if(cpf == "11111111111"
+                || cpf == "22222222222" 
+                || cpf == "33333333333" 
+                || cpf == "44444444444" 
+                || cpf == "55555555555"
+                || cpf == "66666666666"
+                || cpf == "77777777777"
+                || cpf == "88888888888"
+                || cpf == "99999999999")
+            {
+                Console.WriteLine("\n---------ERRO----------");
+                Console.WriteLine("Nome do campo: cpf");
+                Console.WriteLine($"Dado: {cpf}");
+                Console.WriteLine("Erro: Números do CPF não podem ser todos iguais.");
+                Console.WriteLine(">> ");
+                cpf = Console.ReadLine();
+                goto valida;
+            }
+            
+            var cpfArray = cpf.ToCharArray();
+            char primeiroDigitoVerificador = cpfArray[cpfArray.Length - 2];
+            char segundoDigitoVerificador = cpfArray[cpfArray.Length - 1];
+            int multiplicador,contador = 0,soma = 0;
+            for(multiplicador = 10; multiplicador >= 2; multiplicador--)
+            {
+                soma += cpfArray[contador] * multiplicador;
+                ++contador;
+            }
+            int resultado = soma % 11;
+            if(resultado == 0 || resultado == 1)
+            {
+                if(primeiroDigitoVerificador != 0)
+                {
+                    Console.WriteLine("\n---------ERRO----------");
+                    Console.WriteLine("Nome do campo: cpf");
+                    Console.WriteLine($"Dado: {cpf}");
+                    Console.WriteLine("Erro: CPF Inválido: Primeiro dígito verificador não confere.");
+                    Console.WriteLine(">> ");
+                    cpf = Console.ReadLine();
+                    goto valida;
+                }
+            }
+            else if(resultado <= 10 && resultado >= 2)
+            {
+                if(primeiroDigitoVerificador != 11 - resultado)
+                {
+                    Console.WriteLine("\n---------ERRO----------");
+                    Console.WriteLine("Nome do campo: cpf");
+                    Console.WriteLine($"Dado: {cpf}");
+                    Console.WriteLine("Erro: CPF Inválido: Primeiro dígito verificador não confere.");
+                    Console.WriteLine(">> ");
+                    cpf = Console.ReadLine();
+                    goto valida;
+                }
+            }
+            for (multiplicador = 11; multiplicador >= 2; multiplicador--)
+            {
+                soma += cpfArray[contador] * multiplicador;
+                ++contador;
+            }
+            resultado = soma % 11;
+            if (resultado == 0 || resultado == 1)
+            {
+                if (segundoDigitoVerificador != 0)
+                {
+                    Console.WriteLine("\n---------ERRO----------");
+                    Console.WriteLine("Nome do campo: cpf");
+                    Console.WriteLine($"Dado: {cpf}");
+                    Console.WriteLine("Erro: CPF Inválido: Segundo dígito verificador não confere.");
+                    Console.WriteLine(">> ");
+                    cpf = Console.ReadLine();
+                    goto valida;
+                }
+            }
+            else if (resultado <= 10 && resultado >= 2)
+            {
+                if (segundoDigitoVerificador != 11 - resultado)
+                {
+                    Console.WriteLine("\n---------ERRO----------");
+                    Console.WriteLine("Nome do campo: cpf");
+                    Console.WriteLine($"Dado: {cpf}");
+                    Console.WriteLine("Erro: CPF Inválido: Segundo dígito verificador não confere.");
+                    Console.WriteLine(">> ");
+                    cpf = Console.ReadLine();
+                    goto valida;
+                }
+            }
+
             return long.Parse(cpf);
         }
 
@@ -84,6 +173,24 @@ namespace Atividade02
         //VALIDAR RENDA
         protected float ValidaRendaMensal(String renda)
         {
+            //
+            /*
+            valida:
+            //
+            
+            if ()
+            {
+                Console.WriteLine("\n---------ERRO----------");
+                Console.WriteLine("Nome do campo: rendaMensal");
+                Console.WriteLine($"Dado: {renda}");
+                Console.WriteLine("Erro: Renda menor do que zero.");
+                Console.WriteLine(">> ");
+
+                renda = Console.ReadLine();
+
+                goto valida;
+            }
+            */
             return float.Parse(renda);
         }
 
