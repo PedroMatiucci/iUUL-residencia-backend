@@ -9,19 +9,18 @@ namespace Atividade02.Aluno_Q3
     internal class Curso
     {
         private String nome { get; set; }
-        private List<Aluno> alunos;
-        private List<Turma> turmas;
+        private List<Aluno> alunosDoCurso;
+        private List<Turma> turmasDoCurso;
 
         public Curso(string nome)
         {
             this.nome = nome;
-            alunos = new();
-            turmas = new();
+            alunosDoCurso = new();
+            turmasDoCurso = new();
         }
 
         public Curso MatriculaAlunoCurso(Curso c, Aluno a)
         {
-            alunos = new();
             //...
 
             return c;
