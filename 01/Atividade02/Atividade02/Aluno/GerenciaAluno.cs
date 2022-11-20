@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Atividade02
 {
-    abstract class GerenciaAluno
+    internal class GerenciaAluno
     {
         public Turma InsereAluno(Turma t, Aluno a)
         {
@@ -20,16 +20,13 @@ namespace Atividade02
             return t;
         }
 
-        public Aluno LancaNota(Aluno a,int nota)
+        public Aluno LancaNota(Aluno a,float p1,float p2)
         {
-
+            a.P1 = p1;
+            a.P2 = p2;
+            a.PF = (p1 + p2) / 2;
 
             return a;
-        }
-
-        public void ImprimeTurma(Turma turma)
-        {
-            
         }
     }
 }
