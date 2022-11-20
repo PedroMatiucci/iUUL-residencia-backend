@@ -13,6 +13,5 @@ namespace Atividade02
         protected internal float P1 { get; set; }
         protected internal float P2 { get; set; }
         protected internal float PF { get; set; }
-        
     }
 }

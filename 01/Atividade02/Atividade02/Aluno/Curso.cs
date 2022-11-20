@@ -18,5 +18,13 @@ namespace Atividade02.Aluno_Q3
             alunos = new();
             turmas = new();
         }
+
+        public Curso MatriculaAlunoCurso(Curso c, Aluno a)
+        {
+            alunos = new();
+            //...
+
+            return c;
+        }
     }
 }

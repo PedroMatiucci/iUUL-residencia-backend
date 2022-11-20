@@ -20,5 +20,16 @@ namespace Atividade02
                 Alunos.Add(aluno);
             }
         }
+
+        public Turma InsereAlunoTurma(Turma t, Aluno a)
+        {
+            t.Alunos.Add(a);
+            return t;
+        }
+        public Turma RemoveAlunoTurma(Turma t, Aluno a)
+        {
+            t.Alunos.Remove(a);
+            return t;
+        }
     }
 }
