@@ -28,14 +28,13 @@ namespace Atividade02
 
                 //gerando número aleatório
                 Random r = new();
-                String number = r.Next(0, int.Parse(ano)).ToString();
+                String random = r.Next(0, int.Parse(ano)).ToString();
 
-                //removendo whitespaces do nome e transformando em minúsculo
+                //removendo whitespaces do parâmetro e transformando em minúsculo
                 value = value.Trim().ToLower();
 
-                //gerando matrícula "única" (teoricamente)
-                matricula = value + hashData + number;
-
+                //gerando matrícula "única"
+                matricula = value + hashData + random;
             }
         }
 
@@ -45,13 +44,11 @@ namespace Atividade02
             this.Matricula = nome;
         }
 
-        public Aluno LancaNota(Aluno a, float p1, float p2)
+        public void LancaNota(Aluno a, float p1, float p2)
         {
             a.P1 = p1;
             a.P2 = p2;
             a.PF = (p1 + p2) / 2;
-
-            return a;
         }
     }
 }
