@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace Atividade02
 {
-    internal class Turma
+    internal class Turma : IComparer<Aluno>
     {
         protected internal List<Aluno> Alunos { get; set; }
         private String codigo = "TURMA";
+
+        public int Compare(Aluno? x, Aluno? y)
+        {
+            if (x.nome == null || y.nome == null)
+            {
+                return 0;
+            }
+            return x.nome.CompareTo(y.nome);
+        }
 
         protected internal String Codigo
         {
@@ -45,15 +54,29 @@ namespace Atividade02
             for(int i = 0; i < this.Alunos.Count; i++)
             {
                 var aluno = this.Alunos[i];
-                if (aluno.Equals(a))
-                    Console.WriteLine("Aluno já inserido na turma.");
-                else
-                    this.Alunos.Add(a);
+                if (a.Equals(aluno))
+                {
+                    Console.WriteLine("[ERRO] Aluno "+a.matricula+" já inserido na turma "+this.codigo);
+                    return;
+                }
             }
+            this.Alunos.Add(a);
+            Console.WriteLine("[SUCESSO] Aluno "+a.matricula+" inserido na turma "+this.codigo);
         }
         public void RemoveAlunoTurma(Aluno a)
         {
             this.Alunos.Remove(a);
+            Console.WriteLine($"[SUCESSO] Aluno {a.matricula} removido da turma {this.codigo}");
+        }
+
+        public void ImprimeAlunos()
+        {
+            this.Alunos.Sort(this);
+            Console.WriteLine("Imprimindo alunos em ordem alfabética...");
+            foreach(var aluno in this.Alunos)
+            {
+                Console.WriteLine(aluno.nome);
+            }
         }
     }
 }

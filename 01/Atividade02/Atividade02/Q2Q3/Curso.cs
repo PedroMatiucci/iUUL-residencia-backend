@@ -12,21 +12,20 @@ namespace Atividade02.Aluno_Q3
         private List<Aluno> alunosDoCurso;
         protected internal List<Turma> turmasDoCurso;
 
-        
+
         public void RemoveTurmaCurso(Turma t)
         {
             for(int i = 0; i < this.turmasDoCurso.Count; i++)
             {
                 var turma = this.turmasDoCurso[i];
-                if (turma.Equals(t))
+                if (t.Equals(turma))
                     if (t.Alunos.Count == 0) // só será possível remover a Turma de um Curso caso não hajam alunos nela
                     {
                         this.turmasDoCurso.Remove(t);
-                        Console.WriteLine("Turma "+t.Codigo+" removida com sucesso.");
+                        Console.WriteLine("[SUCESSO] Turma "+t.Codigo+" removida do curso "+this.nome);
                     }
-                        
                     else
-                        Console.WriteLine("Não foi possível excluir a turma "+t.Codigo+" pois ela possui alunos.");
+                        Console.WriteLine("[ERRO] Impossível excluir turma "+t.Codigo+" pois possui aluno.");
             }
         }
 
@@ -35,14 +34,26 @@ namespace Atividade02.Aluno_Q3
             this.turmasDoCurso.Add(t);
         }
 
-        public void ImprimeTurmasDoCurso(Curso c)
+        public void ImprimeTurmasDoCurso()
         {
-            Console.WriteLine("\nImprimindo dados do curso de: "+c.nome);
-            Console.WriteLine("Quantidade de turmas: " + c.turmasDoCurso.Count);
-            foreach (var turma in c.turmasDoCurso)
+            Console.WriteLine("\nIMPRIMINDO DADOS DO CURSO DE: "+this.nome);
+            Console.WriteLine("Quantidade de turmas: " + this.turmasDoCurso.Count);
+            foreach (var turma in this.turmasDoCurso)
             {
                 Console.WriteLine("\nCódigo da turma: "+turma.Codigo);
                 Console.WriteLine("Quantidade de Alunos: "+ turma.Alunos.Count);
+            }
+        }
+        public void ImprimeTurmasdoCursoComAlunos()
+        {
+            Console.WriteLine($"\n\nImprimindo Turmas por código com Alunos por nome do Curso de {this.nome}...");
+            foreach (var turma in this.turmasDoCurso)
+            {
+                if(turma.Alunos.Count != 0)
+                {
+                    Console.WriteLine("\n"+turma.Codigo); //IComparer não funcionou ...
+                    turma.ImprimeAlunos();
+                }
             }
         }
 
@@ -70,11 +81,11 @@ namespace Atividade02.Aluno_Q3
             if (!alunoMatriculado)
             {
                 this.alunosDoCurso.Remove(a);
-                Console.WriteLine("Aluno removido com sucesso.");
+                Console.WriteLine($"[SUCESSO] Aluno {a.matricula} removido do curso {this.nome}");
             }
                 
             else
-                Console.WriteLine("Não foi possível remover aluno pois ele está em alguma turma.");
+                Console.WriteLine($"[ERRO] Impossível remover aluno {a.matricula} do curso {this.nome} pois está em alguma turma.");
         }
     }
 }

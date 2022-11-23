@@ -1,7 +1,7 @@
 ﻿using Atividade02;
 using Atividade02.Aluno_Q2;
 using Atividade02.Aluno_Q3;
-
+/*
 Curso c = new("Programação");
 
 List < Aluno > listadeAlunosDaTurma1 = new();
@@ -25,7 +25,7 @@ c.AdicionaTurmaCurso(turma3);
 
 
 
-c.ImprimeTurmasDoCurso(c);
+c.ImprimeTurmasDoCurso();
 
 
 
@@ -34,8 +34,14 @@ turma2.InsereAlunoTurma(aluno3); //erro (repetido)
 c.RemoveTurmaCurso(turma1); //erro (tem aluno)
 c.RemoveTurmaCurso(turma3);
 
-c.ImprimeTurmasDoCurso(c);
+c.ImprimeTurmasDoCurso();
 
 Aluno aluno5 = new("Rodrigo5");
 c.RemoveAlunoCurso(aluno1); // erro (está numa turma)
 c.RemoveAlunoCurso(aluno5);
+
+turma1.ImprimeAlunos();
+
+c.ImprimeTurmasdoCursoComAlunos();
+
+*/

@@ -1,6 +1,6 @@
-﻿/*
-using Atividade02;
+﻿using Atividade02;
 
+/*
 Console.WriteLine("Insira um nome: ");
 String nome = Console.ReadLine();
 Console.WriteLine("Insira um cpf: ");

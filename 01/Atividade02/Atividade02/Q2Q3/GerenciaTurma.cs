@@ -54,8 +54,7 @@ namespace Atividade02.Aluno_Q2
 
         public void ImprimeTurmaNotaFinal(Turma t)
         {
-            GerenciaTurma gt = new();
-            t.Alunos.Sort(gt);
+            t.Alunos.Sort(this);
             foreach (var aluno in t.Alunos)
             {
                 Console.WriteLine("Nome: " + aluno.nome);
