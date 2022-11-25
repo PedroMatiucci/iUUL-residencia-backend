@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Atividade02.Q1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,21 +9,21 @@ namespace Atividade02
 {
     internal class Cliente
     {
-        public string Nome { get; private set; }
-        public long CPF { get; private set; }
-        public DateTime DataNascimento { get; private set; }
-        public float RendaMensal { get; private set; }
-        public char EstadoCivil { get; private set; }
-        public int QtdDependentes { get; private set; }
+        protected internal string Nome { get; set; }
+        protected internal long CPF { get; set; }
+        protected internal DateTime DataNascimento { get; set; }
+        protected internal float RendaMensal { get; set; }
+        protected internal char EstadoCivil { get; set; }
+        protected internal int QtdDependentes { get; set; }
 
-        public Cliente(string Nome, long CPF, DateTime DataNascimento, float RendaMensal, char EstadoCivil, int QtdDependentes)
+        public Cliente(ClienteForm cf)
         {
-            this.Nome = Nome;
-            this.CPF = CPF;
-            this.DataNascimento = DataNascimento;
-            this.RendaMensal = RendaMensal;
-            this.EstadoCivil = EstadoCivil;
-            this.QtdDependentes = QtdDependentes;
+            this.Nome = cf.Nome;
+            this.CPF = long.Parse(cf.CPF);
+            this.DataNascimento = DateTime.Parse(cf.DataNascimento);
+            this.RendaMensal = float.Parse(cf.RendaMensal);
+            this.EstadoCivil = char.Parse(cf.EstadoCivil);
+            this.QtdDependentes = int.Parse(cf.QtdDependentes);
         }
     }
 }

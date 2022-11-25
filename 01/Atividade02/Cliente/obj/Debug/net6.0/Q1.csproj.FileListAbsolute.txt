@@ -1,0 +1,15 @@
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\obj\Debug\net6.0\Q1.csproj.AssemblyReference.cache
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\obj\Debug\net6.0\Q1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\obj\Debug\net6.0\Q1.AssemblyInfoInputs.cache
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\obj\Debug\net6.0\Q1.AssemblyInfo.cs
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\obj\Debug\net6.0\Q1.csproj.CoreCompileInputs.cache
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\bin\Debug\net6.0\Q1.exe
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\bin\Debug\net6.0\Q1.deps.json
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\bin\Debug\net6.0\Q1.runtimeconfig.json
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\bin\Debug\net6.0\Q1.dll
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\bin\Debug\net6.0\Q1.pdb
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\obj\Debug\net6.0\Q1.dll
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\obj\Debug\net6.0\refint\Q1.dll
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\obj\Debug\net6.0\Q1.pdb
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\obj\Debug\net6.0\Q1.genruntimeconfig.cache
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\01\Atividade02\Cliente\obj\Debug\net6.0\ref\Q1.dll
