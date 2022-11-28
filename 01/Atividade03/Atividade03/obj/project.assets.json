@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rodri\\Desktop\\R\\prog\\github\\iUUL-UNIRIO-residencia-backend\\01\\Atividade03\\Atividade03\\Atividade03.csproj",
-      "projectName": "Atividade03",
-      "projectPath": "C:\\Users\\rodri\\Desktop\\R\\prog\\github\\iUUL-UNIRIO-residencia-backend\\01\\Atividade03\\Atividade03\\Atividade03.csproj",
+      "projectUniqueName": "C:\\Users\\rodri\\Desktop\\R\\prog\\github\\iUUL-UNIRIO-residencia-backend\\01\\Atividade03\\Atividade03\\Q1.csproj",
+      "projectName": "Q1",
+      "projectPath": "C:\\Users\\rodri\\Desktop\\R\\prog\\github\\iUUL-UNIRIO-residencia-backend\\01\\Atividade03\\Atividade03\\Q1.csproj",
       "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\rodri\\Desktop\\R\\prog\\github\\iUUL-UNIRIO-residencia-backend\\01\\Atividade03\\Atividade03\\obj\\",
       "projectStyle": "PackageReference",

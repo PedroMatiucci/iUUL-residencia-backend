@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Atividade02.Q1
+namespace Atividade03.Q1
 {
-    internal class ClienteForm
+    public class ClienteForm
     {
         public string Nome { get; set; }
         public string CPF { get; set; }
