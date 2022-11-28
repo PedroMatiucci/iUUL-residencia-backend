@@ -25,18 +25,7 @@ namespace Q2
             string[] words = txt.Split(' ');
             Array.Sort(words);
 
-
-            int i = 0,wordCounter = 0;
-            
-            
-
-            foreach(string word in words)
-            {
-                if (!ignorewords.Contains(word))
-                    ++wordCounter;
-                Console.WriteLine($"{word.ToUpper()} ({wordCounter})");
-            }
-
+            //??
         }
     }
 }
