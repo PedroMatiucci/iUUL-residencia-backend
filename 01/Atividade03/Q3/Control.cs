@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Q2
+namespace Q3
 {
     internal class Control
     {
