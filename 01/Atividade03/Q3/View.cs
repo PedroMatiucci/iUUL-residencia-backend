@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace Q3
 {
-    internal static class View
+    public static class View
     {
-        internal static void PrintArmstrong(this int numbers)
+        public static void PrintNumber(this int i)
         {
-            for(int i = 1; i <= numbers; i++)
-            {
-                if (i.IsArmstrong())
-                    Console.WriteLine(i);
-            }
+            Console.WriteLine(i);
         }
     }
 }

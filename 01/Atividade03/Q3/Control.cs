@@ -12,7 +12,12 @@ namespace Q2
     {
         public static void Start()
         {
-            View.PrintArmstrong(10000);
+            for(int i = 1; i <= 10000; i++)
+            {
+                Armstrong armstrong = new();
+                armstrong.number = i;
+                if (armstrong.IsArmstrong()) i.PrintNumber();
+            }
         }
     }
 }
