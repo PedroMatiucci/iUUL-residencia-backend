@@ -8,13 +8,20 @@ namespace Atividade02.Q4
 {
     internal class CertidaoNascimento
     {
-        private DateOnly dataEmissao;
-        private Pessoa pessoa { get; }
+        public DateOnly DataEmissao { get; private set; }
+        public Pessoa Pessoa { get; private set; }
 
         public CertidaoNascimento(Pessoa pessoa,DateOnly emissao)
         {
-            this.dataEmissao= emissao;
-            this.pessoa = pessoa;
+            if (pessoa == null)
+                throw new ArgumentException("Pessoa não pode ser nula.");
+
+
+            this.DataEmissao = emissao;
+            this.Pessoa = pessoa; //Associa certidão à pessoa
+
+            //Associa pessoa à essa certidão !! (Amarrou)
+            pessoa.CertidaoNascimento = this;
         }
     }
 }

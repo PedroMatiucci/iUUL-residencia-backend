@@ -8,12 +8,24 @@ namespace Atividade02.Q4
 {
     internal class Pessoa
     {
-        private String nome;
-        private CertidaoNascimento certidaoNascimento { get; }
+        public CertidaoNascimento? certidao;
+        public String Nome { get; private set; }
+        public CertidaoNascimento? CertidaoNascimento
+        {
+            get { return certidao; }
+            set
+            {
+                if (certidao == null)
+                    certidao = value;
+
+                else
+                    throw new InvalidOperationException("Pessoa já possui certidão");
+            }
+        }
 
         public Pessoa(String nome)
         {
-            this.nome = nome;
+            this.Nome = nome;
         }
     }
 }
