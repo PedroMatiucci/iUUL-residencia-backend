@@ -6,22 +6,32 @@ using System.Threading.Tasks;
 
 namespace Atividade02.Q5
 {
-    internal class Carro
+    public class Carro
     {
-        private String placa { get; set; }
-        private String modelo { get; set; }
-        private Motor motor { get; set; }
-
-        public  Carro(string placa, string modelo, Motor motor)
+        public String Placa { get; private set; }
+        public String Modelo { get; private set; }
+        public Motor motor;
+        public Motor Motor
         {
-            this.placa = placa;
-            this.modelo = modelo;
-            this.motor = motor;
+            get { return motor; }
+            set
+            {
+                if(value == null)
+                    throw new ArgumentNullException("Carro não pode ficar sem motor");
+                if (this.motor != value && value.Carro != this)
+                    throw new ArgumentException("Carro não pode trocar de motor.");
+                motor = value;
+            }
         }
 
-        public void TrocaMotor(Motor.Cilindrada cl) //pode passar assim?
+        public Carro(string placa, string modelo, Motor motor)
         {
-            this.motor = new(cl);
+            this.Placa = placa;
+            this.Modelo = modelo;
+
+
+            this.Motor = motor; //verifica primeiro se o carro já possui um motor
+            motor.Carro = this; //atribui esse carro a um motor
         }
     }
 }

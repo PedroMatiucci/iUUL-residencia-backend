@@ -6,25 +6,40 @@ using System.Threading.Tasks;
 
 namespace Atividade02.Q5
 {
-    internal class Motor
+    public class Motor
     {
-        private Enum cilindrada { get; set; }
-        public enum Cilindrada
+        public String cilindrada;
+        public String Cilindrada
         {
-            cl10 = 1000,
-            cl16 = 1600,
-            cl18 = 1800,
-            cl20 = 2000,
-            cl30 = 3000
+            get { return cilindrada;}
+            set
+            {
+                if(value != "1000" ||
+                   value != "1600" ||
+                   value != "2000")
+                    throw new ArgumentException("Cilindrada não existe");
+                cilindrada = value;
+            }
+        }
+        private Carro? carro;
+        public Carro? Carro
+        {
+            get { return carro; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("Carro precisa estar associado a um motor.");
+
+                if (value.Motor != this)
+                    throw new ArgumentException("Carro não pode possuir outro motor");
+
+                carro = value;
+            }
         }
 
-        public Motor(Cilindrada cl)
+        public Motor(string cl)
         {
-            this.cilindrada = cl;
-
-            //testando ...
-            foreach(var valor in Enum.GetValues(typeof(Cilindrada)))
-                Console.WriteLine(valor); //??
+            this.Cilindrada = cl;
         }
     }
 }
