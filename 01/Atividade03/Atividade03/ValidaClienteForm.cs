@@ -20,7 +20,7 @@ namespace Atividade03.Q1
             //Valida Nome
             if (!IsNome(cf.nome))
             {
-                clienteERR.nome = cf.nome;
+                clienteERR.dados.Add("nome",cf.nome);
                 err.IsClienteNomeValid = false;
                 return false;
             }
@@ -29,7 +29,7 @@ namespace Atividade03.Q1
             //Valida CPF
             if (!IsCpf(cf.cpf))
             {
-                clienteERR.cpf = cf.cpf;
+                clienteERR.dados.Add("cpf",cf.cpf);
                 err.IsClienteCPFValid = false;
                 return false;
             }
@@ -38,7 +38,7 @@ namespace Atividade03.Q1
             //Valida DataNascimento
             if (!IsDataNascimento(cf.dt_nascimento))
             {
-                clienteERR.dt_nascimento = cf.dt_nascimento;
+                clienteERR.dados.Add("dt_nascimento", cf.dt_nascimento);
                 err.IsClienteDataNascimentoValid = false;
                 return false;
             }
@@ -47,7 +47,7 @@ namespace Atividade03.Q1
             //Valida RendaMensal
             if (!IsRendaMensal(cf.renda_mensal))
             {
-                clienteERR.renda_mensal = cf.renda_mensal;
+                clienteERR.dados.Add("renda_mensal",cf.renda_mensal);
                 err.IsClienteRendaMensalValid = false;
                 return false;
             }
@@ -56,7 +56,7 @@ namespace Atividade03.Q1
             //Valida EstadoCivil
             if (!IsEstadoCivil(cf.estado_civil))
             {
-                clienteERR.estado_civil = cf.estado_civil;
+                clienteERR.dados.Add("estado_civil", cf.estado_civil);
                 err.IsClienteEstadoCivilValid = false;
                 return false;
             }
@@ -65,7 +65,7 @@ namespace Atividade03.Q1
             //Valida QtdDependentes
             if (!IsQtdDependentes(cf.dependentes))
             {
-                clienteERR.dependentes = cf.dependentes;
+                clienteERR.dados.Add("dependentes", cf.dependentes);
                 err.IsClienteQtdDependentesValid = false;
                 return false;
             }
@@ -150,9 +150,8 @@ namespace Atividade03.Q1
         private static bool IsRendaMensal(string? valor)
         {
             if (valor == null) return false;
-            //...
 
-            return true;
+            return float.Parse(valor) >= 0;
         }
 
         private static bool IsEstadoCivil(string? value)

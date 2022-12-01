@@ -16,28 +16,20 @@ namespace Atividade03.Q1
         public bool IsClienteEstadoCivilValid = false;
         public bool IsClienteQtdDependentesValid = false;
 
-        public string? nome { get; set; }
-        public string? cpf { get; set; }
-        public string? dt_nascimento { get; set; }
-        public string? renda_mensal { get; set; }
-        public string? estado_civil { get; set; }
-        public string? dependentes { get; set; }
+        public Dictionary<string, string>? dados { get; set; }
+        private Dictionary<string, string>? erros { get; set; }
 
-        private Errors dados { get; set; }
-        //private Dictionary<string, string>? erros;
-
-        public Errors() { }
+        public Errors()
+        {
+            dados = new Dictionary<string, string>();
+            erros = new Dictionary<string, string>();
+        }
 
         public void StoreClienteErrors()
         {
             string filename = "myerros.json";
 
-            Errors err = new()
-            {
-                dados = this
-            };
-
-            string jsonstr = JsonSerializer.Serialize(err);
+            string jsonstr = JsonSerializer.Serialize(this);
 
             File.WriteAllText(filename,jsonstr);
 
