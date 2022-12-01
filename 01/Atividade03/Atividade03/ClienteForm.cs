@@ -7,24 +7,23 @@ using System.Threading.Tasks;
 
 namespace Atividade03.Q1
 {
-    internal class ClienteForm
+    public class ClienteForm
     {
-        public string? nome { get; set; }
-        public string? cpf { get; set; }
-        public string? dt_nascimento { get; set; }
-        public string? renda_mensal { get; set; }
-        public string? estado_civil { get; set; }
-        public string? dependentes { get; set; }
+        public string? nome { get; private set; }
+        public string? cpf { get; private set; }
+        public string? dt_nascimento { get; private set; }
+        public string? renda_mensal { get; private set; }
+        public string? estado_civil { get; private set; }
+        public string? dependentes { get; private set; }
         
-        public ClienteForm() { }
-        public static ClienteForm[] ReadData(string strjson)
+        public static List<ClienteForm>? ReadData(string strjson)
         {
             
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
-            ClienteForm[]? clienteform = System.Text.Json.JsonSerializer.Deserialize<ClienteForm[]>(strjson);
+            var clienteform = JsonSerializer.Deserialize<List<ClienteForm>>(strjson,options);
 
             return clienteform;
         }
@@ -96,9 +95,9 @@ namespace Atividade03.Q1
             return;
         }
 
-        public static void PrintValidCliente(List<Cliente> carr)
+        public static void PrintValidCliente(List<Cliente> cList)
         {
-            foreach(var c in carr)
+            foreach(Cliente c in cList)
             {
                 Console.WriteLine();
                 Console.WriteLine("---------SUCESSO----------");

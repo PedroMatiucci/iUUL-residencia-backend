@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace Atividade03.Q1
 {
-    internal class Cliente
+    public class Cliente
     {
-        protected internal string Nome { get; set; }
-        protected internal long CPF { get; set; }
-        protected internal DateTime DataNascimento { get; set; }
-        protected internal float RendaMensal { get; set; }
-        protected internal char EstadoCivil { get; set; }
-        protected internal int QtdDependentes { get; set; }
+        public string Nome { get; private set; }
+        public long CPF { get; private set; }
+        public DateTime DataNascimento { get; private set; }
+        public float RendaMensal { get; private set; }
+        public char EstadoCivil { get; private set; }
+        public int QtdDependentes { get; private set; }
 
-        public Cliente() { }
         public Cliente(ClienteForm cf)
         {
+            if (cf == null)
+                throw new ArgumentNullException("ClienteForm não pode ser nulo");
             this.Nome = cf.nome;
             this.CPF = long.Parse(cf.cpf);
             this.DataNascimento = DateTime.Parse(cf.dt_nascimento);

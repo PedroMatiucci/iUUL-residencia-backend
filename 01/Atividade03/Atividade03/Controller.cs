@@ -6,30 +6,33 @@ static class Controller
 {
 	public static void Start()
 	{
-		//
-		// UI > CONTROLLER > VALIDADOR > ERROS > VALIDADOR > CONTROLLER > CLIENTE
-		//
-        ClienteForm[] cfarr;
+        List<ClienteForm>? cfList;
         Errors err = new();
-		Cliente c = null;
-		var carr = new List<Cliente>();
+        List<Cliente> cList = new();
+        //
+        // UI > CONTROLLER > VALIDADOR > ERROS > VALIDADOR > CONTROLLER > CLIENTE
+        //
 
-		// UI - CONTROLLER
-		string strjson = ClienteForm.ReadJsonFile();
-		cfarr = ClienteForm.ReadData(strjson);
+        // UI - CONTROLLER
+        string strjson = ClienteForm.ReadJsonFile();
+		cfList = ClienteForm.ReadData(strjson);
 
         // CONTROLLER - VALIDADOR - ERROS - VALIDADOR - CONTROLLER
-		foreach(var cf in cfarr)
-		{
+        foreach(ClienteForm cf in cfList)
+        {
             while (!ValidaClienteForm.IsValid(cf, err))
                 cf.ReadInvalidData(err);
-			// CONTROLLER - CLIENTE
-			c = new(cf);
-			carr.Add(c);
+
+            // CONTROLLER - CLIENTE
+            Cliente c = new(cf);
+            cList.Add(c);
         }
+            
+
+		
 
         //CONTROLLER - UI
-        ClienteForm.PrintValidCliente(carr);
+        ClienteForm.PrintValidCliente(cList);
 
     }
 }

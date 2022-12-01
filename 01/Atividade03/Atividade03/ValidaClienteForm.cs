@@ -1,6 +1,7 @@
 ﻿using Atividade03.Q1;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace Atividade03.Q1
     {
         private enum EC{C,S,V,D}
         
-        public static bool IsValid(ClienteForm cf,Errors err)
+        public static bool IsValid(ClienteForm? cf,Errors err)
         {
             Errors clienteERR = new();
 
@@ -80,14 +81,16 @@ namespace Atividade03.Q1
         
         //////////////////////////
         //VALIDATION METHODS
-        private static bool IsNome(string valor)
+        private static bool IsNome(string? valor)
         {
+            if (valor == null) return false;
             return valor.Length >= 5;
         }
 
         // Código IsCpf: https://macoratti.net/11/09/c_val1.htm
-        private static bool IsCpf(string cpf)
+        private static bool IsCpf(string? cpf)
         {
+            if (cpf == null) return false;
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             string tempCpf;
@@ -122,8 +125,9 @@ namespace Atividade03.Q1
             return cpf.EndsWith(digito);
         }
 
-        private static bool IsDataNascimento(string valor)
+        private static bool IsDataNascimento(string? valor)
         {
+            if (valor == null) return false;
             String format = "dd/MM/yyyy";
             DateTime DataFormatada;
             int AnoAtual, AnoNascimento;
@@ -143,15 +147,17 @@ namespace Atividade03.Q1
             return true;
         }
 
-        private static bool IsRendaMensal(string valor)
+        private static bool IsRendaMensal(string? valor)
         {
+            if (valor == null) return false;
             //...
 
             return true;
         }
 
-        private static bool IsEstadoCivil(string value)
+        private static bool IsEstadoCivil(string? value)
         {
+            if (value == null) return false;
             if (value.Length == 1)
                 foreach (var ec in Enum.GetNames(typeof(EC)))
                     if (value.ToUpper() == ec.ToString())
@@ -159,8 +165,9 @@ namespace Atividade03.Q1
             return false;
         }
 
-        private static bool IsQtdDependentes(string qtd)
+        private static bool IsQtdDependentes(string? qtd)
         {
+            if (qtd == null) return false;
             int dependentes;
             try
             {

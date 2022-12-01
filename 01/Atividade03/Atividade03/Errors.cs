@@ -7,37 +7,40 @@ using System.Threading.Tasks;
 
 namespace Atividade03.Q1
 {
-    internal class Errors
+    public class Errors
     {
-        protected internal bool IsClienteNomeValid = false;
-        protected internal bool IsClienteCPFValid = false;
-        protected internal bool IsClienteDataNascimentoValid = false;
-        protected internal bool IsClienteRendaMensalValid = false;
-        protected internal bool IsClienteEstadoCivilValid = false;
-        protected internal bool IsClienteQtdDependentesValid = false;
+        public bool IsClienteNomeValid = false;
+        public bool IsClienteCPFValid = false;
+        public bool IsClienteDataNascimentoValid = false;
+        public bool IsClienteRendaMensalValid = false;
+        public bool IsClienteEstadoCivilValid = false;
+        public bool IsClienteQtdDependentesValid = false;
 
-        protected internal string? nome { get; set; }
-        protected internal string? cpf { get; set; }
-        protected internal string? dt_nascimento { get; set; }
-        protected internal string? renda_mensal { get; set; }
-        protected internal string? estado_civil { get; set; }
-        protected internal string? dependentes { get; set; }
+        public string? nome { get; set; }
+        public string? cpf { get; set; }
+        public string? dt_nascimento { get; set; }
+        public string? renda_mensal { get; set; }
+        public string? estado_civil { get; set; }
+        public string? dependentes { get; set; }
 
-        private IList<Errors>? dados { get; set; }
+        private Errors dados { get; set; }
+        //private Dictionary<string, string>? erros;
 
         public Errors() { }
 
-        protected internal void StoreClienteErrors()
+        public void StoreClienteErrors()
         {
             string filename = "myerros.json";
 
-            var clienteerr = new Errors
+            Errors err = new()
             {
-                dados = new List<Errors> { this }
+                dados = this
             };
-            string jsonstr = JsonSerializer.Serialize(clienteerr);
+
+            string jsonstr = JsonSerializer.Serialize(err);
 
             File.WriteAllText(filename,jsonstr);
+
 
             return;
         }
