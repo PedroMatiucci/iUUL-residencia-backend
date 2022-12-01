@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Atividade03.Q1
 {
-    internal class ValidaClienteForm
+    public class ValidaClienteForm
     {
         private enum EC{C,S,V,D}
         

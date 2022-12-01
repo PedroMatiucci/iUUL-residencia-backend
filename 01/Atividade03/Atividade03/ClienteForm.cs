@@ -9,14 +9,14 @@ namespace Atividade03.Q1
 {
     public class ClienteForm
     {
-        public string? nome { get; private set; }
-        public string? cpf { get; private set; }
-        public string? dt_nascimento { get; private set; }
-        public string? renda_mensal { get; private set; }
-        public string? estado_civil { get; private set; }
-        public string? dependentes { get; private set; }
+        public string? nome { get; set; }
+        public string? cpf { get; set; }
+        public string? dt_nascimento { get; set; }
+        public string? renda_mensal { get; set; }
+        public string? estado_civil { get; set; }
+        public string? dependentes { get; set; }
         
-        public static List<ClienteForm>? ReadData(string strjson)
+        public static List<ClienteForm> ReadData(string strjson)
         {
             
             var options = new JsonSerializerOptions

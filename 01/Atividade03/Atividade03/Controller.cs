@@ -18,7 +18,7 @@ static class Controller
 		cfList = ClienteForm.ReadData(strjson);
 
         // CONTROLLER - VALIDADOR - ERROS - VALIDADOR - CONTROLLER
-        foreach(ClienteForm cf in cfList)
+        foreach(var cf in cfList)
         {
             while (!ValidaClienteForm.IsValid(cf, err))
                 cf.ReadInvalidData(err);
