@@ -10,10 +10,19 @@ namespace Q2
     {
         public static void Start()
         {
-            string txt = IndiceRemissivo.ReadTxt();
-            string? ignore = IndiceRemissivo.ReadIgnore();
+            //Read files
+            string txt = View.ReadTxt();
+            string ignore = View.ReadIgnore();
 
-            IndiceRemissivo.Imprime(txt, ignore);
+            //generate arrays
+            string[] sortedTxt = IndiceRemissivo.TxtToUpperSortedArray(txt);
+            string[] ignoreArr = IndiceRemissivo.IgnoreToUpperArray(ignore);
+
+            //calculate remissive index
+            var indices = IndiceRemissivo.Calcula(sortedTxt, ignoreArr);
+
+            //print
+            View.Imprime(indices);
         }
     }
 }

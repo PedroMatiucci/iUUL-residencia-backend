@@ -27,12 +27,11 @@ namespace Atividade03.Q1
 
         public void StoreClienteErrors()
         {
-            string filename = "myerros.json";
+            string filename = "errors.json";
 
             string jsonstr = JsonSerializer.Serialize(this);
 
             File.WriteAllText(filename,jsonstr);
-
 
             return;
         }
