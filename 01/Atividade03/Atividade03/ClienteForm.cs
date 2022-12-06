@@ -40,7 +40,7 @@ namespace Atividade03.Q1
             if (!err.IsClienteNomeValid)
             {
                 Console.WriteLine("\n---------ERRO----------");
-                Console.WriteLine("Nome do campo: Nome");
+                Console.WriteLine($"Nome do campo: {nameof(Cliente.Nome)}");
                 Console.WriteLine($"Dado: {this.nome}");
                 Console.WriteLine("Erro: Nome com menos de 5 caracteres.");
                 Console.WriteLine(">> Insira um novo valor >> ");
@@ -49,7 +49,7 @@ namespace Atividade03.Q1
             if (!err.IsClienteCPFValid)
             {
                 Console.WriteLine("\n---------ERRO----------");
-                Console.WriteLine("Nome do campo: CPF");
+                Console.WriteLine($"Nome do campo: {nameof(Cliente.CPF)}");
                 Console.WriteLine($"Dado: {this.cpf}");
                 Console.WriteLine("Erro: CPF não existe.");
                 Console.WriteLine(">> Insira um novo valor >> ");
@@ -58,7 +58,7 @@ namespace Atividade03.Q1
             if (!err.IsClienteDataNascimentoValid)
             {
                 Console.WriteLine("\n---------ERRO----------");
-                Console.WriteLine("Nome do campo: DataNascimento");
+                Console.WriteLine($"Nome do campo: {nameof(Cliente.DataNascimento)}");
                 Console.WriteLine($"Dado: {this.dt_nascimento}");
                 Console.WriteLine("Erro: Data inválida e/ou idade menor do que 18 anos.");
                 Console.WriteLine(">> Insira um novo valor >> ");
@@ -67,7 +67,7 @@ namespace Atividade03.Q1
             if (!err.IsClienteRendaMensalValid)
             {
                 Console.WriteLine("\n---------ERRO----------");
-                Console.WriteLine("Nome do campo: RendaMensal");
+                Console.WriteLine($"Nome do campo: {nameof(Cliente.RendaMensal)}");
                 Console.WriteLine($"Dado: {this.renda_mensal}");
                 Console.WriteLine("Erro: Renda inválida.");
                 Console.WriteLine(">> Insira um novo valor >> ");
@@ -76,7 +76,7 @@ namespace Atividade03.Q1
             if (!err.IsClienteEstadoCivilValid)
             {
                 Console.WriteLine("\n---------ERRO----------");
-                Console.WriteLine("Nome do campo: EstadoCivil");
+                Console.WriteLine($"Nome do campo: {nameof(Cliente.EstadoCivil)}");
                 Console.WriteLine($"Dado: {this.estado_civil}");
                 Console.WriteLine("Erro: Estado civil desconhecido.");
                 Console.WriteLine(">> Insira um estado civil (Cc/Ss/Vv/Dd) >> ");
@@ -85,7 +85,7 @@ namespace Atividade03.Q1
             if (!err.IsClienteQtdDependentesValid)
             {
                 Console.WriteLine("\n---------ERRO----------");
-                Console.WriteLine("Nome do campo: QtdDependentes");
+                Console.WriteLine($"Nome do campo: {nameof(Cliente.QtdDependentes)}");
                 Console.WriteLine($"Dado: {this.dependentes}");
                 Console.WriteLine("Erro: Quantidade de dependentes não pode ser menor que 0 ou maior que 10.");
                 Console.WriteLine(">> Insira um novo valor >> ");

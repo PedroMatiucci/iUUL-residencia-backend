@@ -17,7 +17,7 @@ namespace Q3
             double sum = 0;
             foreach (var numchar in single)
             {
-                var num = int.Parse(numchar.ToString());
+                int num = int.Parse(numchar.ToString());
                 sum += Math.Pow(num, houses);
             }
             if (sum == entity.number) return true; else return false;

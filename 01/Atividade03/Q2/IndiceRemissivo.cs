@@ -50,6 +50,7 @@ namespace Q2
                 }
                 isPresent = false;
             }
+
             return indices;
         }
     }
