@@ -8,6 +8,15 @@ namespace Q4
 {
     public class GenericList<T>
     {
-        public void Add(T input) { }
+        
+        public List<T> List;
+        public GenericList()
+        {
+            List = new List<T>();
+        }
+        public void Add(T input)
+        {
+            List.Add(input);
+        }
     }
 }
