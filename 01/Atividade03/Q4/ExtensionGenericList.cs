@@ -10,17 +10,9 @@ namespace Q4
 {
     public static class ExtensionGenericList
     {
-        public static void RemoveRepetido<T>(this GenericList<T> entity) where T : notnull
+        public static List<T> RemoveRepetido<T>(this IList<T> list)
         {
-            int contains = 0;
-            for(int k = 0; k < entity.List.Count; k++)
-            {
-                var item = entity.List[k];
-                if (entity.List.Contains(item))
-                    ++contains;
-                if (contains > 1)
-                    entity.List.Remove(item);
-            }
+            return list.ToHashSet().ToList();
         }
     }
 }

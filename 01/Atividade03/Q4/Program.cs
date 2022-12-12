@@ -1,20 +1,11 @@
 ﻿using Q4;
 
-GenericList<string> strlist = new();
-strlist.Add("string 1");
-strlist.Add("string 1");
-strlist.Add("string 2");
+List<string> strlist = new() { "string 1", "string 2", "string 1", "string 3", "string 2"};
 
-GenericList<int> intlist = new();
-intlist.Add(1);
-intlist.Add(1);
-intlist.Add(2);
+List<int> intlist = new() { 3, 1, 2, 4, 5, 3, 1, 2, 4, 5 };
 
-strlist.RemoveRepetido();
-intlist.RemoveRepetido();
+strlist = ExtensionGenericList.RemoveRepetido(strlist);
+intlist = ExtensionGenericList.RemoveRepetido(intlist);
 
-foreach(string str in strlist.List)
-    Console.WriteLine(str);
-
-foreach (int i in intlist.List)
-    Console.WriteLine(i);
+strlist.ForEach(e => Console.WriteLine($"{e} "));
+intlist.ForEach(e => Console.WriteLine($"{e} "));
