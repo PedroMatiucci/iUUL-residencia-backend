@@ -79,6 +79,7 @@ namespace Consultorio
         internal static bool ProcuraCliente(string? entrada)
         {
             //... continuar por aqui
+            return true;
         }
     }
 }

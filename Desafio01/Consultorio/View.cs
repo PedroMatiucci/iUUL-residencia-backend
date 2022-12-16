@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace Consultorio
             int escolha;
             do
             {
-                Console.WriteLine("\n\nMenu Principal" +
+                Console.WriteLine("\nMenu Principal" +
                 "\n1-Cadastro de Pacientes" +
                 "\n2-Agenda" +
                 "\n3-Fim");
@@ -33,12 +34,12 @@ namespace Consultorio
             int escolha;
             do
             {
-                Console.WriteLine("\n\nMenu do Cadastro de Pacientes" +
+                Console.WriteLine("\nMenu do Cadastro de Pacientes" +
                     "\n1-Cadastrar novo paciente" +
                     "\n2-Excluir paciente" +
                     "\n3-Listar pacientes (ordenado por CPF)" +
                     "\n4-Listar pacientes (ordenado por nome)" +
-                    "\n5-Voltar p/ menu principal\n");
+                    "\n5-Voltar p/ menu principal");
 
                 entrada = Console.ReadLine();
                 escolha = int.Parse(entrada);
@@ -54,7 +55,7 @@ namespace Consultorio
             int escolha;
             do
             {
-                Console.WriteLine("\n\nAgenda" +
+                Console.WriteLine("\nAgenda" +
                     "\n1-Agendar consulta" +
                     "\n2-Cancelar agendamento" +
                     "\n3-Listar agenda" +
@@ -74,11 +75,12 @@ namespace Consultorio
             string entrada;
             bool valido = true;
 
+            CPF:
             do
             {
                 if(valido == false)
-                    Console.WriteLine("\n[ERRO] CPF inválido.\n");
-                Console.WriteLine("CPF: ");
+                    Console.WriteLine("\n[ERRO] CPF inválido.");
+                Console.Write("\nCPF: ");
                 entrada = Console.ReadLine();
                 valido = ValidaClienteForm.IsCPF(entrada);
             } while (!valido);
@@ -86,9 +88,11 @@ namespace Consultorio
             do
             {
                 if (valido == false)
+                {
                     Console.WriteLine("\n[ERRO] Cliente já cadastrado.\n");
-                Console.WriteLine("CPF: ");
-                entrada = Console.ReadLine();
+                    goto CPF;
+                }
+                    
                 valido = ValidaClienteForm.ProcuraCliente(entrada);
             } while (!valido);
 
@@ -97,8 +101,8 @@ namespace Consultorio
             do
             {
                 if (valido == false)
-                    Console.WriteLine("\n[ERRO] Nome deve ter pelo menos 05 caracteres.");
-                Console.WriteLine("Nome: ");
+                    Console.WriteLine("\n[ERRO] Nome deve ter pelo menos 05 caracteres.\n");
+                Console.Write("Nome: ");
                 entrada = Console.ReadLine();
                 valido = ValidaClienteForm.IsNome(entrada);
             } while (!valido);
@@ -108,8 +112,8 @@ namespace Consultorio
             do
             {
                 if(valido == false)
-                    Console.WriteLine("\n[ERRO] Paciente deve ter pelo menos 13 anos.");
-                Console.WriteLine("Data de Nascimento: ");
+                    Console.WriteLine("\n[ERRO] Data inválida / Cliente precisa ter 13 anos.\n");
+                Console.Write("Data de Nascimento: ");
                 entrada = Console.ReadLine();
                 valido = ValidaClienteForm.IsDataNascimento(entrada);
             } while (!valido);

@@ -1,0 +1,15 @@
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\obj\Debug\net6.0\Consultorio.csproj.AssemblyReference.cache
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\obj\Debug\net6.0\Consultorio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\obj\Debug\net6.0\Consultorio.AssemblyInfoInputs.cache
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\obj\Debug\net6.0\Consultorio.AssemblyInfo.cs
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\obj\Debug\net6.0\Consultorio.csproj.CoreCompileInputs.cache
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\bin\Debug\net6.0\Consultorio.exe
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\bin\Debug\net6.0\Consultorio.deps.json
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\bin\Debug\net6.0\Consultorio.runtimeconfig.json
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\bin\Debug\net6.0\Consultorio.dll
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\bin\Debug\net6.0\Consultorio.pdb
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\obj\Debug\net6.0\Consultorio.dll
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\obj\Debug\net6.0\refint\Consultorio.dll
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\obj\Debug\net6.0\Consultorio.pdb
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\obj\Debug\net6.0\Consultorio.genruntimeconfig.cache
+C:\Users\rodri\Desktop\R\prog\github\iUUL-UNIRIO-residencia-backend\Desafio01\Consultorio\obj\Debug\net6.0\ref\Consultorio.dll
