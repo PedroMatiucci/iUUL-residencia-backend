@@ -12,6 +12,9 @@ namespace Consultorio
         {
             Cliente c;
             ClienteForm cf;
+            // Criaremos a lista de clientes apenas uma
+            // única vez durante a execução do programa.
+            GerenciaCliente gc = new();
 
             MENU:
 
@@ -38,6 +41,8 @@ namespace Consultorio
                     {
                         cf = View.CadastroCliente();
                         c = new(cf);
+                        // Adicionando cliente recém-criado na lista de clientes.
+                        gc.Clientes.Add(c);
                         if (c != null) View.ExibeMensagemCadastroCliente(true);
                         else View.ExibeMensagemCadastroCliente(false);
                     }
@@ -56,7 +61,7 @@ namespace Consultorio
 
             // Ao final de toda execução,
             // voltaremos sempre ao menu principal
-            // resetando os valores.
+            // resetando os valores das escolhas.
             goto MENU;
         }
     }

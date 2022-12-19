@@ -8,6 +8,11 @@ namespace Consultorio
 {
     public class GerenciaCliente
     {
-        
+        public List<Cliente> Clientes { get; private set;}
+
+        public GerenciaCliente()
+        {
+            Clientes= new List<Cliente>();
+        }
     }
 }
