@@ -128,5 +128,26 @@ namespace Consultorio
             if (valido) Console.WriteLine("\nCliente cadastrado com sucesso!\n");
             else Console.WriteLine("\nErro de cadastro.\n");
         }
+
+        public static long RemoveCliente()
+        {
+            string entrada;
+            bool valido = true;
+            do
+            {
+                if (valido == false)
+                    Console.WriteLine("\n[ERRO] CPF inválido.");
+                Console.Write("\nCPF: ");
+                entrada = Console.ReadLine();
+                valido = ValidaClienteForm.IsCPF(entrada);
+
+            }while(!valido);
+            return long.Parse(entrada);
+        }
+        public static void ExibeMensagemErroRemocao(bool valido)
+        {
+            if (valido) Console.WriteLine("\nCliente removido com sucesso!\n");
+            else Console.WriteLine("\nEste Cliente nao existe.\n");
+        }
     }
 }
