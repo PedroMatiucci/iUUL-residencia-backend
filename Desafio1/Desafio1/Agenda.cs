@@ -24,6 +24,8 @@ namespace Consultorio
         {
             Agenda c = ViewCadastro.InsereDadosConsulta();
             c.agendaList.Add(c);
+
+            //continuar por aqui...
         }
     }
 }
