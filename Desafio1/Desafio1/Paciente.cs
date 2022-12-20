@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Consultorio
 {
-    internal class Cliente
+    internal class Paciente
     {
         public string Nome { get; private set; }
         public long CPF { get; private set; }
         public DateTime DataNascimento { get; private set; }
 
-        public Cliente(ClienteForm cf)
+        public Paciente(PacienteForm cf)
         {
             this.Nome = cf.Nome;
             this.CPF = long.Parse(cf.CPF);

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Consultorio
 {
-    public class ClienteForm
+    public class PacienteForm
     {
         public string? Nome { get; set; }
         public string? CPF { get; set; }
         public string? DataNascimento { get; set; }
     
-        public ClienteForm() { }
+        public PacienteForm() { }
     }
 }

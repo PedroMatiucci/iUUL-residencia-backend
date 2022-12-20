@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Consultorio
 {
-    internal class ValidaClienteForm
+    internal class ValidaPacienteForm
     {   
         public static bool IsNome(string? valor)
         {
@@ -76,7 +76,7 @@ namespace Consultorio
             return true;
         }
 
-        internal static bool ProcuraCliente(string? entrada)
+        internal static bool ProcuraPaciente(string? entrada)
         {
             //... continuar por aqui
             return true;

@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Consultorio
 {
-    internal class GerenciaCliente
+    internal class GerenciaPaciente
     {
-        public List<Cliente> Clientes { get; private set;}
+        public List<Paciente> Pacientes { get; private set;}
 
-        public GerenciaCliente()
+        public GerenciaPaciente()
         {
-            Clientes= new List<Cliente>();
+            Pacientes = new List<Paciente>();
         }
     }
 }

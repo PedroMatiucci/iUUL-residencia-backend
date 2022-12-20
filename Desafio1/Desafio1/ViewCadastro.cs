@@ -10,9 +10,9 @@ namespace Consultorio
 {
     internal static class ViewCadastro
     {
-        public static ClienteForm CadastroCliente()
+        public static PacienteForm CadastroCliente()
         {
-            ClienteForm cf = new();
+            PacienteForm cf = new();
             string entrada;
             bool valido = true;
 
@@ -28,7 +28,7 @@ namespace Consultorio
                 entrada = Console.ReadLine();
 
                 // Validar.
-                valido = ValidaClienteForm.IsCPF(entrada);
+                valido = ValidaPacienteForm.IsCPF(entrada);
             } while (!valido);
 
             do
@@ -39,7 +39,7 @@ namespace Consultorio
                     goto CPF;
                 }
                     
-                valido = ValidaClienteForm.ProcuraCliente(entrada);
+                valido = ValidaPacienteForm.ProcuraPaciente(entrada);
             } while (!valido);
 
             cf.CPF = entrada;
@@ -51,7 +51,7 @@ namespace Consultorio
                 Console.Write("Nome: ");
                 entrada = Console.ReadLine();
 
-                valido = ValidaClienteForm.IsNome(entrada);
+                valido = ValidaPacienteForm.IsNome(entrada);
             } while (!valido);
 
             cf.Nome = entrada;
@@ -63,7 +63,7 @@ namespace Consultorio
                 Console.Write("Data de Nascimento: ");
                 entrada = Console.ReadLine();
 
-                valido = ValidaClienteForm.IsDataNascimento(entrada);
+                valido = ValidaPacienteForm.IsDataNascimento(entrada);
             } while (!valido);
 
             cf.DataNascimento = entrada;
@@ -82,7 +82,7 @@ namespace Consultorio
                 Console.Write("\nCPF: ");
                 entrada = Console.ReadLine();
 
-                valido = ValidaClienteForm.IsCPF(entrada);
+                valido = ValidaPacienteForm.IsCPF(entrada);
 
             }while(!valido);
             return long.Parse(entrada);

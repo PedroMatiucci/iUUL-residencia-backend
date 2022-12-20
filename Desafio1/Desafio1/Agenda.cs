@@ -13,8 +13,7 @@ namespace Consultorio
         public DateOnly data { get; set; }
         public int horaInicial { get; set; }
         public int horaFinal { get; set; }
-
-        List<Agenda> agendaList { get; set; }
+        public List<Agenda> agendaList { get; set; }
 
         public Agenda()
         {
