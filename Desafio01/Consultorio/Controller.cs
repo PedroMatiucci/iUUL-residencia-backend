@@ -80,6 +80,21 @@
                             }
                         }
                         break;
+                    case 3:
+                        {
+                            // ordena a lista de pacientes utilizando o Cpf como criterio de ordenacao 
+                            //Depois Retorna para o view a lista ordenada para ser printada
+                            gc.Clientes.Sort((a1, a2) => a1.CPF.CompareTo(a2.CPF));
+                            View.ExibeListaPacientes(gc.Clientes);
+                        }
+                        break;
+                    case 4:
+                        {
+                            // ordena a lista de pacientes utilizando o Nome como criterio de ordenacao 
+                            //Depois Retorna para o view a lista ordenada para ser printada
+                            gc.Clientes.Sort((a1, a2) => a1.Nome.CompareTo(a2.Nome));
+                            View.ExibeListaPacientes(gc.Clientes);}
+                        break;
                         //...
                 }
             }

@@ -8,19 +8,24 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\rodri\\.nuget\\packages\\": {}
+    "C:\\Users\\Carla\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rodri\\Desktop\\R\\prog\\github\\iUUL-UNIRIO-residencia-backend\\Desafio01\\Consultorio\\Consultorio.csproj",
+      "projectUniqueName": "C:\\Users\\Carla\\source\\repos\\iUUL-UNIRIO-residencia-backend\\Desafio01\\Consultorio\\Consultorio.csproj",
       "projectName": "Consultorio",
-      "projectPath": "C:\\Users\\rodri\\Desktop\\R\\prog\\github\\iUUL-UNIRIO-residencia-backend\\Desafio01\\Consultorio\\Consultorio.csproj",
-      "packagesPath": "C:\\Users\\rodri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rodri\\Desktop\\R\\prog\\github\\iUUL-UNIRIO-residencia-backend\\Desafio01\\Consultorio\\obj\\",
+      "projectPath": "C:\\Users\\Carla\\source\\repos\\iUUL-UNIRIO-residencia-backend\\Desafio01\\Consultorio\\Consultorio.csproj",
+      "packagesPath": "C:\\Users\\Carla\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Carla\\source\\repos\\iUUL-UNIRIO-residencia-backend\\Desafio01\\Consultorio\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\rodri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Carla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -28,6 +33,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -170,5 +171,18 @@ namespace Consultorio
         {
             Console.WriteLine("\nErro: paciente está agendado.\n");
         }
+        internal static void ExibeListaPacientes(List<Cliente> listaClientes)
+        {
+            //Metodo para listar pacientes, recebe uma lista ja ordenada pelo controlador e da o print nela
+            Console.WriteLine("------------------------------------------------------------\r\nCPF Nome Dt.Nasc. Idade\r\n------------------------------------------------------------");
+            foreach (Cliente cliente in listaClientes)
+            {
+                int idade = DateTime.Now.Year - cliente.DataNascimento.Year;
+                Console.WriteLine("{0} {1} {2} {3}", cliente.CPF, cliente.Nome, cliente.DataNascimento, idade);
+            }
+            Console.WriteLine("------------------------------------------------------------");
+        }
+
+
     }
 }
