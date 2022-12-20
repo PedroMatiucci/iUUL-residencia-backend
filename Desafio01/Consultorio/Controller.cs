@@ -37,26 +37,47 @@
                         {
                             cf = View.CadastroCliente();
                             c = new(cf);
+
                             // Adicionando cliente recém-criado na lista de clientes.
                             gc.Clientes.Add(c);
-                            if (c != null) View.ExibeMensagemCadastroCliente(true);
-                            else View.ExibeMensagemCadastroCliente(false);
+
+                            View.ExibeMensagemCadastroCliente();
                         }
                         break;
                     case 2:
                         {
-                            long cpfRemover = View.RemoveCliente();
-                            bool verifica = false;
-                            foreach (Cliente clienteRemover in gc.Clientes.ToList())
+                            long cpfRemover = View.InsereCPF(); // Buscar CPF do Paciente.
+                            bool existePaciente = false;
+                            bool temConsulta = false;
+
+                            foreach (Cliente pacienteRemover in gc.Clientes.ToList())
                             {
-                                if (clienteRemover.CPF == cpfRemover)
+                                if (pacienteRemover.CPF == cpfRemover)
                                 {
-                                    gc.Clientes.Remove(clienteRemover);//veriricar se tem atendimento marcado
-                                    verifica = true;
-                                    //remover os atendiemtos tambem
+                                    existePaciente = true;
+
+                                    // Verificar se há algum atendimento marcado
+                                    //...
+                                    //if(verdadeiro)...
+                                    // temConsulta == true;
+
+                                    
+                                    // Após as verificações, se existir o paciente
+                                    // e se não tiver consulta, podemos excluí-lo.
+                                    if (existePaciente && !temConsulta)
+                                    {
+                                        gc.Clientes.Remove(pacienteRemover);
+                                    }
+
+                                    // Do contrário, se tiver consulta,
+                                    // exibir mensagem de erro.
+                                    else if(existePaciente && temConsulta)
+                                    {
+                                        View.ExibeMensagemRemocaoPacienteMarcado();
+                                    }
                                 }
+                                View.ExibeMensagemRemocaoPaciente(existePaciente);
                             }
-                            View.ExibeMensagemErroRemocao(verifica);
                         }
                         break;
                         //...

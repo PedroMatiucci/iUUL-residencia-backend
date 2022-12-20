@@ -9,6 +9,9 @@ namespace Consultorio
 {
     public class View
     {
+        /*
+         * MENU PRINCIPAL
+         */
         public static int MenuPrincipal()
         {
             string entrada;
@@ -28,6 +31,9 @@ namespace Consultorio
             return escolha;
         }
 
+        /*
+         * MENU CADASTRO DE PACIENTE
+         */
         public static int MenuCadastroPaciente()
         {
             string entrada;
@@ -49,6 +55,9 @@ namespace Consultorio
             return escolha;
         }
 
+        /*
+         * MENU AGENDA
+         */
         public static int MenuAgenda()
         {
             string entrada;
@@ -78,10 +87,15 @@ namespace Consultorio
             CPF:
             do
             {
+                // Indicar se houve algum erro na entrada.
                 if(valido == false)
                     Console.WriteLine("\n[ERRO] CPF inválido.");
+
+                // Ler entrada do usuário.
                 Console.Write("\nCPF: ");
                 entrada = Console.ReadLine();
+
+                // Validar.
                 valido = ValidaClienteForm.IsCPF(entrada);
             } while (!valido);
 
@@ -104,6 +118,7 @@ namespace Consultorio
                     Console.WriteLine("\n[ERRO] Nome deve ter pelo menos 05 caracteres.\n");
                 Console.Write("Nome: ");
                 entrada = Console.ReadLine();
+
                 valido = ValidaClienteForm.IsNome(entrada);
             } while (!valido);
 
@@ -115,6 +130,7 @@ namespace Consultorio
                     Console.WriteLine("\n[ERRO] Data inválida / Cliente precisa ter 13 anos.\n");
                 Console.Write("Data de Nascimento: ");
                 entrada = Console.ReadLine();
+
                 valido = ValidaClienteForm.IsDataNascimento(entrada);
             } while (!valido);
 
@@ -123,15 +139,14 @@ namespace Consultorio
             return cf;
         }
 
-        public static void ExibeMensagemCadastroCliente(bool valido)
+        public static void ExibeMensagemCadastroCliente()
         {
-            if (valido) Console.WriteLine("\nCliente cadastrado com sucesso!\n");
-            else Console.WriteLine("\nErro de cadastro.\n");
+            Console.WriteLine("\nPaciente cadastrado com sucesso!\n");
         }
 
-        public static long RemoveCliente()
+        public static long InsereCPF()
         {
-            string entrada;
+            string? entrada;
             bool valido = true;
             do
             {
@@ -139,15 +154,21 @@ namespace Consultorio
                     Console.WriteLine("\n[ERRO] CPF inválido.");
                 Console.Write("\nCPF: ");
                 entrada = Console.ReadLine();
+
                 valido = ValidaClienteForm.IsCPF(entrada);
 
             }while(!valido);
             return long.Parse(entrada);
         }
-        public static void ExibeMensagemErroRemocao(bool valido)
+        public static void ExibeMensagemRemocaoPaciente(bool v)
         {
-            if (valido) Console.WriteLine("\nCliente removido com sucesso!\n");
-            else Console.WriteLine("\nEste Cliente nao existe.\n");
+            if (v) Console.WriteLine("\nPaciente excluído com sucesso!\n");
+            else Console.WriteLine("\nErro: paciente não cadastrado.\n");
+        }
+
+        internal static void ExibeMensagemRemocaoPacienteMarcado()
+        {
+            Console.WriteLine("\nErro: paciente está agendado.\n");
         }
     }
 }
