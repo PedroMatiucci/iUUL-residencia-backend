@@ -39,7 +39,7 @@ namespace Consultorio
                     goto CPF;
                 }
                     
-                valido = ValidaPacienteForm.ProcuraPaciente(entrada);
+                valido = GerenciaPaciente.ProcuraPaciente(entrada);
             } while (!valido);
 
             cf.CPF = entrada;
@@ -71,6 +71,66 @@ namespace Consultorio
             return cf;
         }
 
+        public static Consulta InsereDadosConsulta()
+        {
+            Consulta c = new();
+            string? entrada;
+
+            long cpf = ViewCadastro.InsereCPF();
+            c.CPF = cpf;
+
+            DateOnly data = ViewCadastro.InsereDataConsulta();
+            c.DataConsulta = data;
+
+            int[] horasInicialFinal = new int[2];
+            horasInicialFinal = ViewCadastro.InsereHora();
+            c.HoraInicial = horasInicialFinal[0];
+            c.HoraFinal = horasInicialFinal[1];
+
+            return c;
+        }
+
+        private static int[] InsereHora()
+        {
+            HORA:
+            Console.WriteLine("Hora inicial: ");
+            string? entrada = Console.ReadLine();
+
+            int[] horasInicialFinal = new int[2];
+            try
+            {
+                horasInicialFinal[0] = int.Parse(entrada);
+            }
+            catch
+            {
+                ViewMensagens.ExibeMensagemErroHora();
+                goto HORA;
+            }
+
+            HORA_FINAL:
+            Console.WriteLine("Hora final: ");
+            entrada = Console.ReadLine();
+
+            try
+            {
+                horasInicialFinal[1] = int.Parse(entrada);
+            }
+            catch
+            {
+                ViewMensagens.ExibeMensagemErroHora();
+                goto HORA_FINAL;
+            }
+
+            if (ValidaPacienteForm.PossuiHoraConflitante(horasInicialFinal))
+            {
+                ViewMensagens.ExibeMensagemAgendamento(false);
+                goto HORA;
+            }
+            else ViewMensagens.ExibeMensagemAgendamento(true);
+
+            return horasInicialFinal;
+        }
+
         public static long InsereCPF()
         {
             string? entrada;
@@ -88,15 +148,21 @@ namespace Consultorio
             return long.Parse(entrada);
         }
 
-        public static Agenda InsereDadosConsulta()
+        private static DateOnly InsereDataConsulta()
         {
-            Agenda a = new();
-
-            long cpf = ViewCadastro.InsereCPF();
-
-            a.cpf = cpf;
-
-            //continuar por aqui...
+        DATA:
+            Console.WriteLine("Data da consulta: ");
+            string? entrada = Console.ReadLine();
+            DateOnly data;
+            try
+            {
+                data = DateOnly.Parse(entrada);
+            }
+            catch
+            {
+                Console.WriteLine("\nErro: Data inválida.");
+            }
+            return data;
         }
     }
 }

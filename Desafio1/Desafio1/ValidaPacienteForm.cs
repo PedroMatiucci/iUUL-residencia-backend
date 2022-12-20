@@ -20,6 +20,7 @@ namespace Consultorio
         public static bool IsCPF(string? cpf)
         {
             if (cpf == null) return false;
+
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             string tempCpf;
@@ -57,9 +58,11 @@ namespace Consultorio
         public static bool IsDataNascimento(string? valor)
         {
             if (valor == null) return false;
+
             String format = "dd/MM/yyyy";
             DateTime DataFormatada;
             int AnoAtual, AnoNascimento;
+
             try
             {
                 DataFormatada = DateTime.ParseExact(valor, format, System.Globalization.CultureInfo.InvariantCulture);
@@ -76,10 +79,9 @@ namespace Consultorio
             return true;
         }
 
-        internal static bool ProcuraPaciente(string? entrada)
+        internal static bool PossuiHoraConflitante(int[] horasInicialFinal)
         {
-            //... continuar por aqui
-            return true;
+            // continuar...
         }
     }
 }

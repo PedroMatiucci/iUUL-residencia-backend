@@ -18,6 +18,17 @@ namespace Consultorio
             else Console.WriteLine("\nErro: paciente não cadastrado.\n");
         }
 
+        internal static void ExibeMensagemAgendamento(bool v)
+        {
+            if(!v) Console.WriteLine("\nErro: Já existe uma consulta agendada neste horário.\n");
+            else Console.WriteLine("\nAgendamento realizado com sucesso\n");
+        }
+
+        internal static void ExibeMensagemErroHora()
+        {
+            Console.WriteLine("\nErro: Hora inválida.\n");
+        }
+
         internal static void ExibeMensagemRemocaoPacienteMarcado()
         {
             Console.WriteLine("\nErro: paciente está agendado.\n");

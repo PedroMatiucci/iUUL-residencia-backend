@@ -4,12 +4,12 @@
     {
         public static void Start()
         {
-            Paciente c;
-            PacienteForm cf;
+            Paciente p;
+            PacienteForm pf;
             // Criaremos a lista de clientes apenas uma
             // única vez durante a execução do programa.
             GerenciaPaciente gp = new();
-            Agenda a = new();
+            Consulta c = new();
 
             MENU:
 
@@ -34,11 +34,11 @@
                 {
                     case 1:
                         {
-                            cf = ViewCadastro.CadastroCliente();
-                            c = new(cf);
+                            pf = ViewCadastro.CadastroCliente();
+                            p = new(pf);
 
                             // Adicionando cliente recém-criado na lista de clientes.
-                            gp.Pacientes.Add(c);
+                            gp.Pacientes.Add(p);
 
                             ViewMensagens.ExibeMensagemCadastroCliente();
                         }
@@ -104,10 +104,8 @@
                 {
                     case 1:
                         {
-                            if (a.AgendarConsulta())
-                            {
-
-                            }
+                            c.AgendarConsulta();
+                            ViewMensagens.ExibeMensagemAgendamento(true);
                         }
                         break;
                 }

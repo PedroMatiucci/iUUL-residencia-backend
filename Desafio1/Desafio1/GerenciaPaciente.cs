@@ -14,5 +14,11 @@ namespace Consultorio
         {
             Pacientes = new List<Paciente>();
         }
+
+        public static bool ProcuraPaciente(string? entrada)
+        {
+            //...
+            return true;
+        }
     }
 }
