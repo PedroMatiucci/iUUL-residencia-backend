@@ -81,7 +81,7 @@ namespace Consultorio
          * Função para inserção de dados para agendamento
          * de uma consulta!
          */
-        public static Consulta InsereDadosConsulta(GerenciaPaciente gerenciaPaciente,Agenda agenda)
+        public static ConsultaForm InsereDadosConsulta(GerenciaPaciente gerenciaPaciente,Agenda agenda)
         {
             ConsultaForm consultaForm = new();
             string? entrada;
@@ -156,10 +156,8 @@ namespace Consultorio
 
             consultaForm.HoraInicial = horasInicialFinal[0];
             consultaForm.HoraFinal = horasInicialFinal[1];
-
-            //Consulta consulta = new(consultaForm.CPF);
             
-            return consulta;
+            return consultaForm;
         }
 
         private static string[] InsereHoraInicialFinal()

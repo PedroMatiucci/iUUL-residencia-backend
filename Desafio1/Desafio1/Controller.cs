@@ -100,7 +100,12 @@
                 {
                     case 1:
                         {
-                            Consulta consulta = ViewCadastro.InsereDadosConsulta(gerenciaPaciente, agenda);
+                            ConsultaForm consultaForm = ViewCadastro.InsereDadosConsulta(gerenciaPaciente, agenda);
+
+                            Consulta consulta = new(long.Parse(consultaForm.CPF),
+                                DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta)),
+                                int.Parse(consultaForm.HoraInicial), int.Parse(consultaForm.HoraFinal));
+
                             agenda.Consultas.Add(consulta);
                             ViewMensagens.ExibeMensagemAgendamento(true);
                         }
