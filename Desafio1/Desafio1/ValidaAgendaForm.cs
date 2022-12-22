@@ -8,6 +8,10 @@ namespace Consultorio
 {
     internal static class ValidaAgendaForm
     {
+        public static bool ValidaData(string entrada)
+        {
+
+        }
         internal static bool PossuiHoraConflitante(List<Consulta> agenda, int[] horasInicialFinal)
         {
             foreach (Consulta consulta in agenda)

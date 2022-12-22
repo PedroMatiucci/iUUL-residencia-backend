@@ -97,7 +97,7 @@ namespace Consultorio
 
                 entrada = InsereDataConsulta();
 
-                valido = ValidaAgendaForm.DataConsultaValida(entrada);
+                valido = ValidaAgendaForm.ValidaData(entrada);
             } while (!valido);
             
             consultaForm.DataConsulta = entrada;

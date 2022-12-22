@@ -6,7 +6,7 @@
         {
             // Criaremos a lista de clientes apenas uma
             // única vez durante a execução do programa.
-            GerenciaPaciente gp = new();
+            Agenda agenda = new();
 
         MENU:
             int escolhaMenuPrincipal;
