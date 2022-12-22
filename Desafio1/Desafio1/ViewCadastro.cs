@@ -81,12 +81,14 @@ namespace Consultorio
          * Função para inserção de dados para agendamento
          * de uma consulta!
          */
-        public static Consulta InsereDadosConsulta(GerenciaPaciente gerenciaPaciente)
+        public static Consulta InsereDadosConsulta(GerenciaPaciente gerenciaPaciente,Agenda agenda)
         {
             ConsultaForm consultaForm = new();
             string? entrada;
             bool valido = true;
 
+
+            /* CPF DO PACIENTE */
             CPF:
             do
             {
@@ -107,10 +109,11 @@ namespace Consultorio
             consultaForm.CPF = entrada;
 
 
+            /* DATA DA CONSULTA */
             do
             {
                 if (!valido)
-                    ViewMensagens.ExibeMensagemAgendamento(valido);
+                    ViewMensagens.ExibeMensagemErroData();
 
                 entrada = InsereDataConsulta();
 
@@ -119,18 +122,43 @@ namespace Consultorio
             
             consultaForm.DataConsulta = entrada;
 
-            /*
-            // terminar este último...
+
+            /* HORAS INICIAL E FINAL */
+            HORA:
+
             string[] horasInicialFinal;
-            horasInicialFinal = InsereHoraInicialFinal(c.Agenda);
+
+            do
+            {
+                if (!valido)
+                    ViewMensagens.ExibeMensagemErroHora();
+
+                horasInicialFinal = InsereHoraInicialFinal();
+
+                valido = ValidaAgendaForm.HoraValida(horasInicialFinal);
+            } while (!valido);
+
+            if (!ValidaAgendaForm.HorarioValido(horasInicialFinal))
+            {
+                ViewMensagens.ExibeMensagemErroHorarioComercial();
+                goto HORA;
+            }
+            if (!ValidaAgendaForm.HorarioDisponivel(horasInicialFinal,agenda))
+            {
+                ViewMensagens.ExibeMensagemAgendamento(false);
+                goto HORA;
+            }
+            if (ValidaAgendaForm.ExisteAgendamento(gerenciaPaciente.Pacientes,horasInicialFinal))
+            {
+                ViewMensagens.ExibeMensagemAgendamento(false);
+                goto HORA;
+            }
+
             consultaForm.HoraInicial = horasInicialFinal[0];
             consultaForm.HoraFinal = horasInicialFinal[1];
 
-            ValidaAgendaForm.HoraValida();
-
-
-            Consulta consulta = new(consultaForm.CPF);
-            */
+            //Consulta consulta = new(consultaForm.CPF);
+            
             return consulta;
         }
 

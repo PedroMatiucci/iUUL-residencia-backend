@@ -35,8 +35,12 @@ namespace Consultorio
          *********/
         internal static void ExibeMensagemAgendamento(bool v)
         {
-            if(!v) Console.WriteLine("\nErro: já existe uma consulta agendada neste horário.\n");
-            else Console.WriteLine("\nAgendamento realizado com sucesso\n");
+            if(v) Console.WriteLine("\nAgendamento realizado com sucesso\n");
+            else Console.WriteLine("\nErro: já existe uma consulta agendada neste horário.\n");
+        }
+        internal static void ExibeMensagemErroHorarioComercial()
+        {
+            Console.WriteLine("\nErro: horário inserido fora do horário comercial (08h às 19h)\n");
         }
 
         /*************
@@ -44,11 +48,11 @@ namespace Consultorio
          ************/
         internal static void ExibeMensagemErroHora()
         {
-            Console.WriteLine("\nErro: Hora inválida.\n");
+            Console.WriteLine("\nErro: hora inválida.\n");
         }
         internal static void ExibeMensagemErroData()
         {
-            Console.WriteLine("\nErro: Data inválida.\n");
+            Console.WriteLine("\nErro: data inválida.\n");
         }
 
         /*******
@@ -68,7 +72,7 @@ namespace Consultorio
          *******/
         internal static void ExibeMensagemErroNome()
         {
-            Console.WriteLine("\nErro: Nome deve ter pelo menos 05 (cinco) caracteres.\n");
+            Console.WriteLine("\nErro: nome deve ter pelo menos 05 (cinco) caracteres.\n");
         }
     }
 }

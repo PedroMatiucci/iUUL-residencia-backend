@@ -100,7 +100,7 @@
                 {
                     case 1:
                         {
-                            Consulta consulta = ViewCadastro.InsereDadosConsulta(gerenciaPaciente);
+                            Consulta consulta = ViewCadastro.InsereDadosConsulta(gerenciaPaciente, agenda);
                             agenda.Consultas.Add(consulta);
                             ViewMensagens.ExibeMensagemAgendamento(true);
                         }
