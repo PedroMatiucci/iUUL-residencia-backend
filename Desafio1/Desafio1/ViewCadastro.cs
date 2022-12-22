@@ -34,13 +34,14 @@ namespace Consultorio
                 valido = ValidaPacienteForm.ValidaCPF(entrada);
             } while (!valido);
 
-            if (gerenciaPaciente.ProcuraPaciente(entrada))
+            if (gerenciaPaciente.ExistePaciente(entrada))
             {
                 ViewMensagens.ExibeMensagemErroCPFCadastrado();
                 goto CPF;
             }
 
             pacienteForm.CPF = entrada;
+
 
             do
             {
@@ -54,6 +55,7 @@ namespace Consultorio
 
             pacienteForm.Nome = entrada;
 
+
             do
             {
                 if (valido == false)
@@ -66,7 +68,9 @@ namespace Consultorio
 
             pacienteForm.DataNascimento = entrada;
 
-            paciente = new(pacienteForm.Nome, long.Parse(pacienteForm.CPF), DateTime.Parse(pacienteForm.DataNascimento));
+
+            paciente = new(null,pacienteForm.Nome, long.Parse(pacienteForm.CPF), DateTime.Parse(pacienteForm.DataNascimento));
+
 
             return paciente;
         }
