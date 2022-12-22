@@ -13,17 +13,36 @@ namespace Consultorio
         public DateOnly DataConsulta { get; set; }
         public int HoraInicial { get; set; }
         public int HoraFinal { get; set; }
-        public List<Consulta> Agenda { get; set; }
-
-        public Consulta()
+        
+        public Consulta(long cpf,DateOnly data, int h1, int h2)
         {
-            Agenda = new List<Consulta>();
+            this.CPF = cpf;
+            this.DataConsulta = data;
+            this.HoraInicial = h1;
+            this.HoraFinal = h2;
         }
 
-        public void AgendarConsulta()
+        public bool AgendarConsulta()
         {
-            Consulta c = ViewCadastro.InsereDadosConsulta();
-            c.Agenda.Add(c);
+            /*
+            // verificar se existe agendamento
+            if (ValidaAgendaForm.PossuiHoraConflitante(this.Agenda,))
+            {
+                // se sim
+                return false;
+            }
+            
+            
+            // se não
+            this.Agenda.Add(this);
+            return true;
+            */
+            return true;
+        }
+
+        private bool VerificaAgendamento()
+        {
+            return true;
         }
     }
 }

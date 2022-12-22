@@ -8,17 +8,22 @@ namespace Consultorio
 {
     internal class GerenciaPaciente
     {
-        public List<Paciente> Pacientes { get; private set;}
+        public List<Paciente> Pacientes { get; set;}
 
         public GerenciaPaciente()
         {
             Pacientes = new List<Paciente>();
         }
 
-        public static bool ProcuraPaciente(string? entrada)
+        public bool ProcuraPaciente(string entrada)
         {
-            //...
-            return true;
+            long cpf = long.Parse(entrada);
+            foreach(Paciente paciente in this.Pacientes)
+            {
+                if(paciente.CPF == cpf)
+                    return true;
+            }
+            return false;
         }
     }
 }

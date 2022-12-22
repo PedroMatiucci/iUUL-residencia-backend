@@ -8,12 +8,21 @@ using System.Threading.Tasks;
 
 namespace Consultorio
 {
-    internal class ValidaPacienteForm
+    internal static class ValidaPacienteForm
     {   
-        public static bool IsNome(string? valor)
+        public static bool IsNome(string? entrada)
         {
-            if (valor == null) return false;
-            return valor.Length >= 5;
+            if (entrada == null) return false;
+            return entrada.Length >= 5;
+        }
+
+        public static bool ValidaCPF(string? entrada)
+        {
+            bool cpfValido = ValidaPacienteForm.IsCPF(entrada);
+            bool conversaoValida = ValidaPacienteForm.ValidaConversaoCPF(entrada);
+            if (!cpfValido || !conversaoValida)
+                return false;
+            return true;
         }
 
         // Fonte: https://macoratti.net/11/09/c_val1.htm
@@ -54,10 +63,20 @@ namespace Consultorio
             digito += resto.ToString();
             return cpf.EndsWith(digito);
         }
-
-        public static bool IsDataNascimento(string? valor)
+        public static bool ValidaConversaoCPF(string? entrada)
         {
-            if (valor == null) return false;
+            if (entrada == null) return false;
+            try
+            {
+                long cpf = long.Parse(entrada);
+            }
+            catch (Exception) { return false; }
+            return true;
+        }
+
+        public static bool IsDataNascimento(string? entrada)
+        {
+            if (entrada == null) return false;
 
             String format = "dd/MM/yyyy";
             DateTime DataFormatada;
@@ -65,7 +84,7 @@ namespace Consultorio
 
             try
             {
-                DataFormatada = DateTime.ParseExact(valor, format, System.Globalization.CultureInfo.InvariantCulture);
+                DataFormatada = DateTime.ParseExact(entrada, format, System.Globalization.CultureInfo.InvariantCulture);
                 
             }
             catch (Exception) { return false; }
@@ -77,11 +96,5 @@ namespace Consultorio
             if ((AnoAtual - AnoNascimento) <= 12) return false;
 
             return true;
-        }
-
-        internal static bool PossuiHoraConflitante(int[] horasInicialFinal)
-        {
-            // continuar...
-        }
+        }  
     }
-}

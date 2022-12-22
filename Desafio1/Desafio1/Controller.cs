@@ -4,46 +4,41 @@
     {
         public static void Start()
         {
-            Paciente p;
-            PacienteForm pf;
             // Criaremos a lista de clientes apenas uma
             // única vez durante a execução do programa.
             GerenciaPaciente gp = new();
-            Consulta c = new();
 
-            MENU:
+        MENU:
+            int escolhaMenuPrincipal;
+            int? escolhaCadastroPaciente = null;
+            int? escolhaAgenda = null;
 
-            int escolhaMP;
-            int? escolhaCP = null;
-            int? escolhaA = null;
+            escolhaMenuPrincipal = ViewMenu.MenuPrincipal();
 
-            escolhaMP = ViewMenu.MenuPrincipal();
-
-            switch (escolhaMP)
+            switch (escolhaMenuPrincipal)
             {
-                case 1: escolhaCP = ViewMenu.MenuCadastroPaciente();
+                case 1: escolhaCadastroPaciente = ViewMenu.MenuCadastroPaciente();
                     break;
-                case 2: escolhaA = ViewMenu.MenuAgenda();
+                case 2: escolhaAgenda = ViewMenu.MenuAgenda();
                     break;
                 default: return;
             }
 
-            if (escolhaCP != null)
+            if (escolhaCadastroPaciente != null)
             {
-                switch (escolhaCP)
+                switch (escolhaCadastroPaciente)
                 {
                     case 1:
                         {
-                            pf = ViewCadastro.CadastroCliente();
-                            p = new(pf);
-
-                            // Adicionando cliente recém-criado na lista de clientes.
+                            Paciente p = ViewCadastro.CadastroPaciente(gp);
+                            // Adicionando paciente recém-criado e validado
+                            // na lista de pacientes.
                             gp.Pacientes.Add(p);
 
-                            ViewMensagens.ExibeMensagemCadastroCliente();
+                            ViewMensagens.ExibeMensagemCadastroPaciente();
                         }
                         break;
-                    case 2:
+                    case 2: /* PARA FAZER ! */
                         {
                             long cpfRemover = ViewCadastro.InsereCPF(); // Inserir um CPF.
                             bool existePaciente = false;
@@ -98,14 +93,13 @@
                 }
             }
 
-            else if (escolhaA != null)
+            else if (escolhaAgenda != null)
             {
-                switch (escolhaA)
+                switch (escolhaAgenda)
                 {
                     case 1:
                         {
-                            c.AgendarConsulta();
-                            ViewMensagens.ExibeMensagemAgendamento(true);
+                            Consulta consulta = ViewCadastro.InsereDadosConsulta();
                         }
                         break;
                 }

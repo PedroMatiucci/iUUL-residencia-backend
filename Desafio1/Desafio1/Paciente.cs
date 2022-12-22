@@ -12,11 +12,11 @@ namespace Consultorio
         public long CPF { get; private set; }
         public DateTime DataNascimento { get; private set; }
 
-        public Paciente(PacienteForm cf)
+        public Paciente(string nome, long cpf, DateTime data)
         {
-            this.Nome = cf.Nome;
-            this.CPF = long.Parse(cf.CPF);
-            this.DataNascimento = DateTime.Parse(cf.DataNascimento);
+            this.Nome = nome;
+            this.CPF = cpf;
+            this.DataNascimento = data;
         }
     }
 }

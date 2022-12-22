@@ -10,159 +10,143 @@ namespace Consultorio
 {
     internal static class ViewCadastro
     {
-        public static PacienteForm CadastroCliente()
+        public static Paciente CadastroPaciente(GerenciaPaciente gerenciaPaciente)
         {
-            PacienteForm cf = new();
-            string entrada;
+            PacienteForm pacienteForm = new();
+            Paciente paciente;
+            string? entrada;
             bool valido = true;
+            bool cpfValido = true;
+            bool conversaoValida = true;
 
+            //INSERÇÃO DE CPF PARA CADASTRO -> VALIDAÇÃO CPF VÁLIDO -> VALIDAÇÃO CPF EXISTENTE NO CADASTRO
             CPF:
             do
             {
-                // Indicar se houve algum erro na entrada.
-                if(valido == false)
-                    Console.WriteLine("\n[ERRO] CPF inválido.");
+                if (!valido)
+                    ViewMensagens.ExibeMensagemErroCPF();
 
-                // Ler entrada do usuário.
-                Console.Write("\nCPF: ");
-                entrada = Console.ReadLine();
+                entrada = InsereCPF();
 
-                // Validar.
-                valido = ValidaPacienteForm.IsCPF(entrada);
+                valido = ValidaPacienteForm.ValidaCPF(entrada);
             } while (!valido);
+
+            if (gerenciaPaciente.ProcuraPaciente(entrada))
+            {
+                ViewMensagens.ExibeMensagemErroCPFCadastrado();
+                goto CPF;
+            }
+
+            pacienteForm.CPF = entrada;
 
             do
             {
-                if (valido == false)
-                {
-                    Console.WriteLine("\n[ERRO] Cliente já cadastrado.\n");
-                    goto CPF;
-                }
-                    
-                valido = GerenciaPaciente.ProcuraPaciente(entrada);
-            } while (!valido);
-
-            cf.CPF = entrada;
-
-            do
-            {
-                if (valido == false)
-                    Console.WriteLine("\n[ERRO] Nome deve ter pelo menos 05 caracteres.\n");
+                if (!valido)
+                    ViewMensagens.ExibeMensagemErroNome();
                 Console.Write("Nome: ");
                 entrada = Console.ReadLine();
 
                 valido = ValidaPacienteForm.IsNome(entrada);
             } while (!valido);
 
-            cf.Nome = entrada;
+            pacienteForm.Nome = entrada;
 
             do
             {
-                if(valido == false)
-                    Console.WriteLine("\n[ERRO] Data inválida / Cliente precisa ter 13 anos.\n");
+                if (valido == false)
+                    ViewMensagens.ExibeMensagemErroData();
                 Console.Write("Data de Nascimento: ");
                 entrada = Console.ReadLine();
 
                 valido = ValidaPacienteForm.IsDataNascimento(entrada);
             } while (!valido);
 
-            cf.DataNascimento = entrada;
+            pacienteForm.DataNascimento = entrada;
 
-            return cf;
+            paciente = new(pacienteForm.Nome, long.Parse(pacienteForm.CPF), DateTime.Parse(pacienteForm.DataNascimento));
+
+            return paciente;
         }
-
+        
+        /*
+         * Função para inserção de dados para agendamento
+         * de uma consulta!
+         */
         public static Consulta InsereDadosConsulta()
         {
-            Consulta c = new();
+            ConsultaForm consultaForm = new();
             string? entrada;
+            bool valido = true;
 
-            long cpf = ViewCadastro.InsereCPF();
-            c.CPF = cpf;
+            do
+            {
+                if (!valido)
+                    ViewMensagens.ExibeMensagemErroCPF();
 
-            DateOnly data = ViewCadastro.InsereDataConsulta();
-            c.DataConsulta = data;
+                entrada = InsereCPF();
 
-            int[] horasInicialFinal = new int[2];
-            horasInicialFinal = ViewCadastro.InsereHora();
-            c.HoraInicial = horasInicialFinal[0];
-            c.HoraFinal = horasInicialFinal[1];
+                valido = ValidaPacienteForm.ValidaCPF(entrada);
+            } while (!valido);
+            
+            consultaForm.CPF = entrada;
 
-            return c;
+            do
+            {
+                if (!valido)
+                    ViewMensagens.ExibeMensagemErroCPF();
+
+                entrada = InsereDataConsulta();
+
+                valido = ValidaAgendaForm.DataConsultaValida(entrada);
+            } while (!valido);
+            
+            consultaForm.DataConsulta = entrada;
+
+            /*
+            // terminar este último...
+            string[] horasInicialFinal;
+            horasInicialFinal = InsereHoraInicialFinal(c.Agenda);
+            consultaForm.HoraInicial = horasInicialFinal[0];
+            consultaForm.HoraFinal = horasInicialFinal[1];
+
+            ValidaAgendaForm.HoraValida();
+
+
+            Consulta consulta;
+
+            return consulta;
+            */
         }
 
-        private static int[] InsereHora()
+        private static string[] InsereHoraInicialFinal()
         {
-            HORA:
+            string[] horasInicialFinal = new string[2];
+        
             Console.WriteLine("Hora inicial: ");
             string? entrada = Console.ReadLine();
-
-            int[] horasInicialFinal = new int[2];
-            try
-            {
-                horasInicialFinal[0] = int.Parse(entrada);
-            }
-            catch
-            {
-                ViewMensagens.ExibeMensagemErroHora();
-                goto HORA;
-            }
-
-            HORA_FINAL:
+            horasInicialFinal[0] = entrada;
+            
             Console.WriteLine("Hora final: ");
             entrada = Console.ReadLine();
-
-            try
-            {
-                horasInicialFinal[1] = int.Parse(entrada);
-            }
-            catch
-            {
-                ViewMensagens.ExibeMensagemErroHora();
-                goto HORA_FINAL;
-            }
-
-            if (ValidaPacienteForm.PossuiHoraConflitante(horasInicialFinal))
-            {
-                ViewMensagens.ExibeMensagemAgendamento(false);
-                goto HORA;
-            }
-            else ViewMensagens.ExibeMensagemAgendamento(true);
+            horasInicialFinal[1] = entrada;
 
             return horasInicialFinal;
         }
 
-        public static long InsereCPF()
+        public static string? InsereCPF()
         {
-            string? entrada;
-            bool valido = true;
-            do
-            {
-                if (valido == false)
-                    Console.WriteLine("\n[ERRO] CPF inválido.");
-                Console.Write("\nCPF: ");
-                entrada = Console.ReadLine();
+            Console.WriteLine("CPF: ");
+            string? entrada = Console.ReadLine();
 
-                valido = ValidaPacienteForm.IsCPF(entrada);
-
-            }while(!valido);
-            return long.Parse(entrada);
+            return entrada;
         }
 
-        private static DateOnly InsereDataConsulta()
+        private static string? InsereDataConsulta()
         {
-        DATA:
             Console.WriteLine("Data da consulta: ");
             string? entrada = Console.ReadLine();
-            DateOnly data;
-            try
-            {
-                data = DateOnly.Parse(entrada);
-            }
-            catch
-            {
-                Console.WriteLine("\nErro: Data inválida.");
-            }
-            return data;
+            
+            return entrada;
         }
     }
 }
