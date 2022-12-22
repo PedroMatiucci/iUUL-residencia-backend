@@ -23,28 +23,5 @@ namespace Consultorio
             this.HoraInicial = h1;
             this.HoraFinal = h2;
         }
-
-        public bool AgendarConsulta()
-        {
-            /*
-            // verificar se existe agendamento
-            if (ValidaAgendaForm.PossuiHoraConflitante(this.Agenda,))
-            {
-                // se sim
-                return false;
-            }
-            
-            
-            // se não
-            this.Agenda.Add(this);
-            return true;
-            */
-            return true;
-        }
-
-        private bool VerificaAgendamento()
-        {
-            return true;
-        }
     }
 }

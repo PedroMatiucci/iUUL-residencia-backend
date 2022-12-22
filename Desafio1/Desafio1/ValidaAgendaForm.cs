@@ -14,6 +14,7 @@ namespace Consultorio
             if (!DataConsultaValida(entrada)) return false;
 
 
+            return true;
         }
         internal static bool PossuiHoraConflitante(List<Consulta> agenda, int[] horasInicialFinal)
         {

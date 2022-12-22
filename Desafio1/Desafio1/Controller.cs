@@ -34,7 +34,8 @@
                 {
                     case 1:
                         {
-                            Paciente p = ViewCadastro.CadastroPaciente();
+                            Paciente p = ViewCadastro.CadastroPaciente(gerenciaPaciente);
+                            gerenciaPaciente.Pacientes.Add(p);
                             ViewMensagens.ExibeMensagemCadastroPaciente();
                         }
                         break;
@@ -99,8 +100,9 @@
                 {
                     case 1:
                         {
-                            Consulta consulta = ViewCadastro.InsereDadosConsulta();
+                            Consulta consulta = ViewCadastro.InsereDadosConsulta(gerenciaPaciente);
                             agenda.Consultas.Add(consulta);
+                            ViewMensagens.ExibeMensagemAgendamento(true);
                         }
                         break;
                 }

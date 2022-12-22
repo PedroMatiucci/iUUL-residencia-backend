@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Consultorio
 {
     internal static class ValidaPacienteForm
-    {   
+    {
         public static bool IsNome(string? entrada)
         {
             if (entrada == null) return false;
@@ -18,6 +18,7 @@ namespace Consultorio
 
         public static bool ValidaCPF(string? entrada)
         {
+            if (entrada == null) return false;
             bool cpfValido = ValidaPacienteForm.IsCPF(entrada);
             bool conversaoValida = ValidaPacienteForm.ValidaConversaoCPF(entrada);
             if (!cpfValido || !conversaoValida)
@@ -26,10 +27,8 @@ namespace Consultorio
         }
 
         // Fonte: https://macoratti.net/11/09/c_val1.htm
-        public static bool IsCPF(string? cpf)
+        public static bool IsCPF(string cpf)
         {
-            if (cpf == null) return false;
-
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             string tempCpf;
@@ -63,9 +62,8 @@ namespace Consultorio
             digito += resto.ToString();
             return cpf.EndsWith(digito);
         }
-        public static bool ValidaConversaoCPF(string? entrada)
+        public static bool ValidaConversaoCPF(string entrada)
         {
-            if (entrada == null) return false;
             try
             {
                 long cpf = long.Parse(entrada);
@@ -85,7 +83,7 @@ namespace Consultorio
             try
             {
                 DataFormatada = DateTime.ParseExact(entrada, format, System.Globalization.CultureInfo.InvariantCulture);
-                
+
             }
             catch (Exception) { return false; }
 
@@ -96,5 +94,6 @@ namespace Consultorio
             if ((AnoAtual - AnoNascimento) <= 12) return false;
 
             return true;
-        }  
+        }
     }
+}

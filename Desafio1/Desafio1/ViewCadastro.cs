@@ -10,7 +10,10 @@ namespace Consultorio
 {
     internal static class ViewCadastro
     {
-        public static Paciente CadastroPaciente()
+        /*
+         * Função para cadastramento de um paciente! 
+         */
+        public static Paciente CadastroPaciente(GerenciaPaciente gerenciaPaciente)
         {
             PacienteForm pacienteForm = new();
             Paciente paciente;
@@ -72,7 +75,7 @@ namespace Consultorio
          * Função para inserção de dados para agendamento
          * de uma consulta!
          */
-        public static Consulta InsereDadosConsulta()
+        public static Consulta InsereDadosConsulta(GerenciaPaciente gerenciaPaciente)
         {
             ConsultaForm consultaForm = new();
             string? entrada;
@@ -87,6 +90,8 @@ namespace Consultorio
 
                 valido = ValidaPacienteForm.ValidaCPF(entrada);
             } while (!valido);
+
+            if (gerenciaPaciente.ProcuraPaciente(entrada))
             
             consultaForm.CPF = entrada;
 
@@ -112,10 +117,9 @@ namespace Consultorio
             ValidaAgendaForm.HoraValida();
 
 
-            Consulta consulta;
-
-            return consulta;
+            Consulta consulta = new(consultaForm.CPF);
             */
+            return consulta;
         }
 
         private static string[] InsereHoraInicialFinal()
