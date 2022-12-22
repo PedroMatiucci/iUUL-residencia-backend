@@ -5,10 +5,12 @@
         public static void Start()
         {
             /*******************************************
-             * Criaremos a lista de Consultas apenas uma
-             * única vez durante a execução do programa.
+             * Criaremos a lista de Consultas e Pacientes
+             * apenas uma única vez durante a execução
+             * do programa.
              ******************************************/
             Agenda agenda = new();
+            GerenciaPaciente gerenciaPaciente = new();
 
         MENU:
             int escolhaMenuPrincipal;
@@ -42,7 +44,7 @@
                             bool existePaciente = false;
                             bool temConsulta = false;
 
-                            foreach (Paciente pacienteRemover in gp.Pacientes.ToList()) // Buscar o CPF.
+                            foreach (Paciente pacienteRemover in gerenciaPaciente.Pacientes.ToList()) // Buscar o CPF.
                             {
                                 if (pacienteRemover.CPF == cpfRemover)
                                 {
@@ -58,7 +60,7 @@
                                     // e se não tiver consulta, podemos excluí-lo.
                                     if (existePaciente && !temConsulta)
                                     {
-                                        gp.Pacientes.Remove(pacienteRemover);
+                                        gerenciaPaciente.Pacientes.Remove(pacienteRemover);
                                     }
 
                                     // Do contrário, se tiver consulta,
@@ -76,16 +78,16 @@
                         {
                             // ordena a lista de pacientes utilizando o Cpf como criterio de ordenacao 
                             //Depois Retorna para o view a lista ordenada para ser printada
-                            gp.Pacientes.Sort((a1, a2) => a1.CPF.CompareTo(a2.CPF));
-                            ViewListagem.ExibeListaPacientes(gp.Pacientes);
+                            gerenciaPaciente.Pacientes.Sort((a1, a2) => a1.CPF.CompareTo(a2.CPF));
+                            ViewListagem.ExibeListaPacientes(gerenciaPaciente.Pacientes);
                         }
                         break;
                     case 4:
                         {
                             // ordena a lista de pacientes utilizando o Nome como criterio de ordenacao 
                             //Depois Retorna para o view a lista ordenada para ser printada
-                            gp.Pacientes.Sort((a1, a2) => a1.Nome.CompareTo(a2.Nome));
-                            ViewListagem.ExibeListaPacientes(gp.Pacientes);}
+                            gerenciaPaciente.Pacientes.Sort((a1, a2) => a1.Nome.CompareTo(a2.Nome));
+                            ViewListagem.ExibeListaPacientes(gerenciaPaciente.Pacientes);}
                         break;
                     default:return;
                 }
