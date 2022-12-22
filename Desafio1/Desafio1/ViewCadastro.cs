@@ -10,7 +10,7 @@ namespace Consultorio
 {
     internal static class ViewCadastro
     {
-        public static Paciente CadastroPaciente(GerenciaPaciente gerenciaPaciente)
+        public static Paciente CadastroPaciente()
         {
             PacienteForm pacienteForm = new();
             Paciente paciente;
@@ -93,7 +93,7 @@ namespace Consultorio
             do
             {
                 if (!valido)
-                    ViewMensagens.ExibeMensagemErroCPF();
+                    ViewMensagens.ExibeMensagemAgendamento(valido);
 
                 entrada = InsereDataConsulta();
 

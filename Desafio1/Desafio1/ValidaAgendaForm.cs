@@ -8,8 +8,11 @@ namespace Consultorio
 {
     internal static class ValidaAgendaForm
     {
-        public static bool ValidaData(string entrada)
+        public static bool ValidaData(string? entrada)
         {
+            if (entrada == null) return false;
+            if (!DataConsultaValida(entrada)) return false;
+
 
         }
         internal static bool PossuiHoraConflitante(List<Consulta> agenda, int[] horasInicialFinal)
@@ -23,9 +26,8 @@ namespace Consultorio
             return false;
         }
 
-        internal static bool DataConsultaValida(string? entrada)
+        internal static bool DataConsultaValida(string entrada)
         {
-            if(entrada == null) return false;
             try
             {
                 DateOnly data = DateOnly.Parse(entrada);

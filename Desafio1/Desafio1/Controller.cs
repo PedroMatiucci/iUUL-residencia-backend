@@ -4,8 +4,10 @@
     {
         public static void Start()
         {
-            // Criaremos a lista de clientes apenas uma
-            // única vez durante a execução do programa.
+            /*******************************************
+             * Criaremos a lista de Consultas apenas uma
+             * única vez durante a execução do programa.
+             ******************************************/
             Agenda agenda = new();
 
         MENU:
@@ -30,15 +32,11 @@
                 {
                     case 1:
                         {
-                            Paciente p = ViewCadastro.CadastroPaciente(gp);
-                            // Adicionando paciente recém-criado e validado
-                            // na lista de pacientes.
-                            gp.Pacientes.Add(p);
-
+                            Paciente p = ViewCadastro.CadastroPaciente();
                             ViewMensagens.ExibeMensagemCadastroPaciente();
                         }
                         break;
-                    case 2: /* PARA FAZER ! */
+                    case 2:
                         {
                             long cpfRemover = ViewCadastro.InsereCPF(); // Inserir um CPF.
                             bool existePaciente = false;
@@ -100,6 +98,7 @@
                     case 1:
                         {
                             Consulta consulta = ViewCadastro.InsereDadosConsulta();
+                            agenda.Consultas.Add(consulta);
                         }
                         break;
                 }
