@@ -15,7 +15,7 @@ namespace Consultorio
             Pacientes = new List<Paciente>();
         }
 
-        public bool ProcuraPaciente(string entrada)
+        public bool ExistePaciente(string entrada)
         {
             long cpf = long.Parse(entrada);
             foreach(Paciente paciente in this.Pacientes)

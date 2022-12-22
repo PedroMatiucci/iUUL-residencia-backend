@@ -36,7 +36,7 @@
                         {
                             Paciente p = ViewCadastro.CadastroPaciente(gerenciaPaciente);
                             gerenciaPaciente.Pacientes.Add(p);
-                            ViewMensagens.ExibeMensagemCadastroPaciente();
+                            ViewMensagens.ExibeMensagemCadastroPaciente(true);
                         }
                         break;
                     case 2:
@@ -68,7 +68,7 @@
                                     // exibir mensagem de erro.
                                     else if(existePaciente && temConsulta)
                                     {
-                                        ViewMensagens.ExibeMensagemRemocaoPacienteMarcado();
+                                        ViewMensagens.ExibeMensagemRemocaoPacienteAgendado();
                                     }
                                 }
                                 ViewMensagens.ExibeMensagemRemocaoPaciente(existePaciente);

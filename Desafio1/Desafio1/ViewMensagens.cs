@@ -11,18 +11,23 @@ namespace Consultorio
         /************
          * PACIENTE *
          ***********/
-        public static void ExibeMensagemCadastroPaciente()
+        public static void ExibeMensagemCadastroPaciente(bool v)
         {
-            Console.WriteLine("\nPaciente cadastrado com sucesso!\n");
+            if (v) Console.WriteLine("\nPaciente cadastrado com sucesso!\n");
+            else Console.WriteLine("\nErro: paciente não cadastrado.");
         }
         public static void ExibeMensagemRemocaoPaciente(bool v)
         {
             if (v) Console.WriteLine("\nPaciente excluído com sucesso!\n");
             else Console.WriteLine("\nErro: paciente não cadastrado.\n");
         }
-        internal static void ExibeMensagemRemocaoPacienteMarcado()
+        internal static void ExibeMensagemRemocaoPacienteAgendado()
         {
             Console.WriteLine("\nErro: paciente está agendado.\n");
+        }
+        public static void ExibeMensagemErroIdadePaciente()
+        {
+            Console.WriteLine("\nErro: paciente precisa ter pelo menos 13 anos.\n");
         }
 
         /**********
@@ -30,7 +35,7 @@ namespace Consultorio
          *********/
         internal static void ExibeMensagemAgendamento(bool v)
         {
-            if(!v) Console.WriteLine("\nErro: Já existe uma consulta agendada neste horário.\n");
+            if(!v) Console.WriteLine("\nErro: já existe uma consulta agendada neste horário.\n");
             else Console.WriteLine("\nAgendamento realizado com sucesso\n");
         }
 
@@ -43,7 +48,7 @@ namespace Consultorio
         }
         internal static void ExibeMensagemErroData()
         {
-            Console.WriteLine("\nErro: Data inválida / Paciente precisa ter pelo menos 13 anos.\n");
+            Console.WriteLine("\nErro: Data inválida.\n");
         }
 
         /*******

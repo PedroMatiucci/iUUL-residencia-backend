@@ -71,6 +71,8 @@ namespace Consultorio
             return paciente;
         }
         
+
+
         /*
          * Função para inserção de dados para agendamento
          * de uma consulta!
@@ -81,6 +83,7 @@ namespace Consultorio
             string? entrada;
             bool valido = true;
 
+            CPF:
             do
             {
                 if (!valido)
@@ -91,9 +94,14 @@ namespace Consultorio
                 valido = ValidaPacienteForm.ValidaCPF(entrada);
             } while (!valido);
 
-            if (gerenciaPaciente.ProcuraPaciente(entrada))
+            if (!gerenciaPaciente.ExistePaciente(entrada))
+            {
+                ViewMensagens.ExibeMensagemCadastroPaciente(false);
+                goto CPF;
+            }
             
             consultaForm.CPF = entrada;
+
 
             do
             {
