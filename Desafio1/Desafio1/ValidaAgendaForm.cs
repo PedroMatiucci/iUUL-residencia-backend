@@ -78,9 +78,21 @@ namespace Consultorio
             horaInicial = int.Parse(horaInicial.ToString().Substring(0, 2));
             horaFinal = int.Parse(horaFinal.ToString().Substring(0, 2));
 
-            if (horaFinal >= horaInicial) return false;
-            if (horaInicial < DateTime.Now.Hour) return false;
+            int agora = DateTime.Now.Hour;
 
+            if (horaFinal >= horaInicial)
+                return false;
+
+            if(horaInicial > horaFinal)
+                return false;
+
+            if (horaInicial < agora ||
+                horaFinal < agora)
+                return false;
+
+            if (horaFinal == int.Parse(Horas.H19.ToString()) ||
+                horaInicial == int.Parse(Horas.H19.ToString()))
+                return false;
 
             return true;
         }
