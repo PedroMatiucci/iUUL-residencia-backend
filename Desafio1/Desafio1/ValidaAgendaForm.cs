@@ -149,9 +149,16 @@ namespace Consultorio
             return true;
         }
 
-        internal static bool ExisteAgendamento(List<Paciente> pacientes, string[] entrada)
+        internal static bool ExisteAgendamento(GerenciaPaciente gerenciaPaciente, string cpf)
         {
-            // continuar...
+            foreach(Paciente paciente in gerenciaPaciente.Pacientes)
+            {
+                if (paciente.Equals(cpf))
+                    if (paciente.Consulta != null && 
+                        paciente.Consulta.DataConsulta > 
+                        DateOnly.FromDateTime(DateTime.Now))
+                        return true;
+            }
 
             return false;
         }

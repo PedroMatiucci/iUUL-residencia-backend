@@ -69,7 +69,7 @@ namespace Consultorio
             pacienteForm.DataNascimento = entrada;
 
 
-            paciente = new(null,pacienteForm.Nome, long.Parse(pacienteForm.CPF), DateTime.Parse(pacienteForm.DataNascimento));
+            paciente = new(null, pacienteForm.Nome, long.Parse(pacienteForm.CPF), DateTime.Parse(pacienteForm.DataNascimento));
 
 
             return paciente;
@@ -110,6 +110,7 @@ namespace Consultorio
 
 
             /* DATA DA CONSULTA */
+            DATA:
             do
             {
                 if (!valido)
@@ -119,7 +120,13 @@ namespace Consultorio
 
                 valido = ValidaAgendaForm.ValidaData(entrada);
             } while (!valido);
-            
+
+            if (ValidaAgendaForm.ExisteAgendamento(gerenciaPaciente, consultaForm.CPF))
+            {
+                ViewMensagens.ExibeMensagemAgendamento(false);
+                goto DATA;
+            }
+
             consultaForm.DataConsulta = entrada;
 
 
@@ -144,11 +151,6 @@ namespace Consultorio
                 goto HORA;
             }
             if (!ValidaAgendaForm.HorarioDisponivel(horasInicialFinal,agenda))
-            {
-                ViewMensagens.ExibeMensagemAgendamento(false);
-                goto HORA;
-            }
-            if (ValidaAgendaForm.ExisteAgendamento(gerenciaPaciente.Pacientes,horasInicialFinal))
             {
                 ViewMensagens.ExibeMensagemAgendamento(false);
                 goto HORA;
