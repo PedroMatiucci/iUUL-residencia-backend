@@ -41,34 +41,21 @@
                         break;
                     case 2:
                         {
-                            long cpfRemover = ViewCadastro.InsereCPF(); // Inserir um CPF.
+                            long cpfRemover = long.Parse(ViewCadastro.InsereCPF()); // Inserir um CPF.
                             bool existePaciente = false;
-                            bool temConsulta = false;
 
                             foreach (Paciente pacienteRemover in gerenciaPaciente.Pacientes.ToList()) // Buscar o CPF.
                             {
-                                if (pacienteRemover.CPF == cpfRemover)
+                                if (pacienteRemover.CPF == cpfRemover)//Verifica se existe um Paciente com este CPF
                                 {
                                     existePaciente = true;
-
-                                    // Verificar se há algum atendimento marcado
-                                    //...
-                                    //if(verdadeiro)...
-                                    // temConsulta == true;
-
-                                    
-                                    // Após as verificações, se existir o paciente
-                                    // e se não tiver consulta, podemos excluí-lo.
-                                    if (existePaciente && !temConsulta)
+                                    if (pacienteRemover.Consulta == null)//Se existir o paciente verifica se ele tem uma consulta agendada
                                     {
-                                        gerenciaPaciente.Pacientes.Remove(pacienteRemover);
+                                        gerenciaPaciente.Pacientes.Remove(pacienteRemover);//remove o paciente 
                                     }
-
-                                    // Do contrário, se tiver consulta,
-                                    // exibir mensagem de erro.
-                                    else if(existePaciente && temConsulta)
+                                    else
                                     {
-                                        ViewMensagens.ExibeMensagemRemocaoPacienteAgendado();
+                                        ViewMensagens.ExibeMensagemRemocaoPacienteAgendado();//Mensagem de erro caso o paciente tenha uma consulta futura agendada
                                     }
                                 }
                                 ViewMensagens.ExibeMensagemRemocaoPaciente(existePaciente);
