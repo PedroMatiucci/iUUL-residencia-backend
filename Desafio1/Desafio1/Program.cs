@@ -1,3 +1,3 @@
-﻿using Consultorio;
+﻿using Consultorio.Controller;
 
 Controller.Start();

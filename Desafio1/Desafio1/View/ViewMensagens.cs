@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Consultorio
+namespace Consultorio.View
 {
     internal static class ViewMensagens
     {
@@ -35,7 +35,7 @@ namespace Consultorio
          *********/
         internal static void ExibeMensagemAgendamento(bool v)
         {
-            if(v) Console.WriteLine("\nAgendamento realizado com sucesso\n");
+            if (v) Console.WriteLine("\nAgendamento realizado com sucesso\n");
             else Console.WriteLine("\nErro: já existe uma consulta agendada neste horário.\n");
         }
         internal static void ExibeMensagemErroHorarioComercial()

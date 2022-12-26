@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Consultorio
+namespace Consultorio.Model
 {
     internal class Paciente
     {
@@ -13,12 +13,12 @@ namespace Consultorio
         public DateTime DataNascimento { get; private set; }
         public Consulta? Consulta { get; private set; }
 
-        public Paciente(Consulta? consulta,string nome, long cpf, DateTime data)
+        public Paciente(Consulta? consulta, string nome, long cpf, DateTime data)
         {
-            this.Consulta = consulta;
-            this.Nome = nome;
-            this.CPF = cpf;
-            this.DataNascimento = data;
+            Consulta = consulta;
+            Nome = nome;
+            CPF = cpf;
+            DataNascimento = data;
         }
     }
 }

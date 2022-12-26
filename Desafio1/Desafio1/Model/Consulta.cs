@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Consultorio
+namespace Consultorio.Model
 {
     internal class Consulta
     {
@@ -13,13 +13,13 @@ namespace Consultorio
         public DateOnly DataConsulta { get; set; }
         public int HoraInicial { get; set; }
         public int HoraFinal { get; set; }
-        
-        public Consulta(long cpf,DateOnly data, int h1, int h2)
+
+        public Consulta(long cpf, DateOnly data, int h1, int h2)
         {
-            this.CPF = cpf;
-            this.DataConsulta = data;
-            this.HoraInicial = h1;
-            this.HoraFinal = h2;
+            CPF = cpf;
+            DataConsulta = data;
+            HoraInicial = h1;
+            HoraFinal = h2;
         }
     }
 }

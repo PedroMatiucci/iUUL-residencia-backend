@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Consultorio
+namespace Consultorio.Model
 {
     internal class Agenda
     {
