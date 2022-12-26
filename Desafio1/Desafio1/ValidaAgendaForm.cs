@@ -22,19 +22,22 @@ namespace Consultorio
             M30 = 30, M45 = 45
         }
 
-
+        /* VALIDAÇÃO DE DATAS */
         public static bool ValidaData(string? entrada)
         {
             if (entrada == null) return false;
-            if (!DataConsultaValida(entrada)) return false;
-            if(DateOnly.FromDateTime(DateTime.Now) 
-                < DateOnly.FromDateTime(DateTime.Parse(entrada)))
+            if (!DataValida(entrada)) return false;
+
+            var agora = DateOnly.FromDateTime(DateTime.Now);
+            var dtConsulta = DateOnly.FromDateTime(DateTime.Parse(entrada));
+
+            if (dtConsulta.CompareTo(agora) < 0)
                 return false;
 
             return true;
         }
 
-        internal static bool DataConsultaValida(string entrada)
+        internal static bool DataValida(string entrada)
         {
             try
             {
@@ -47,6 +50,8 @@ namespace Consultorio
             return true;
         }
 
+
+        /* VALIDAÇÃO DE HORAS */
         internal static bool HoraValida(string[] entrada)
         {
             if (entrada == null) return false;
@@ -80,18 +85,14 @@ namespace Consultorio
 
             int agora = DateTime.Now.Hour;
 
-            if (horaFinal >= horaInicial)
-                return false;
-
-            if(horaInicial > horaFinal)
+            if (horaInicial > horaFinal)
                 return false;
 
             if (horaInicial < agora ||
                 horaFinal < agora)
                 return false;
 
-            if (horaFinal == int.Parse(Horas.H19.ToString()) ||
-                horaInicial == int.Parse(Horas.H19.ToString()))
+            if (horaInicial == (int) Horas.H19)
                 return false;
 
             return true;
@@ -102,6 +103,9 @@ namespace Consultorio
             int hhHoraInicial, mmHoraInicial;
             hhHoraInicial = int.Parse(entrada[0].Substring(0, 2));
             mmHoraInicial = int.Parse(entrada[0].Substring(2, 2));
+
+            Console.WriteLine(mmHoraInicial);
+            Console.WriteLine(hhHoraInicial);
             
             bool valido = false;
 
@@ -147,20 +151,6 @@ namespace Consultorio
             }
 
             return true;
-        }
-
-        internal static bool ExisteAgendamento(GerenciaPaciente gerenciaPaciente, string cpf)
-        {
-            foreach(Paciente paciente in gerenciaPaciente.Pacientes)
-            {
-                if (paciente.Equals(cpf))
-                    if (paciente.Consulta != null && 
-                        paciente.Consulta.DataConsulta > 
-                        DateOnly.FromDateTime(DateTime.Now))
-                        return true;
-            }
-
-            return false;
         }
     }
 }

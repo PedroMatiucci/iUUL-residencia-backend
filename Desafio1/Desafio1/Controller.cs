@@ -12,8 +12,8 @@
             Agenda agenda = new();
             GerenciaPaciente gerenciaPaciente = new();
 
-        MENU:
             int escolhaMenuPrincipal;
+        MENU:
             int? escolhaCadastroPaciente = null;
             int? escolhaAgenda = null;
 

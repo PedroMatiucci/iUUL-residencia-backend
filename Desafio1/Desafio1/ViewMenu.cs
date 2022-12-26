@@ -14,7 +14,7 @@ namespace Consultorio
             int escolha;
             do
             {
-                Console.WriteLine("\nMenu Principal" +
+                Console.WriteLine("Menu Principal" +
                 "\n1-Cadastro de Pacientes" +
                 "\n2-Agenda" +
                 "\n3-Fim");

@@ -14,7 +14,7 @@ namespace Consultorio
         public static void ExibeMensagemCadastroPaciente(bool v)
         {
             if (v) Console.WriteLine("\nPaciente cadastrado com sucesso!\n");
-            else Console.WriteLine("\nErro: paciente não cadastrado.");
+            else Console.WriteLine("\nErro: paciente não cadastrado.\n");
         }
         public static void ExibeMensagemRemocaoPaciente(bool v)
         {

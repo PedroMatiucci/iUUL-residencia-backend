@@ -19,8 +19,6 @@ namespace Consultorio
             Paciente paciente;
             string? entrada;
             bool valido = true;
-            bool cpfValido = true;
-            bool conversaoValida = true;
 
             //INSERÇÃO DE CPF PARA CADASTRO -> VALIDAÇÃO CPF VÁLIDO -> VALIDAÇÃO CPF EXISTENTE NO CADASTRO
             CPF:
@@ -89,22 +87,15 @@ namespace Consultorio
 
 
             /* CPF DO PACIENTE */
-            CPF:
             do
             {
                 if (!valido)
-                    ViewMensagens.ExibeMensagemErroCPF();
+                    ViewMensagens.ExibeMensagemCadastroPaciente(false);
 
                 entrada = InsereCPF();
 
-                valido = ValidaPacienteForm.ValidaCPF(entrada);
+                valido = gerenciaPaciente.ExistePaciente(entrada);
             } while (!valido);
-
-            if (!gerenciaPaciente.ExistePaciente(entrada))
-            {
-                ViewMensagens.ExibeMensagemCadastroPaciente(false);
-                goto CPF;
-            }
             
             consultaForm.CPF = entrada;
 
@@ -121,7 +112,7 @@ namespace Consultorio
                 valido = ValidaAgendaForm.ValidaData(entrada);
             } while (!valido);
 
-            if (ValidaAgendaForm.ExisteAgendamento(gerenciaPaciente, consultaForm.CPF))
+            if (gerenciaPaciente.ExisteAgendamento(consultaForm.CPF))
             {
                 ViewMensagens.ExibeMensagemAgendamento(false);
                 goto DATA;
@@ -133,7 +124,7 @@ namespace Consultorio
             /* HORAS INICIAL E FINAL */
             HORA:
 
-            string[] horasInicialFinal;
+            var horasInicialFinal = new string[2];
 
             do
             {
@@ -166,11 +157,11 @@ namespace Consultorio
         {
             string[] horasInicialFinal = new string[2];
         
-            Console.WriteLine("Hora inicial: ");
+            Console.Write("Hora inicial: ");
             string? entrada = Console.ReadLine();
             horasInicialFinal[0] = entrada;
             
-            Console.WriteLine("Hora final: ");
+            Console.Write("Hora final: ");
             entrada = Console.ReadLine();
             horasInicialFinal[1] = entrada;
 
@@ -179,7 +170,7 @@ namespace Consultorio
 
         public static string? InsereCPF()
         {
-            Console.WriteLine("CPF: ");
+            Console.Write("\nCPF: ");
             string? entrada = Console.ReadLine();
 
             return entrada;
@@ -187,7 +178,7 @@ namespace Consultorio
 
         private static string? InsereDataConsulta()
         {
-            Console.WriteLine("Data da consulta: ");
+            Console.Write("Data da consulta: ");
             string? entrada = Console.ReadLine();
             
             return entrada;
