@@ -1,4 +1,4 @@
-Desafio1.sln
+*.sln
 /.vs
 *.vsidx
 *.suo
