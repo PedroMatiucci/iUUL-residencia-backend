@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Consultorio
+namespace Consultorio.Form
 {
     internal static class ValidaPacienteForm
     {
@@ -76,13 +76,13 @@ namespace Consultorio
         {
             if (entrada == null) return false;
 
-            String format = "dd/MM/yyyy";
+            string format = "dd/MM/yyyy";
             DateTime DataFormatada;
             int AnoAtual, AnoNascimento;
 
             try
             {
-                DataFormatada = DateTime.ParseExact(entrada, format, System.Globalization.CultureInfo.InvariantCulture);
+                DataFormatada = DateTime.ParseExact(entrada, format, CultureInfo.InvariantCulture);
 
             }
             catch (Exception) { return false; }
@@ -91,7 +91,7 @@ namespace Consultorio
             AnoAtual = now.Year;
             AnoNascimento = DataFormatada.Year;
 
-            if ((AnoAtual - AnoNascimento) <= 12) return false;
+            if (AnoAtual - AnoNascimento <= 12) return false;
 
             return true;
         }

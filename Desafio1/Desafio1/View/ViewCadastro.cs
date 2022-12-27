@@ -5,13 +5,16 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Consultorio.Controller;
+using Consultorio.Form;
+using Consultorio.Model;
 
-namespace Consultorio
+namespace Consultorio.View
 {
     internal static class ViewCadastro
     {
         /*
-         * Função para cadastramento de um paciente! 
+         * Função para cadastramento de um paciente!
          */
         public static Paciente CadastroPaciente(GerenciaPaciente gerenciaPaciente)
         {
@@ -20,8 +23,8 @@ namespace Consultorio
             string? entrada;
             bool valido = true;
 
-            //INSERÇÃO DE CPF PARA CADASTRO -> VALIDAÇÃO CPF VÁLIDO -> VALIDAÇÃO CPF EXISTENTE NO CADASTRO
-            CPF:
+        //INSERÇÃO DE CPF PARA CADASTRO -> VALIDAÇÃO CPF VÁLIDO -> VALIDAÇÃO CPF EXISTENTE NO CADASTRO
+        CPF:
             do
             {
                 if (!valido)
@@ -72,14 +75,14 @@ namespace Consultorio
 
             return paciente;
         }
-        
+
 
 
         /*
          * Função para inserção de dados para agendamento
          * de uma consulta!
          */
-        public static ConsultaForm InsereDadosConsulta(GerenciaPaciente gerenciaPaciente,Agenda agenda)
+        public static ConsultaForm InsereDadosConsulta(GerenciaPaciente gerenciaPaciente, Agenda agenda)
         {
             ConsultaForm consultaForm = new();
             string? entrada;
@@ -127,7 +130,7 @@ namespace Consultorio
             consultaForm.DataConsulta = entrada;
 
 
-            /* HORAS INICIAL E FINAL */
+        /* HORAS INICIAL E FINAL */
             var horasInicialFinal = new string[2];
             HORA:
             do
@@ -145,7 +148,7 @@ namespace Consultorio
                 ViewMensagens.ExibeMensagemErroHorarioComercial();
                 goto HORA;
             }
-            if (!ValidaAgendaForm.HorarioDisponivel(horasInicialFinal,agenda))
+            if (!ValidaAgendaForm.HorarioDisponivel(horasInicialFinal, agenda))
             {
                 ViewMensagens.ExibeMensagemAgendamento(false);
                 goto HORA;
@@ -153,18 +156,18 @@ namespace Consultorio
 
             consultaForm.HoraInicial = horasInicialFinal[0];
             consultaForm.HoraFinal = horasInicialFinal[1];
-            
+
             return consultaForm;
         }
 
         private static string[] InsereHoraInicialFinal()
         {
             string[] horasInicialFinal = new string[2];
-        
+
             Console.Write("Hora inicial: ");
             string? entrada = Console.ReadLine();
             horasInicialFinal[0] = entrada;
-            
+
             Console.Write("Hora final: ");
             entrada = Console.ReadLine();
             horasInicialFinal[1] = entrada;
@@ -184,7 +187,7 @@ namespace Consultorio
         {
             Console.Write("Data da consulta: ");
             string? entrada = Console.ReadLine();
-            
+
             return entrada;
         }
     }

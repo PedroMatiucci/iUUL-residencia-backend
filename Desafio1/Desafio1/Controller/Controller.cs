@@ -1,4 +1,8 @@
-﻿namespace Consultorio
+﻿using Consultorio.Form;
+using Consultorio.Model;
+using Consultorio.View;
+
+namespace Consultorio.Controller
 {
     internal static class Controller
     {
@@ -21,9 +25,11 @@
 
             switch (escolhaMenuPrincipal)
             {
-                case 1: escolhaCadastroPaciente = ViewMenu.MenuCadastroPaciente();
+                case 1:
+                    escolhaCadastroPaciente = ViewMenu.MenuCadastroPaciente();
                     break;
-                case 2: escolhaAgenda = ViewMenu.MenuAgenda();
+                case 2:
+                    escolhaAgenda = ViewMenu.MenuAgenda();
                     break;
                 default: return;
             }
@@ -75,9 +81,10 @@
                             // ordena a lista de pacientes utilizando o Nome como criterio de ordenacao 
                             //Depois Retorna para o view a lista ordenada para ser printada
                             gerenciaPaciente.Pacientes.Sort((a1, a2) => a1.Nome.CompareTo(a2.Nome));
-                            ViewListagem.ExibeListaPacientes(gerenciaPaciente.Pacientes);}
+                            ViewListagem.ExibeListaPacientes(gerenciaPaciente.Pacientes);
+                        }
                         break;
-                    default:return;
+                    default: return;
                 }
             }
 

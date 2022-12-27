@@ -4,8 +4,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Consultorio.Model;
 
-namespace Consultorio
+namespace Consultorio.Form
 {
     internal class ValidaAgendaForm
     {
@@ -90,13 +91,13 @@ namespace Consultorio
             return true;
         }
 
-       internal static bool HorarioValido(string[] entrada)
+        internal static bool HorarioValido(string[] entrada)
         {
             //Validação de hora inicial
             int hhHoraInicial, mmHoraInicial;
             hhHoraInicial = int.Parse(entrada[0].Substring(0, 2));
             mmHoraInicial = int.Parse(entrada[0].Substring(2, 2));
-            
+
             bool valido = false;
 
             foreach (int hh in Enum.GetValues(typeof(Horas)))

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Consultorio.Model;
 
-namespace Consultorio
+namespace Consultorio.Controller
 {
     internal class GerenciaPaciente
     {
-        public List<Paciente> Pacientes { get; private set;}
+        public List<Paciente> Pacientes { get; private set; }
 
         public GerenciaPaciente()
         {
@@ -30,11 +31,11 @@ namespace Consultorio
 
         internal bool ExisteAgendamento(string cpf)
         {
-            foreach (Paciente paciente in this.Pacientes)
+            foreach (Paciente paciente in Pacientes)
             {
                 if (paciente.Equals(cpf))
                 {
-                    return (paciente.Consulta != null) && 
+                    return (paciente.Consulta != null) &&
                         (DateOnly.FromDateTime(DateTime.Now).CompareTo(paciente.Consulta.DataConsulta) < 0);
                 }
             }

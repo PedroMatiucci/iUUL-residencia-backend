@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Consultorio.Model;
 
-namespace Consultorio
+namespace Consultorio.View
 {
     internal static class ViewListagem
     {

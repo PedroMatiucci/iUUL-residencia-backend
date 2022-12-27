@@ -5,14 +5,14 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Consultorio
+namespace Consultorio.Form
 {
     public class PacienteForm
     {
         public string? Nome { get; set; }
         public string? CPF { get; set; }
         public string? DataNascimento { get; set; }
-    
+
         public PacienteForm() { }
     }
 }
