@@ -11,11 +11,10 @@ namespace Consultorio.Model
         public string Nome { get; private set; }
         public long CPF { get; private set; }
         public DateTime DataNascimento { get; private set; }
-        public Consulta? Consulta { get; private set; }
+        public Consulta? Consulta { get; set; }
 
-        public Paciente(Consulta? consulta, string nome, long cpf, DateTime data)
+        public Paciente(string nome, long cpf, DateTime data)
         {
-            Consulta = consulta;
             Nome = nome;
             CPF = cpf;
             DataNascimento = data;

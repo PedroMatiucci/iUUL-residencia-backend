@@ -41,7 +41,7 @@ namespace Consultorio.Controller
                     case 1:
                         {
                             var pacienteForm = ViewCadastro.CadastroPaciente(gerenciaPaciente);
-                            Paciente p = new(null, pacienteForm.Nome, long.Parse(pacienteForm.CPF), DateTime.Parse(pacienteForm.DataNascimento));
+                            Paciente p = new(pacienteForm.Nome, long.Parse(pacienteForm.CPF), DateTime.Parse(pacienteForm.DataNascimento));
                             gerenciaPaciente.Pacientes.Add(p);
                             ViewMensagens.ExibeMensagemCadastroPaciente(true);
                         }
