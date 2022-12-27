@@ -94,6 +94,7 @@
                                 int.Parse(consultaForm.HoraInicial), int.Parse(consultaForm.HoraFinal));
 
                             agenda.Consultas.Add(consulta);
+
                             ViewMensagens.ExibeMensagemAgendamento(true);
                         }
                         break;

@@ -87,21 +87,33 @@ namespace Consultorio
 
 
             /* CPF DO PACIENTE */
+            CPF:
             do
             {
                 if (!valido)
-                    ViewMensagens.ExibeMensagemCadastroPaciente(false);
+                    ViewMensagens.ExibeMensagemErroCPF();
 
                 entrada = InsereCPF();
 
-                valido = gerenciaPaciente.ExistePaciente(entrada);
+                valido = ValidaPacienteForm.ValidaCPF(entrada);
             } while (!valido);
-            
+
             consultaForm.CPF = entrada;
+
+            if (!gerenciaPaciente.ExistePaciente(consultaForm.CPF))
+            {
+                ViewMensagens.ExibeMensagemCadastroPaciente(false);
+                goto CPF;
+            }
+
+            if (gerenciaPaciente.ExisteAgendamento(consultaForm.CPF))
+            {
+                ViewMensagens.ExibeMensagemAgendamento(false);
+                goto CPF;
+            }
 
 
             /* DATA DA CONSULTA */
-            DATA:
             do
             {
                 if (!valido)
@@ -112,20 +124,12 @@ namespace Consultorio
                 valido = ValidaAgendaForm.ValidaData(entrada);
             } while (!valido);
 
-            if (gerenciaPaciente.ExisteAgendamento(consultaForm.CPF))
-            {
-                ViewMensagens.ExibeMensagemAgendamento(false);
-                goto DATA;
-            }
-
             consultaForm.DataConsulta = entrada;
 
 
             /* HORAS INICIAL E FINAL */
-            HORA:
-
             var horasInicialFinal = new string[2];
-
+            HORA:
             do
             {
                 if (!valido)
@@ -133,7 +137,7 @@ namespace Consultorio
 
                 horasInicialFinal = InsereHoraInicialFinal();
 
-                valido = ValidaAgendaForm.HoraValida(horasInicialFinal);
+                valido = ValidaAgendaForm.ValidaHora(horasInicialFinal);
             } while (!valido);
 
             if (!ValidaAgendaForm.HorarioValido(horasInicialFinal))

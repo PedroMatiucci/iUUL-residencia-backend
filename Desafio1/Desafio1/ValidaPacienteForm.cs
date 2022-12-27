@@ -19,15 +19,15 @@ namespace Consultorio
         public static bool ValidaCPF(string? entrada)
         {
             if (entrada == null) return false;
-            bool cpfValido = ValidaPacienteForm.IsCPF(entrada);
-            bool conversaoValida = ValidaPacienteForm.ValidaConversaoCPF(entrada);
+            bool cpfValido = IsCPF(entrada);
+            bool conversaoValida = ValidaConversaoCPF(entrada);
             if (!cpfValido || !conversaoValida)
                 return false;
             return true;
         }
 
         // Fonte: https://macoratti.net/11/09/c_val1.htm
-        public static bool IsCPF(string cpf)
+        private static bool IsCPF(string cpf)
         {
             int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
             int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };

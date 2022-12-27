@@ -15,14 +15,16 @@ namespace Consultorio
             Pacientes = new List<Paciente>();
         }
 
-        internal bool ExistePaciente(string entrada)
+        internal bool ExistePaciente(string? entrada)
         {
-            long cpf = long.Parse(entrada);
+            if(entrada == null) return false;
+
             foreach(Paciente paciente in this.Pacientes)
             {
-                if(paciente.CPF == cpf)
+                if(paciente.CPF.ToString() == entrada)
                     return true;
             }
+
             return false;
         }
 
@@ -31,10 +33,10 @@ namespace Consultorio
             foreach (Paciente paciente in this.Pacientes)
             {
                 if (paciente.Equals(cpf))
-                    if (paciente.Consulta != null &&
-                        paciente.Consulta.DataConsulta >
-                        DateOnly.FromDateTime(DateTime.Now))
-                        return true;
+                {
+                    return (paciente.Consulta != null) && 
+                        (DateOnly.FromDateTime(DateTime.Now).CompareTo(paciente.Consulta.DataConsulta) < 0);
+                }
             }
 
             return false;

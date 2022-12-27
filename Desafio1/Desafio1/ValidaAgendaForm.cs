@@ -11,15 +11,15 @@ namespace Consultorio
     {
         private enum Horas
         {
-            H08 = 8, H09 = 9, H10 = 10,
-            H11 = 11, H12 = 12, H13 = 13,
-            H14 = 14, H15 = 15, H16 = 16,
-            H17 = 17, H18 = 18, H19 = 19
+            H08 = 8,    H09 = 9,    H10 = 10,
+            H11 = 11,   H12 = 12,   H13 = 13,
+            H14 = 14,   H15 = 15,   H16 = 16,
+            H17 = 17,   H18 = 18,   H19 = 19
         }
         private enum Minutos
         {
-            M00 = 0, M15 = 15,
-            M30 = 30, M45 = 45
+            M00 = 0,    M15 = 15,
+            M30 = 30,   M45 = 45
         }
 
         /* VALIDAÇÃO DE DATAS */
@@ -31,7 +31,7 @@ namespace Consultorio
             var agora = DateOnly.FromDateTime(DateTime.Now);
             var dtConsulta = DateOnly.FromDateTime(DateTime.Parse(entrada));
 
-            if (dtConsulta.CompareTo(agora) < 0)
+            if (dtConsulta.CompareTo(agora) < 0 || dtConsulta.CompareTo(agora) == 0)
                 return false;
 
             return true;
@@ -52,7 +52,7 @@ namespace Consultorio
 
 
         /* VALIDAÇÃO DE HORAS */
-        internal static bool HoraValida(string[] entrada)
+        internal static bool ValidaHora(string[] entrada)
         {
             if (entrada == null) return false;
 
@@ -75,21 +75,13 @@ namespace Consultorio
                 return false;
             }
 
-
             if (entrada[0].Length >= 5 || entrada[1].Length >= 5)
                 return false;
 
-
-            horaInicial = int.Parse(horaInicial.ToString().Substring(0, 2));
-            horaFinal = int.Parse(horaFinal.ToString().Substring(0, 2));
-
-            int agora = DateTime.Now.Hour;
+            horaInicial = int.Parse(entrada[0].Substring(0, 2));
+            horaFinal = int.Parse(entrada[1].Substring(0, 2));
 
             if (horaInicial > horaFinal)
-                return false;
-
-            if (horaInicial < agora ||
-                horaFinal < agora)
                 return false;
 
             if (horaInicial == (int) Horas.H19)
@@ -100,12 +92,10 @@ namespace Consultorio
 
        internal static bool HorarioValido(string[] entrada)
         {
+            //Validação de hora inicial
             int hhHoraInicial, mmHoraInicial;
             hhHoraInicial = int.Parse(entrada[0].Substring(0, 2));
             mmHoraInicial = int.Parse(entrada[0].Substring(2, 2));
-
-            Console.WriteLine(mmHoraInicial);
-            Console.WriteLine(hhHoraInicial);
             
             bool valido = false;
 
@@ -123,6 +113,7 @@ namespace Consultorio
 
             valido = false;
 
+            //Validação de hora final
             int hhHoraFinal, mmHoraFinal;
             hhHoraFinal = int.Parse(entrada[1].Substring(0, 2));
             mmHoraFinal = int.Parse(entrada[1].Substring(2, 2));
@@ -144,9 +135,14 @@ namespace Consultorio
 
         internal static bool HorarioDisponivel(string[] entrada, Agenda agenda)
         {
+            var horarioInicio = int.Parse(entrada[0]);
+            var horarioFim = int.Parse(entrada[1]);
+
             foreach (Consulta consulta in agenda.Consultas)
             {
-                if (consulta.HoraInicial == int.Parse(entrada[0]))
+                if (consulta.HoraInicial == horarioInicio)
+                    return false;
+                if (consulta.HoraInicial > horarioInicio && consulta.HoraInicial < horarioFim)
                     return false;
             }
 
