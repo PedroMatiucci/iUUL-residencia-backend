@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Consultorio.Form
+namespace Consultorio.Validators
 {
     internal static class ValidaPacienteForm
     {

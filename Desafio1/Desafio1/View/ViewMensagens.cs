@@ -42,6 +42,11 @@ namespace Consultorio.View
         {
             Console.WriteLine("\nErro: horário inserido fora do horário comercial (08h às 19h)");
         }
+        internal static void ExibeMensagemCancelarConsulta(bool v)
+        {
+            if (v) Console.WriteLine("\nConsulta desmarcada com sucesso.");
+            else Console.WriteLine("\nErro: Não há consultas marcadas nesta data.");
+        }
 
         /*************
          * DATA/HORA *

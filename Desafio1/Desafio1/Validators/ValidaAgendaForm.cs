@@ -6,21 +6,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Consultorio.Model;
 
-namespace Consultorio.Form
+namespace Consultorio.Validators
 {
     internal class ValidaAgendaForm
     {
         private enum Horas
         {
-            H08 = 8,    H09 = 9,    H10 = 10,
-            H11 = 11,   H12 = 12,   H13 = 13,
-            H14 = 14,   H15 = 15,   H16 = 16,
-            H17 = 17,   H18 = 18,   H19 = 19
+            H08 = 8, H09 = 9, H10 = 10,
+            H11 = 11, H12 = 12, H13 = 13,
+            H14 = 14, H15 = 15, H16 = 16,
+            H17 = 17, H18 = 18, H19 = 19
         }
         private enum Minutos
         {
-            M00 = 0,    M15 = 15,
-            M30 = 30,   M45 = 45
+            M00 = 0, M15 = 15,
+            M30 = 30, M45 = 45
         }
 
         /* VALIDAÇÃO DE DATAS */
@@ -38,7 +38,7 @@ namespace Consultorio.Form
             return true;
         }
 
-        internal static bool DataValida(string entrada)
+        private static bool DataValida(string entrada)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace Consultorio.Form
             if (horaInicial > horaFinal)
                 return false;
 
-            if (horaInicial == (int) Horas.H19)
+            if (horaInicial == (int)Horas.H19)
                 return false;
 
             return true;

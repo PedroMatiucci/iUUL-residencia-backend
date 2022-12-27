@@ -20,5 +20,50 @@ namespace Consultorio.View
             }
             Console.WriteLine("------------------------------------------------------------");
         }
+
+        internal static void ExibeAgenda(Agenda agenda)
+        {
+            Console.WriteLine("--------------------------");
+            foreach (Consulta consulta in agenda.Consultas)
+            {
+                Console.WriteLine(consulta.DataConsulta
+                    +"\t"+consulta.CPF
+                    +"\t"+consulta.HoraInicial
+                    +"\t"+consulta.HoraFinal);
+                Console.WriteLine("--------------------------");
+            }
+        }
+
+        internal static void ExibeAgendaPeriodo(Agenda agenda, string[] datas)
+        {
+            Console.WriteLine("--------------------------");
+            foreach (Consulta consulta in agenda.Consultas)
+            {
+                if(consulta.DataConsulta.CompareTo(
+                    DateOnly.FromDateTime(DateTime.Parse(datas[0]))) > 0
+                    &&
+                    consulta.DataConsulta.CompareTo(
+                        DateOnly.FromDateTime(DateTime.Parse(datas[1]))) < 0)
+                {
+                    Console.WriteLine(consulta.DataConsulta
+                    + "\t" + consulta.CPF
+                    + "\t" + consulta.HoraInicial
+                    + "\t" + consulta.HoraFinal);
+                    Console.WriteLine("--------------------------");
+                }
+                if (consulta.DataConsulta.CompareTo(
+                    DateOnly.FromDateTime(DateTime.Parse(datas[0]))) == 0
+                    ||
+                    consulta.DataConsulta.CompareTo(
+                        DateOnly.FromDateTime(DateTime.Parse(datas[1]))) == 0)
+                {
+                    Console.WriteLine(consulta.DataConsulta
+                    + "\t" + consulta.CPF
+                    + "\t" + consulta.HoraInicial
+                    + "\t" + consulta.HoraFinal);
+                    Console.WriteLine("--------------------------");
+                }
+            }
+        }
     }
 }

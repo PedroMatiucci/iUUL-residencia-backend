@@ -40,7 +40,8 @@ namespace Consultorio.Controller
                 {
                     case 1:
                         {
-                            Paciente p = ViewCadastro.CadastroPaciente(gerenciaPaciente);
+                            var pacienteForm = ViewCadastro.CadastroPaciente(gerenciaPaciente);
+                            Paciente p = new(null, pacienteForm.Nome, long.Parse(pacienteForm.CPF), DateTime.Parse(pacienteForm.DataNascimento));
                             gerenciaPaciente.Pacientes.Add(p);
                             ViewMensagens.ExibeMensagemCadastroPaciente(true);
                         }
@@ -50,24 +51,32 @@ namespace Consultorio.Controller
                             long cpfRemover = long.Parse(ViewCadastro.InsereCPF()); // Inserir um CPF.
                             bool existePaciente = false;
 
-                            foreach (Paciente pacienteRemover in gerenciaPaciente.Pacientes.ToList()) // Buscar o CPF.
+                            foreach (Paciente pacienteRemover in gerenciaPaciente.Pacientes) // Buscar o CPF.
                             {
-                                if (pacienteRemover.CPF == cpfRemover)//Verifica se existe um Paciente com este CPF
+                                //Verifica se existe um Paciente com este CPF
+                                if (pacienteRemover.CPF == cpfRemover)
                                 {
                                     existePaciente = true;
-                                    if (pacienteRemover.Consulta == null)//Se existir o paciente verifica se ele tem uma consulta agendada
+                                    //Se existir o paciente
+                                    //verifica se ele tem uma consulta agendada no futuro
+                                    if (pacienteRemover.Consulta.DataConsulta.CompareTo(DateOnly.FromDateTime(DateTime.Now)) < 0)
                                     {
-                                        gerenciaPaciente.Pacientes.Remove(pacienteRemover);//remove o paciente 
+                                        gerenciaPaciente.Pacientes.Remove(pacienteRemover);
+                                        ViewMensagens.ExibeMensagemRemocaoPaciente(existePaciente);
+                                        break;
                                     }
                                     else
                                     {
-                                        ViewMensagens.ExibeMensagemRemocaoPacienteAgendado();//Mensagem de erro caso o paciente tenha uma consulta futura agendada
+                                        //Mensagem de erro caso o paciente tenha uma consulta futura agendada
+                                        ViewMensagens.ExibeMensagemRemocaoPacienteAgendado();
+                                        break;
                                     }
                                 }
-                                ViewMensagens.ExibeMensagemRemocaoPaciente(existePaciente);
                             }
+                            existePaciente = false;
+                            ViewMensagens.ExibeMensagemRemocaoPaciente(existePaciente);
+                            break;
                         }
-                        break;
                     case 3:
                         {
                             // ordena a lista de pacientes utilizando o Cpf como criterio de ordenacao 
@@ -103,6 +112,36 @@ namespace Consultorio.Controller
                             agenda.Consultas.Add(consulta);
 
                             ViewMensagens.ExibeMensagemAgendamento(true);
+                        }
+                        break;
+                    case 2:
+                        {
+                            var consultaForm = ViewCadastro.InsereDadosCancelamentoConsulta();
+
+                            if (!agenda.RemoveConsulta(consultaForm))
+                                ViewMensagens.ExibeMensagemCancelarConsulta(false);
+                            else
+                                ViewMensagens.ExibeMensagemCancelarConsulta(true);
+                        }
+                        break;
+                    case 3:
+                        {
+                            int escolha = ViewMenu.MenuListaAgenda();
+                            switch(escolha)
+                            {
+                                case 1:
+                                    {
+                                        ViewListagem.ExibeAgenda(agenda);
+                                    }
+                                    break;
+                                case 2:
+                                    {
+                                        var datas = ViewCadastro.InsereDataInicialFinalValida();
+                                        ViewListagem.ExibeAgendaPeriodo(agenda, datas);
+                                    }
+                                    break;
+                                default: return;
+                            }
                         }
                         break;
                 }

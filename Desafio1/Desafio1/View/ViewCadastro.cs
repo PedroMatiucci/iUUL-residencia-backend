@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Consultorio.Controller;
 using Consultorio.Form;
 using Consultorio.Model;
+using Consultorio.Validators;
 
 namespace Consultorio.View
 {
@@ -16,10 +17,9 @@ namespace Consultorio.View
         /*
          * Função para cadastramento de um paciente!
          */
-        public static Paciente CadastroPaciente(GerenciaPaciente gerenciaPaciente)
+        public static PacienteForm CadastroPaciente(GerenciaPaciente gerenciaPaciente)
         {
             PacienteForm pacienteForm = new();
-            Paciente paciente;
             string? entrada;
             bool valido = true;
 
@@ -70,10 +70,7 @@ namespace Consultorio.View
             pacienteForm.DataNascimento = entrada;
 
 
-            paciente = new(null, pacienteForm.Nome, long.Parse(pacienteForm.CPF), DateTime.Parse(pacienteForm.DataNascimento));
-
-
-            return paciente;
+            return pacienteForm;
         }
 
 
@@ -189,6 +186,60 @@ namespace Consultorio.View
             string? entrada = Console.ReadLine();
 
             return entrada;
+        }
+
+        internal static string[] InsereDataInicialFinalValida()
+        {
+            string[] dataInicialFinal = new string[2];
+
+            string? entrada;
+            do
+            {
+                Console.Write("Data inicial: ");
+                entrada = Console.ReadLine();
+            } while (!ValidaAgendaForm.ValidaData(entrada));
+            
+            dataInicialFinal[0] = entrada;
+
+            do
+            {
+                Console.Write("Data final: ");
+                entrada = Console.ReadLine();
+            } while (!ValidaAgendaForm.ValidaData(entrada));
+            
+            dataInicialFinal[1] = entrada;
+
+            return dataInicialFinal;
+        }
+
+        internal static ConsultaForm InsereDadosCancelamentoConsulta()
+        {
+            ConsultaForm consultaForm = new();
+
+            string? cpf, dataConsulta;
+            bool v = true;
+
+            do
+            {
+                if(!v)
+                    ViewMensagens.ExibeMensagemErroCPF();
+                cpf = InsereCPF();
+                v = ValidaPacienteForm.ValidaCPF(cpf);
+            } while (!v);
+
+            consultaForm.CPF = cpf;
+
+            do
+            {
+                if (!v)
+                    ViewMensagens.ExibeMensagemErroData();
+                dataConsulta = InsereDataConsulta();
+                v = ValidaAgendaForm.ValidaData(dataConsulta);
+            } while (!v);
+            
+            consultaForm.DataConsulta = dataConsulta;
+
+            return consultaForm;
         }
     }
 }
