@@ -104,7 +104,10 @@ namespace Consultorio.Controller
                 {
                     case 1:
                         {
-                            ConsultaForm consultaForm = ViewCadastro.InsereDadosConsulta(gerenciaPaciente, agenda);
+                            ConsultaForm consultaForm = new();
+                            consultaForm = ViewCadastro.InsereDadosConsulta(gerenciaPaciente, agenda, consultaForm);
+
+                            //
 
                             Consulta consulta = new(long.Parse(consultaForm.CPF),
                                 DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta)),

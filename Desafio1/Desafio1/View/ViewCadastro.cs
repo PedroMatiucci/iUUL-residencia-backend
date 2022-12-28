@@ -75,9 +75,8 @@ namespace Consultorio.View
          * Função para inserção de dados para agendamento
          * de uma consulta!
          *************************************************/
-        public static ConsultaForm InsereDadosConsulta(GerenciaPaciente gerenciaPaciente, Agenda agenda)
+        public static ConsultaForm InsereDadosConsulta(GerenciaPaciente gerenciaPaciente, Agenda agenda, ConsultaForm consultaForm)
         {
-            ConsultaForm consultaForm = new();
             string? entrada;
             bool valido = true;
             bool existePaciente = true, existeAgendamento = true;
@@ -86,16 +85,20 @@ namespace Consultorio.View
             /* CPF DO PACIENTE */
             do
             {
-                if(!existePaciente)
-                    ViewMensagens.ExibeMensagemCadastroPaciente(false);
-                else if(existeAgendamento)
-                    ViewMensagens.ExibeMensagemAgendamento(false);
+                
 
                 entrada = InsereCPFValido();
 
                 existePaciente = gerenciaPaciente.ExistePaciente(entrada);
-                if(existePaciente)
+
+                if (!existePaciente)
+                    ViewMensagens.ExibeMensagemCadastroPaciente(false);
+
+                if (existePaciente)
                     existeAgendamento = gerenciaPaciente.ExisteAgendamento(entrada);
+
+                if (existeAgendamento)
+                    ViewMensagens.ExibeMensagemAgendamento(true);
 
             } while (!existePaciente && existeAgendamento);
 
