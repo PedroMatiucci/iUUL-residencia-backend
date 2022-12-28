@@ -80,7 +80,7 @@ namespace Consultorio.Controller
                         }
                     case 3:
                         {
-                            // ordena a lista de pacientes utilizando o Cpf como criterio de ordenacao 
+                            // ordena a lista de pacientes utilizando o Cpf como criterio de ordenacao
                             //Depois Retorna para o view a lista ordenada para ser printada
                             gerenciaPaciente.Pacientes.Sort((a1, a2) => a1.CPF.CompareTo(a2.CPF));
                             ViewListagem.ExibeListaPacientes(gerenciaPaciente.Pacientes);
@@ -88,13 +88,13 @@ namespace Consultorio.Controller
                         break;
                     case 4:
                         {
-                            // ordena a lista de pacientes utilizando o Nome como criterio de ordenacao 
+                            // ordena a lista de pacientes utilizando o Nome como criterio de ordenacao
                             //Depois Retorna para o view a lista ordenada para ser printada
                             gerenciaPaciente.Pacientes.Sort((a1, a2) => a1.Nome.CompareTo(a2.Nome));
                             ViewListagem.ExibeListaPacientes(gerenciaPaciente.Pacientes);
                         }
                         break;
-                    default: return;
+                   // default: return;
                 }
             }
 
