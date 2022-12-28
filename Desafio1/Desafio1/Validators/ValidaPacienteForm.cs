@@ -10,12 +10,45 @@ namespace Consultorio.Validators
 {
     internal static class ValidaPacienteForm
     {
+        /**********************/
+        /* VALIDAÇÕES DE NOME */
+        /**********************/
         public static bool IsNome(string? entrada)
         {
             if (entrada == null) return false;
             return entrada.Length >= 5;
         }
 
+        /************************************/
+        /* VALIDAÇÕES DE DATA DE NASCIMENTO */
+        /************************************/
+        public static bool IsDataNascimento(string? entrada)
+        {
+            if (entrada == null) return false;
+
+            string format = "dd/MM/yyyy";
+            DateTime DataFormatada;
+            int AnoAtual, AnoNascimento;
+
+            try
+            {
+                DataFormatada = DateTime.ParseExact(entrada, format, CultureInfo.InvariantCulture);
+
+            }
+            catch (Exception) { return false; }
+
+            DateTime now = DateTime.Now;
+            AnoAtual = now.Year;
+            AnoNascimento = DataFormatada.Year;
+
+            if (AnoAtual - AnoNascimento <= 12) return false;
+
+            return true;
+        }
+
+        /*********************/
+        /* VALIDAÇÕES DE CPF */
+        /*********************/
         public static bool ValidaCPF(string? entrada)
         {
             if (entrada == null) return false;
@@ -62,37 +95,13 @@ namespace Consultorio.Validators
             digito += resto.ToString();
             return cpf.EndsWith(digito);
         }
-        public static bool ValidaConversaoCPF(string entrada)
+        private static bool ValidaConversaoCPF(string entrada)
         {
             try
             {
                 long cpf = long.Parse(entrada);
             }
             catch (Exception) { return false; }
-            return true;
-        }
-
-        public static bool IsDataNascimento(string? entrada)
-        {
-            if (entrada == null) return false;
-
-            string format = "dd/MM/yyyy";
-            DateTime DataFormatada;
-            int AnoAtual, AnoNascimento;
-
-            try
-            {
-                DataFormatada = DateTime.ParseExact(entrada, format, CultureInfo.InvariantCulture);
-
-            }
-            catch (Exception) { return false; }
-
-            DateTime now = DateTime.Now;
-            AnoAtual = now.Year;
-            AnoNascimento = DataFormatada.Year;
-
-            if (AnoAtual - AnoNascimento <= 12) return false;
-
             return true;
         }
     }

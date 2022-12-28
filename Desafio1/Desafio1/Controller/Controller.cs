@@ -40,7 +40,8 @@ namespace Consultorio.Controller
                 {
                     case 1:
                         {
-                            var pacienteForm = ViewCadastro.CadastroPaciente(gerenciaPaciente);
+                            PacienteForm pacienteForm = new();
+                            pacienteForm = ViewCadastro.CadastroPaciente(pacienteForm,gerenciaPaciente);
                             Paciente p = new(pacienteForm.Nome, long.Parse(pacienteForm.CPF), DateTime.Parse(pacienteForm.DataNascimento));
                             gerenciaPaciente.Pacientes.Add(p);
                             ViewMensagens.ExibeMensagemCadastroPaciente(true);
@@ -48,7 +49,7 @@ namespace Consultorio.Controller
                         break;
                     case 2:
                         {
-                            long cpfRemover = long.Parse(ViewCadastro.InsereCPF()); // Inserir um CPF.
+                            long cpfRemover = long.Parse(ViewCadastro.InsereCPFValido()); // Inserir um CPF.
                             bool existePaciente = false;
 
                             foreach (Paciente pacienteRemover in gerenciaPaciente.Pacientes) // Buscar o CPF.
@@ -116,7 +117,8 @@ namespace Consultorio.Controller
                         break;
                     case 2:
                         {
-                            var consultaForm = ViewCadastro.InsereDadosCancelamentoConsulta();
+                            ConsultaForm consultaForm = new();
+                            consultaForm = ViewCadastro.InsereDadosCancelamentoConsulta(consultaForm);
 
                             if (!agenda.RemoveConsulta(consultaForm))
                                 ViewMensagens.ExibeMensagemCancelarConsulta(false);
@@ -140,7 +142,7 @@ namespace Consultorio.Controller
                                         ViewListagem.ExibeAgendaPeriodo(agenda, datas);
                                     }
                                     break;
-                                default: return;
+                                default: break;
                             }
                         }
                         break;

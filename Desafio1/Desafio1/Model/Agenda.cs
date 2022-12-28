@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Consultorio.Model
 {
-    internal class Agenda
+    internal class Agenda : List<Consulta>
     {
         public List<Consulta> Consultas { get; set; }
 
