@@ -18,12 +18,8 @@ namespace Consultorio.View
         }
         public static void ExibeMensagemRemocaoPaciente(bool v)
         {
-            if (v) Console.WriteLine("\nPaciente excluído com sucesso!");
-            else Console.WriteLine("\nErro: paciente não cadastrado.");
-        }
-        internal static void ExibeMensagemRemocaoPacienteAgendado()
-        {
-            Console.WriteLine("\nErro: paciente está agendado.");
+            if(v) Console.WriteLine("\nPaciente excluído com sucesso!");
+            else Console.WriteLine("\nErro: paciente está agendado.");
         }
         public static void ExibeMensagemErroIdadePaciente()
         {

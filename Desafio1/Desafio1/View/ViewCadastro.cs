@@ -58,7 +58,7 @@ namespace Consultorio.View
             do
             {
                 if (!v)
-                    ViewMensagens.ExibeMensagemErroData();
+                    ViewMensagens.ExibeMensagemErroIdadePaciente();
 
                 Console.Write("Data de Nascimento: ");
                 entrada = Console.ReadLine();
@@ -79,31 +79,19 @@ namespace Consultorio.View
         {
             string? entrada;
             bool valido = true;
-            bool existePaciente = true, existeAgendamento = true;
 
 
             /* CPF DO PACIENTE */
-            do
+            CPF:
+            entrada = InsereCPFValido();
+            //verificar se existe o CPF no cadastro
+            Paciente? paciente = gerenciaPaciente.RetornaPaciente(entrada);
+            if (paciente == null)
             {
-                entrada = InsereCPFValido();
-
-                existePaciente = gerenciaPaciente.ExistePaciente(entrada);
-
-                if (!existePaciente)
-                    ViewMensagens.ExibeMensagemCadastroPaciente(false);
-
-                /***************************************************/
-                /* VALIDAR SE JÁ EXISTE UMA CONSULTA PARA ESSE CPF */
-                /***************************************************/
-                if (existePaciente)
-                    existeAgendamento = gerenciaPaciente.ExisteAgendamento(entrada);
-
-
-                if (existeAgendamento)
-                    ViewMensagens.ExibeMensagemAgendamento(true);
-
-            } while (!existePaciente && existeAgendamento);
-
+                ViewMensagens.ExibeMensagemCadastroPaciente(false);
+                goto CPF;
+            }
+            
             consultaForm.CPF = entrada;
 
 
@@ -122,9 +110,11 @@ namespace Consultorio.View
 
                 horasInicialFinal = InsereHoraInicialFinal();
 
-                valido = ValidaAgendaForm.ValidaHora(horasInicialFinal);
+                // CORRIGIR VALIDAÇÃO DEPOIS
+                
             } while (!valido);
 
+/*
             if (!ValidaAgendaForm.HorarioValido(horasInicialFinal))
             {
                 ViewMensagens.ExibeMensagemErroHorarioComercial();
@@ -134,7 +124,7 @@ namespace Consultorio.View
             {
                 ViewMensagens.ExibeMensagemAgendamento(false);
                 goto HORA;
-            }
+            }*/
 
             consultaForm.HoraInicial = horasInicialFinal[0];
             consultaForm.HoraFinal = horasInicialFinal[1];
@@ -247,6 +237,9 @@ namespace Consultorio.View
 
             entrada = InsereDataConsultaValida();
             consultaForm.DataConsulta = entrada;
+
+            entrada = ValidaAgendaForm.InsereHoraInicialValida();
+            consultaForm.HoraInicial = entrada;
 
             return consultaForm;
         }

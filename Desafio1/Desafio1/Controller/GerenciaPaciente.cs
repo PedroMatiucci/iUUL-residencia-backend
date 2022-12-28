@@ -31,18 +31,26 @@ namespace Consultorio.Controller
             return false;
         }
 
-        internal bool ExisteAgendamento(string cpf)
+        internal bool RemovePaciente(string cpf)
         {
-            foreach (Paciente paciente in Pacientes)
-            {
-                if (paciente.Equals(cpf))
-                {
-                    return (paciente.Consulta != null) &&
-                        (DateOnly.FromDateTime(DateTime.Now).CompareTo(paciente.Consulta.DataConsulta) < 0);
-                }
-            }
+            var paciente = this.RetornaPaciente(cpf);
 
-            return false;
+            if (paciente == null) return false;
+
+            // Pacientes com consulta futura não podem ser removidos
+            if (this.ExisteAgendamento(paciente))
+                return false;
+
+            this.Pacientes.Remove(paciente);
+
+            return true;
+        }
+
+        internal bool ExisteAgendamento(Paciente paciente)
+        {
+            return (paciente.Consulta != null) &&
+                        (DateOnly.FromDateTime(DateTime.Now).CompareTo(
+                            paciente.Consulta.DataConsulta) < 0);
         }
 
         internal Paciente? RetornaPaciente(string cpf)
@@ -56,20 +64,6 @@ namespace Consultorio.Controller
                 }
             }
             return null;
-        }
-
-        internal bool RemovePaciente(string cpf)
-        {
-            var paciente = this.RetornaPaciente(cpf);
-
-            if (paciente == null) return false;
-
-            // Pacientes com consulta futura não podem ser removidos
-            if (this.ExisteAgendamento(cpf))
-                return false;
-
-            this.Pacientes.Remove(paciente);
-            return true;
         }
     }
 }

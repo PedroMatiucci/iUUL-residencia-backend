@@ -18,28 +18,16 @@ namespace Consultorio.Model
 
         internal bool RemoveConsulta(ConsultaForm consultaForm)
         {
-            foreach (Consulta consulta in this.Consultas)
+            foreach(var consulta in Consultas)
             {
-                if (consulta.CPF.Equals(consultaForm.CPF))
+                if
+                (consulta.CPF == long.Parse(consultaForm.CPF) 
+                    && consulta.DataConsulta == DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta))
+                    && consulta.HoraInicial == int.Parse(consultaForm.HoraInicial)
+                )
                 {
-                    // Se a data de AGORA for ANTERIOR
-                    // à data da consulta que se deseja desmarcar,
-                    // ou seja, se a data estiver no futuro
-                    if(DateOnly.FromDateTime(DateTime.Now)
-                        .CompareTo(DateOnly.FromDateTime(
-                            DateTime.Parse(consultaForm.DataConsulta))) < 0)
-                    {
-                        // e se essa data da consulta for igual
-                        // à data marcada
-                        if (consulta.DataConsulta
-                            .CompareTo(DateOnly.FromDateTime(
-                                DateTime.Parse(consultaForm.DataConsulta))) == 0)
-                        {
-                            // removemos.
-                            Consultas.Remove(consulta);
-                            return true;
-                        }
-                    }
+                    Consultas.Remove(consulta);
+                    return true;
                 }
             }
 
