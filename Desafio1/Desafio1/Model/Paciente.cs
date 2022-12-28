@@ -11,7 +11,22 @@ namespace Consultorio.Model
         public string Nome { get; private set; }
         public long CPF { get; private set; }
         public DateTime DataNascimento { get; private set; }
-        public Consulta? Consulta { get; private set; }
+
+        private Consulta? consulta;
+        public Consulta Consulta
+        {
+            get { return consulta; }
+            set
+            { // Não pode existir agendamentos futuros
+                if(consulta == null)
+                    consulta = value;
+                else if (DateOnly.FromDateTime(DateTime.Now).CompareTo(
+                    value.DataConsulta) < 0)
+                    throw new Exception();
+
+                consulta = value;
+            }
+        }
 
         public Paciente(string nome, long cpf, DateTime data)
         {

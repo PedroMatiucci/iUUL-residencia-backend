@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Consultorio.Form;
 using Consultorio.Model;
+using Consultorio.View;
 
 namespace Consultorio.Controller
 {
@@ -42,6 +43,33 @@ namespace Consultorio.Controller
             }
 
             return false;
+        }
+
+        internal Paciente? RetornaPaciente(string cpf)
+        {
+            foreach (Paciente paciente in this.Pacientes) // Buscar o CPF.
+            {
+                //Verifica se existe um Paciente com este CPF
+                if (paciente.CPF == long.Parse(cpf))
+                {
+                    return paciente;
+                }
+            }
+            return null;
+        }
+
+        internal bool RemovePaciente(string cpf)
+        {
+            var paciente = this.RetornaPaciente(cpf);
+
+            if (paciente == null) return false;
+
+            // Pacientes com consulta futura não podem ser removidos
+            if (this.ExisteAgendamento(cpf))
+                return false;
+
+            this.Pacientes.Remove(paciente);
+            return true;
         }
     }
 }

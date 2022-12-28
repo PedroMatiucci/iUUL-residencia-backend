@@ -49,33 +49,15 @@ namespace Consultorio.Controller
                         break;
                     case 2:
                         {
-                            long cpfRemover = long.Parse(ViewCadastro.InsereCPFValido()); // Inserir um CPF.
-                            bool existePaciente = false;
+                            var cpfRemover = ViewCadastro.InsereCPFValido(); // Inserir um CPF.
 
-                            foreach (Paciente pacienteRemover in gerenciaPaciente.Pacientes) // Buscar o CPF.
+                            if (gerenciaPaciente.RemovePaciente(cpfRemover))
                             {
-                                //Verifica se existe um Paciente com este CPF
-                                if (pacienteRemover.CPF == cpfRemover)
-                                {
-                                    existePaciente = true;
-                                    //Se existir o paciente
-                                    //verifica se ele tem uma consulta agendada no futuro
-                                    if (pacienteRemover.Consulta.DataConsulta.CompareTo(DateOnly.FromDateTime(DateTime.Now)) < 0)
-                                    {
-                                        gerenciaPaciente.Pacientes.Remove(pacienteRemover);
-                                        ViewMensagens.ExibeMensagemRemocaoPaciente(existePaciente);
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        //Mensagem de erro caso o paciente tenha uma consulta futura agendada
-                                        ViewMensagens.ExibeMensagemRemocaoPacienteAgendado();
-                                        break;
-                                    }
-                                }
+                                ViewMensagens.ExibeMensagemRemocaoPaciente(true);
+                                break;
                             }
-                            existePaciente = false;
-                            ViewMensagens.ExibeMensagemRemocaoPaciente(existePaciente);
+                            
+                            ViewMensagens.ExibeMensagemRemocaoPaciente(false);
                             break;
                         }
                     case 3:
@@ -107,15 +89,41 @@ namespace Consultorio.Controller
                             ConsultaForm consultaForm = new();
                             consultaForm = ViewCadastro.InsereDadosConsulta(gerenciaPaciente, agenda, consultaForm);
 
-                            //
 
-                            Consulta consulta = new(long.Parse(consultaForm.CPF),
-                                DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta)),
-                                int.Parse(consultaForm.HoraInicial), int.Parse(consultaForm.HoraFinal));
+                            // Método que retorna o objeto paciente a partir do CPF
+                            var paciente = gerenciaPaciente.RetornaPaciente(consultaForm.CPF);
+                            if (paciente == null)
+                            {
+                                ViewMensagens.ExibeMensagemErroCPF();
+                                break;
+                            }
+                            else
+                            {
+                                Consulta consulta = new(long.Parse(consultaForm.CPF),
+                                    DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta)),
+                                    int.Parse(consultaForm.HoraInicial), int.Parse(consultaForm.HoraFinal));
 
-                            agenda.Consultas.Add(consulta);
 
-                            ViewMensagens.ExibeMensagemAgendamento(true);
+                                // Adicionar consulta no paciente
+                                // SE HOUVER CONSULTA,
+                                // A exceção deverá ser tratada e exibir mensagem de erro, sem criação de objeto CONSULTA
+                                try
+                                {
+                                    paciente.Consulta = consulta;
+                                }
+                                catch
+                                {
+                                    // Exibir mensagem de erro
+                                    ViewMensagens.ExibeMensagemAgendamento(false);
+                                    break;
+                                }
+
+                                // Adicionando consulta na agenda
+                                agenda.Consultas.Add(consulta);
+
+                                // Exibir mensagem de sucesso
+                                ViewMensagens.ExibeMensagemAgendamento(true);
+                            }
                         }
                         break;
                     case 2:

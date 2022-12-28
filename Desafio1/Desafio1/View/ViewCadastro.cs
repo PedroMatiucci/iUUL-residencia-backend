@@ -85,8 +85,6 @@ namespace Consultorio.View
             /* CPF DO PACIENTE */
             do
             {
-                
-
                 entrada = InsereCPFValido();
 
                 existePaciente = gerenciaPaciente.ExistePaciente(entrada);
@@ -94,8 +92,12 @@ namespace Consultorio.View
                 if (!existePaciente)
                     ViewMensagens.ExibeMensagemCadastroPaciente(false);
 
+                /***************************************************/
+                /* VALIDAR SE JÁ EXISTE UMA CONSULTA PARA ESSE CPF */
+                /***************************************************/
                 if (existePaciente)
                     existeAgendamento = gerenciaPaciente.ExisteAgendamento(entrada);
+
 
                 if (existeAgendamento)
                     ViewMensagens.ExibeMensagemAgendamento(true);
@@ -206,7 +208,7 @@ namespace Consultorio.View
                 Console.Write("Data da consulta: ");
                 entrada = Console.ReadLine();
 
-                v = ValidaAgendaForm.ValidaData(entrada);
+                v = ValidaAgendaForm.ValidaDataMarcacaoConsulta(entrada);
             } while (!v);
 
             return entrada;

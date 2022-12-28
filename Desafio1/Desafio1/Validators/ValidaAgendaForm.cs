@@ -32,6 +32,17 @@ namespace Consultorio.Validators
             var agora = DateOnly.FromDateTime(DateTime.Now);
             var dtConsulta = DateOnly.FromDateTime(DateTime.Parse(entrada));
 
+            return true;
+        }
+        public static bool ValidaDataMarcacaoConsulta(string? entrada)
+        {
+            if (entrada == null) return false;
+            if (!DataValida(entrada)) return false;
+
+            var agora = DateOnly.FromDateTime(DateTime.Now);
+            var dtConsulta = DateOnly.FromDateTime(DateTime.Parse(entrada));
+
+            // What
             if (dtConsulta.CompareTo(agora) < 0 || dtConsulta.CompareTo(agora) == 0)
                 return false;
 
