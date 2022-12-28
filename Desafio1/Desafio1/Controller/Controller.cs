@@ -93,7 +93,7 @@ namespace Consultorio.Controller
                             ViewListagem.ExibeListaPacientes(gerenciaPaciente.Pacientes);
                         }
                         break;
-                    default: return;
+                   // default: return;
                 }
             }
 
@@ -140,7 +140,7 @@ namespace Consultorio.Controller
                                         ViewListagem.ExibeAgendaPeriodo(agenda, datas);
                                     }
                                     break;
-                                default: return;
+                                //default: return;
                             }
                         }
                         break;
