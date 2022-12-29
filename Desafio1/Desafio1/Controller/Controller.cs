@@ -17,9 +17,11 @@ namespace Consultorio.Controller
             GerenciaPaciente gerenciaPaciente = new();
 
             int escolhaMenuPrincipal;
+            int? escolhaCadastroPaciente;
+            int? escolhaAgenda;
         MENU:
-            int? escolhaCadastroPaciente = null;
-            int? escolhaAgenda = null;
+            escolhaCadastroPaciente = null;
+            escolhaAgenda = null;
 
             escolhaMenuPrincipal = ViewMenu.MenuPrincipal();
 
@@ -41,10 +43,14 @@ namespace Consultorio.Controller
                     case 1:
                         {
                             PacienteForm pacienteForm = new();
+
                             pacienteForm = ViewCadastro.CadastroPaciente(pacienteForm,gerenciaPaciente);
+
                             Paciente p = new(pacienteForm.Nome, long.Parse(pacienteForm.CPF), DateTime.Parse(pacienteForm.DataNascimento));
+
                             gerenciaPaciente.Pacientes.Add(p);
-                            ViewMensagens.ExibeMensagemCadastroPaciente(true);
+
+                            ViewMensagens.ExibeMensagemCadastroPaciente();
                         }
                         break;
                     case 2:
@@ -91,50 +97,46 @@ namespace Consultorio.Controller
 
 
                             // Método que retorna o objeto paciente a partir do CPF
-                            var paciente = gerenciaPaciente.RetornaPaciente(consultaForm.CPF);
+                            Paciente? paciente = gerenciaPaciente.RetornaPaciente(consultaForm.CPF);
                             if (paciente == null)
                             {
-                                ViewMensagens.ExibeMensagemErroCPF();
+                                ViewMensagens.ExibeMensagemErroCPFCadastrado(false);
                                 break;
                             }
-                            else
+
+                            Consulta consulta = new(long.Parse(consultaForm.CPF),
+                                DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta)),
+                                consultaForm.HoraInicial, consultaForm.HoraFinal);
+                            try
                             {
-                                Consulta consulta = new(long.Parse(consultaForm.CPF),
-                                    DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta)),
-                                    int.Parse(consultaForm.HoraInicial), int.Parse(consultaForm.HoraFinal));
-
-
-                                // Adicionar consulta no paciente
-                                // SE HOUVER CONSULTA,
-                                // A exceção deverá ser tratada e exibir mensagem de erro, sem criação de objeto CONSULTA
-                                try
-                                {
-                                    paciente.Consulta = consulta;
-                                }
-                                catch
-                                {
-                                    // Exibir mensagem de erro
-                                    ViewMensagens.ExibeMensagemAgendamento(false);
-                                    break;
-                                }
-
-                                // Adicionando consulta na agenda
-                                agenda.Consultas.Add(consulta);
-
-                                // Exibir mensagem de sucesso
-                                ViewMensagens.ExibeMensagemAgendamento(true);
+                                paciente.Consulta = consulta;
                             }
+                            catch
+                            {
+                                // Exibir mensagem de erro
+                                ViewMensagens.ExibeMensagemAgendamento(false);
+                                break;
+                            }
+
+                            // Adicionando consulta na agenda
+                            agenda.Consultas.Add(consulta);
+
+                            // Exibir mensagem de sucesso
+                            ViewMensagens.ExibeMensagemAgendamento(true);
                         }
                         break;
                     case 2:
                         {
                             ConsultaForm consultaForm = new();
-                            consultaForm = ViewCadastro.InsereDadosCancelamentoConsulta(consultaForm);
+                            consultaForm = ViewCadastro.InsereDadosCancelamentoConsulta(gerenciaPaciente,consultaForm);
 
                             if (!agenda.RemoveConsulta(consultaForm))
                                 ViewMensagens.ExibeMensagemCancelarConsulta(false);
                             else
+                            {
                                 ViewMensagens.ExibeMensagemCancelarConsulta(true);
+                            }
+                                
                         }
                         break;
                     case 3:

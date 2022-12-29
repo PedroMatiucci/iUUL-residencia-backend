@@ -18,13 +18,16 @@ namespace Consultorio.Model
             get { return consulta; }
             set
             { // Não pode existir agendamentos futuros
+
                 if(consulta == null)
                     consulta = value;
+
                 else if (DateOnly.FromDateTime(DateTime.Now).CompareTo(
                     value.DataConsulta) < 0)
                     throw new Exception();
 
-                consulta = value;
+                else 
+                    consulta = value;
             }
         }
 

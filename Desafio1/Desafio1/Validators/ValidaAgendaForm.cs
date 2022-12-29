@@ -9,116 +9,109 @@ using Consultorio.View;
 
 namespace Consultorio.Validators
 {
-    internal static class ValidaAgendaForm
+    internal class ValidaAgendaForm
     {
-        private enum Horas
+        private static readonly List<string> Horas = new()
         {
-            H08 = 8, H09 = 9, H10 = 10,
-            H11 = 11, H12 = 12, H13 = 13,
-            H14 = 14, H15 = 15, H16 = 16,
-            H17 = 17, H18 = 18, H19 = 19
-        }
-        private enum Minutos
+            "08","09","10","11",
+            "12","13","14","15",
+            "16","17","18","19"
+        };
+        private static readonly List<string> Minutos = new()
         {
-            M00 = 0, M15 = 15,
-            M30 = 30, M45 = 45
-        }
+            "00","15","30","45"
+        };
 
-        /***********************/
-        /* VALIDAÇÃO DE HORAS */
-        /***********************/
-        internal static bool ValidaHora(string? entrada)
+        /************************/
+        /*  VALIDAÇÃO DE HORAS  *
+         * **********************
+         * SWITCH CASE
+         * 1 p/ INICIAL
+         * 2 p/ FINAL
+         ***********************/
+        internal static bool ValidaHora(string? entrada,int s)
         {
             if (entrada == null) return false;
             if (!HoraValida(entrada)) return false;
 
+            switch (s)
+            {
+                case 1:
+                    {
+                        if (entrada.Substring(0,2) == "19" && entrada.Substring(2,2) == "00")
+                        {
+                            ViewMensagens.ExibeMensagemErroHorarioInicial();
+                            return false;
+                        }
+                    }
+                    break;
+                case 2:
+                    {
+                        if (entrada.Substring(0, 2) == "08" && entrada.Substring(2, 2) == "00")
+                        {
+                            ViewMensagens.ExibeMensagemErroHorarioFinal();
+                            return false;
+                        }
+                    }
+                    break;
+            }
+
             return true;
         }
+
         private static bool HoraValida(string entrada)
         {
-            int horario;
             try
             {
-                horario = int.Parse(entrada);
+                int.Parse(entrada);
             }
             catch
             {
+                ViewMensagens.ExibeMensagemErroHora();
                 return false;
             }
 
-            entrada = entrada.Substring(0, 2);
-            Console.WriteLine(entrada);
+            var hh = entrada.Substring(0, 2);
+            var mm = entrada.Substring(2, 2);
 
-            foreach (int hh in Enum.GetValues(typeof(Horas)))
+            bool verdadeiro = false;
+            foreach (var enumHH in Horas)
             {
-                if (int.Parse(entrada) == hh) return true;
+                if (hh == enumHH) verdadeiro = true;
+            }
+            if (!verdadeiro)
+            {
+                ViewMensagens.ExibeMensagemErroHorarioComercial();
+                return false;
             }
 
-            entrada = entrada.Substring(2, 2);
-            Console.WriteLine(entrada);
-
-            /*
-            if (entrada.Length >= 5 || entrada.Length <= 2)
+            verdadeiro = false;
+            foreach (var enumMM in Minutos)
+            {
+                if (mm == enumMM) verdadeiro = true;
+            }
+            if (!verdadeiro)
+            {
+                ViewMensagens.ExibeMensagemErroHorarioComercial();
                 return false;
-            */
-
+            }
 
             return true;
         }
 
-        internal static string InsereHoraInicialValida()
-        {
-            string? entrada;
-            bool v = true;
-            do
-            {
-                if (!v)
-                    ViewMensagens.ExibeMensagemErroHora();
-
-                Console.Write("Hora inicial: ");
-                entrada = Console.ReadLine();
-
-                v = ValidaHora(entrada);
-
-            } while (!v);
-
-            return entrada;
-        }
-
-
-
-
-
+        
 
         /***********************/
         /* VALIDAÇÃO DE DATAS */
         /***********************/
-        public static bool ValidaData(string? entrada)
+        internal static bool DataValida(string? entrada)
         {
             if (entrada == null) return false;
-            if (!DataValida(entrada)) return false;
-
-            var agora = DateOnly.FromDateTime(DateTime.Now);
-            var dtConsulta = DateOnly.FromDateTime(DateTime.Parse(entrada));
+            if (!ValidaData(entrada)) return false;
 
             return true;
         }
-        public static bool ValidaDataMarcacaoConsulta(string? entrada)
-        {
-            if (entrada == null) return false;
-            if (!DataValida(entrada)) return false;
-
-            var agora = DateOnly.FromDateTime(DateTime.Now);
-            var dtConsulta = DateOnly.FromDateTime(DateTime.Parse(entrada));
-
-            // What
-            if (dtConsulta.CompareTo(agora) < 0 || dtConsulta.CompareTo(agora) == 0)
-                return false;
-
-            return true;
-        }
-
-        private static bool DataValida(string entrada)
+        private static bool ValidaData(string entrada)
         {
             try
             {
@@ -128,6 +121,28 @@ namespace Consultorio.Validators
             {
                 return false;
             }
+            return true;
+        }
+
+        internal static bool ValidaDataConsulta(string? entrada)
+        {
+            if (!DataValida(entrada))
+            {
+                ViewMensagens.ExibeMensagemErroData();
+                return false;
+            }
+
+            var agora = DateOnly.FromDateTime(DateTime.Now);
+            var dtConsulta = DateOnly.FromDateTime(DateTime.Parse(entrada));
+
+            // Não deve ser possível escolher uma consulta com data passada.
+            if (dtConsulta.CompareTo(agora) < 0)
+            {
+                ViewMensagens.ExibeMensagemErroCancelarConsultaAntiga();
+                return false;
+            }
+                
+
             return true;
         }
     }

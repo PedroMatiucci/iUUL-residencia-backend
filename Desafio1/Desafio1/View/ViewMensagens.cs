@@ -11,10 +11,9 @@ namespace Consultorio.View
         /************
          * PACIENTE *
          ***********/
-        public static void ExibeMensagemCadastroPaciente(bool v)
+        public static void ExibeMensagemCadastroPaciente()
         {
-            if (v) Console.WriteLine("\nPaciente cadastrado com sucesso!");
-            else Console.WriteLine("\nErro: paciente não cadastrado.");
+            Console.WriteLine("\nPaciente cadastrado com sucesso!");
         }
         public static void ExibeMensagemRemocaoPaciente(bool v)
         {
@@ -32,7 +31,7 @@ namespace Consultorio.View
         internal static void ExibeMensagemAgendamento(bool v)
         {
             if(v) Console.WriteLine("\nAgendamento realizado com sucesso");
-            else Console.WriteLine("\nErro: já existe uma consulta agendada neste horário.");
+            else Console.WriteLine("\nErro: já existe uma consulta agendada.");
         }
         internal static void ExibeMensagemErroHorarioComercial()
         {
@@ -43,10 +42,10 @@ namespace Consultorio.View
             if (v) Console.WriteLine("\nConsulta desmarcada com sucesso.");
             else Console.WriteLine("\nErro: Não há consultas marcadas nesta data.");
         }
-
-        /*************
-         * DATA/HORA *
-         ************/
+        internal static void ExibeMensagemErroCancelarConsultaAntiga()
+        {
+            Console.WriteLine("\nErro: Não é possível escolher uma consulta com data passada");
+        }
         internal static void ExibeMensagemErroHora()
         {
             Console.WriteLine("\nErro: hora inválida.");
@@ -54,6 +53,14 @@ namespace Consultorio.View
         internal static void ExibeMensagemErroData()
         {
             Console.WriteLine("\nErro: data inválida.\n");
+        }
+        internal static void ExibeMensagemErroHorarioInicial()
+        {
+            Console.WriteLine("\nErro: hora inicial deve ser anterior às 19h.");
+        }
+        internal static void ExibeMensagemErroHorarioFinal()
+        {
+            Console.WriteLine("\nErro: hora final deve ser posterior às 08h.");
         }
 
         /*******
@@ -63,9 +70,10 @@ namespace Consultorio.View
         {
             Console.WriteLine("\nErro: CPF inválido.");
         }
-        internal static void ExibeMensagemErroCPFCadastrado()
+        internal static void ExibeMensagemErroCPFCadastrado(bool v)
         {
-            Console.WriteLine("\nErro: CPF já cadastrado.\n");
+            if (!v) Console.WriteLine("\nErro: CPF não cadastrado.\n");
+            else Console.WriteLine("\n Erro: CPF já está cadastrado");
         }
 
         /********

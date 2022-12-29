@@ -23,7 +23,7 @@ namespace Consultorio.Model
                 if
                 (consulta.CPF == long.Parse(consultaForm.CPF) 
                     && consulta.DataConsulta == DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta))
-                    && consulta.HoraInicial == int.Parse(consultaForm.HoraInicial)
+                    && consulta.HoraInicial == consultaForm.HoraInicial
                 )
                 {
                     Consultas.Remove(consulta);

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Consultorio.Controller;
 using Consultorio.Form;
 using Consultorio.Model;
@@ -15,25 +16,24 @@ namespace Consultorio.View
     internal static class ViewCadastro
     {
         /********************************************
-         * Função para cadastramento de um paciente!
+         *      Cadastramento de um paciente!       *
          *******************************************/
         public static PacienteForm CadastroPaciente(PacienteForm pacienteForm, GerenciaPaciente gerenciaPaciente)
         {
             string? entrada;
-            bool valido = true;
+            bool v = false;
 
             /* CPF */
             //INSERÇÃO DE CPF PARA CADASTRO -> VALIDAÇÃO CPF VÁLIDO -> VALIDAÇÃO CPF EXISTENTE NO CADASTRO
             do
             {
-                if (!valido)
-                    ViewMensagens.ExibeMensagemErroCPFCadastrado();
+                if (v)
+                    ViewMensagens.ExibeMensagemErroCPFCadastrado(true);
 
                 entrada = InsereCPFValido();
-
-                valido = gerenciaPaciente.ExistePaciente(entrada);
-            } while (valido);
-
+                v = gerenciaPaciente.ExistePaciente(entrada);
+            } while (v);
+            
             pacienteForm.CPF = entrada;
 
 
@@ -50,6 +50,68 @@ namespace Consultorio.View
             return pacienteForm;
         }
 
+
+        /********************************************
+         *      Agendamento de uma consulta!       *
+         *******************************************/
+        public static ConsultaForm InsereDadosConsulta(GerenciaPaciente gerenciaPaciente, Agenda agenda, ConsultaForm consultaForm)
+        {
+            string? entrada;
+
+
+            /* CPF DO PACIENTE */
+            entrada = InsereCPFValidoExistente(gerenciaPaciente);
+            consultaForm.CPF = entrada;
+
+
+            /* DATA DA CONSULTA */
+            entrada = InsereDataConsultaValida();
+            consultaForm.DataConsulta = entrada;
+
+
+            /* HORAS INICIAL E FINAL */
+            entrada = InsereHoraValida(1);
+            consultaForm.HoraInicial = entrada;
+
+            entrada = InsereHoraValida(2);
+            consultaForm.HoraFinal = entrada;
+
+
+            return consultaForm;
+        }
+
+
+        /****************************************
+         *    Cancelamento de uma consulta!     *
+         ***************************************/
+        internal static ConsultaForm InsereDadosCancelamentoConsulta(GerenciaPaciente gerenciaPaciente, ConsultaForm consultaForm)
+        {
+            string? entrada;
+            bool v = true;
+
+            /* CPF */
+            entrada = InsereCPFValidoExistente(gerenciaPaciente);
+            consultaForm.CPF = entrada;
+
+            /* DATA DA CONSULTA */
+            entrada = InsereDataConsultaValida();
+            consultaForm.DataConsulta = entrada;
+
+            /* HORA INICIAL */
+            entrada = InsereHoraValida(1);
+            consultaForm.HoraInicial = entrada;
+
+            return consultaForm;
+        }
+
+
+
+
+
+
+        /***************************************
+         * FUNÇÕES DE INSERÇÃO com VALIDAÇÃO!! *
+         **************************************/
         private static string InsereDataNascimentoValido()
         {
             bool v = true;
@@ -68,85 +130,6 @@ namespace Consultorio.View
 
             return entrada;
         }
-
-
-
-        /**************************************************
-         * Função para inserção de dados para agendamento
-         * de uma consulta!
-         *************************************************/
-        public static ConsultaForm InsereDadosConsulta(GerenciaPaciente gerenciaPaciente, Agenda agenda, ConsultaForm consultaForm)
-        {
-            string? entrada;
-            bool valido = true;
-
-
-            /* CPF DO PACIENTE */
-            CPF:
-            entrada = InsereCPFValido();
-            //verificar se existe o CPF no cadastro
-            Paciente? paciente = gerenciaPaciente.RetornaPaciente(entrada);
-            if (paciente == null)
-            {
-                ViewMensagens.ExibeMensagemCadastroPaciente(false);
-                goto CPF;
-            }
-            
-            consultaForm.CPF = entrada;
-
-
-            /* DATA DA CONSULTA */
-            entrada = InsereDataConsultaValida();
-            consultaForm.DataConsulta = entrada;
-
-
-            /* HORAS INICIAL E FINAL */
-            var horasInicialFinal = new string[2];
-            HORA:
-            do
-            {
-                if (!valido)
-                    ViewMensagens.ExibeMensagemErroHora();
-
-                horasInicialFinal = InsereHoraInicialFinal();
-
-                // CORRIGIR VALIDAÇÃO DEPOIS
-                
-            } while (!valido);
-
-/*
-            if (!ValidaAgendaForm.HorarioValido(horasInicialFinal))
-            {
-                ViewMensagens.ExibeMensagemErroHorarioComercial();
-                goto HORA;
-            }
-            if (!ValidaAgendaForm.HorarioDisponivel(horasInicialFinal, agenda))
-            {
-                ViewMensagens.ExibeMensagemAgendamento(false);
-                goto HORA;
-            }*/
-
-            consultaForm.HoraInicial = horasInicialFinal[0];
-            consultaForm.HoraFinal = horasInicialFinal[1];
-
-            return consultaForm;
-        }
-
-        private static string[] InsereHoraInicialFinal()
-        {
-            string[] horasInicialFinal = new string[2];
-
-            Console.Write("Hora inicial: ");
-            string? entrada = Console.ReadLine();
-            horasInicialFinal[0] = entrada;
-
-            Console.Write("Hora final: ");
-            entrada = Console.ReadLine();
-            horasInicialFinal[1] = entrada;
-
-            return horasInicialFinal;
-        }
-
         public static string InsereNomeValido()
         {
             bool v = true;
@@ -166,6 +149,8 @@ namespace Consultorio.View
             return entrada;
         }
 
+
+        /* ESTA FUNÇÃO RETORNA O VALOR SE ELE FOR UM CPF */
         public static string InsereCPFValido()
         {
             bool v = true;
@@ -184,64 +169,104 @@ namespace Consultorio.View
 
             return entrada;
         }
-
-        private static string InsereDataConsultaValida()
+        /* ESTA FUNÇÃO RETORNA O VALOR SE ELE FOR UM CPF && EXISTENTE */
+        public static string InsereCPFValidoExistente(GerenciaPaciente gerenciaPaciente)
         {
-            bool v = true;
             string? entrada;
-
+            bool v = true;
             do
             {
                 if (!v)
-                    ViewMensagens.ExibeMensagemErroData();
+                    ViewMensagens.ExibeMensagemErroCPFCadastrado(false);
 
-                Console.Write("Data da consulta: ");
-                entrada = Console.ReadLine();
+                entrada = InsereCPFValido();
 
-                v = ValidaAgendaForm.ValidaDataMarcacaoConsulta(entrada);
+                v = gerenciaPaciente.ExistePaciente(entrada);
             } while (!v);
 
             return entrada;
         }
 
+        
+
+        /****************
+         * SWITCH CASE
+         * 1 p/ INICIAL
+         * 2 p/ FINAL
+         ****************/
+        internal static string InsereHoraValida(int s)
+        {
+            string? texto = null;
+            switch (s)
+            {
+                case 1: texto = "inicial";
+                    break;
+                case 2: texto = "final";
+                    break;
+            }
+
+            string? entrada;
+            do
+            {
+                Console.Write($"Hora {texto}: ");
+                entrada = Console.ReadLine();
+
+            } while (!ValidaAgendaForm.ValidaHora(entrada, s));
+
+
+            return entrada;
+        }
+
+        /* 
+         * FUNÇÃO PARA INSERÇÃO COM VERIFICAÇÃO DE DATA 
+         * PARA AGENDAMENTO E CANCELAMENTO DE CONSULTAS.
+         */
+        private static string InsereDataConsultaValida()
+        {
+            string? entrada;
+            do
+            {
+                Console.Write("Data da consulta: ");
+                entrada = Console.ReadLine();
+
+            } while (!ValidaAgendaForm.ValidaDataConsulta(entrada));
+
+            return entrada;
+        }
+
+
+        /* FUNÇÃO PARA INSERIR DATAS PARA LISTAGEM DA AGENDA POR PERÍODO */
         internal static string[] InsereDataInicialFinalValida()
         {
             string[] dataInicialFinal = new string[2];
 
             string? entrada;
+            bool v = true;
             do
             {
+                if (!v)
+                    ViewMensagens.ExibeMensagemErroData();
                 Console.Write("Data inicial: ");
                 entrada = Console.ReadLine();
-            } while (!ValidaAgendaForm.ValidaData(entrada));
+
+                v = ValidaAgendaForm.DataValida(entrada);
+            } while (!v);
             
             dataInicialFinal[0] = entrada;
-
+            
             do
             {
+                if (!v)
+                    ViewMensagens.ExibeMensagemErroData();
                 Console.Write("Data final: ");
                 entrada = Console.ReadLine();
-            } while (!ValidaAgendaForm.ValidaData(entrada));
-            
+
+                v = ValidaAgendaForm.DataValida(entrada);
+            } while (!v);
+
             dataInicialFinal[1] = entrada;
 
             return dataInicialFinal;
-        }
-
-        internal static ConsultaForm InsereDadosCancelamentoConsulta(ConsultaForm consultaForm)
-        {
-            string? entrada;
-
-            entrada = InsereCPFValido();
-            consultaForm.CPF = entrada;
-
-            entrada = InsereDataConsultaValida();
-            consultaForm.DataConsulta = entrada;
-
-            entrada = ValidaAgendaForm.InsereHoraInicialValida();
-            consultaForm.HoraInicial = entrada;
-
-            return consultaForm;
         }
     }
 }

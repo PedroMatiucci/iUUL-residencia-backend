@@ -11,15 +11,15 @@ namespace Consultorio.Model
     {
         public long CPF { get; private set; }
         public DateOnly DataConsulta { get; private set; }
-        public int HoraInicial { get; private set; }
-        public int HoraFinal { get; private set; }
+        public string HoraInicial { get; private set; }
+        public string HoraFinal { get; private set; }
 
-        public Consulta(long cpf, DateOnly data, int h1, int h2)
+        public Consulta(long cpf, DateOnly data, string h1, string h2)
         {
-            CPF = cpf;
-            DataConsulta = data;
-            HoraInicial = h1;
-            HoraFinal = h2;
+            this.CPF = cpf;
+            this.DataConsulta = data;
+            this.HoraInicial = h1;
+            this.HoraFinal = h2;
         }
     }
 }
