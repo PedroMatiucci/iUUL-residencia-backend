@@ -19,7 +19,7 @@ namespace Consultorio.Model
             set
             { // Não pode existir agendamentos futuros
 
-                if(consulta == null)
+                if(consulta == null || value == null)
                     consulta = value;
 
                 else if (DateOnly.FromDateTime(DateTime.Now).CompareTo(
