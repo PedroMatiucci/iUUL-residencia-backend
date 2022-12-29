@@ -134,6 +134,9 @@ namespace Consultorio.Controller
                                 ViewMensagens.ExibeMensagemCancelarConsulta(false);
                             else
                             {
+                                Paciente pacienteRemoverConsulta = gerenciaPaciente.RetornaPaciente(consultaForm.CPF);
+                                if (pacienteRemoverConsulta.Consulta != null)
+                                    pacienteRemoverConsulta = null;
                                 ViewMensagens.ExibeMensagemCancelarConsulta(true);
                             }
                                 
