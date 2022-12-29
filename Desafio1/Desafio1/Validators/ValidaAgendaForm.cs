@@ -92,7 +92,7 @@ namespace Consultorio.Validators
             }
             if (!verdadeiro)
             {
-                ViewMensagens.ExibeMensagemErroHorarioComercial();
+                ViewMensagens.ExibeMensagemErroHorarioMinutos();
                 return false;
             }
 
