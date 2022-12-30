@@ -9,7 +9,7 @@ namespace Consultorio.Model
     internal class Paciente
     {
         public string Nome { get; private set; }
-        public long CPF { get; private set; }
+        public string CPF { get; private set; }
         public DateTime DataNascimento { get; private set; }
 
         private Consulta? consulta;
@@ -17,21 +17,24 @@ namespace Consultorio.Model
         {
             get { return consulta; }
             set
-            { // Não pode existir agendamentos futuros
-
-                if(consulta == null || value == null)
+            {
+                if(consulta == null)
                     consulta = value;
 
+                // Não pode existir agendamentos futuros
                 else if (DateOnly.FromDateTime(DateTime.Now).CompareTo(
                     value.DataConsulta) < 0)
                     throw new Exception();
+                // Não pode haver consultas sobrepostas
+                else if (Agenda.HorarioIndisponivel(value)) 
+                    throw new Exception();
 
-                else 
+                else
                     consulta = value;
             }
         }
 
-        public Paciente(string nome, long cpf, DateTime data)
+        public Paciente(string nome, string cpf, DateTime data)
         {
             Nome = nome;
             CPF = cpf;

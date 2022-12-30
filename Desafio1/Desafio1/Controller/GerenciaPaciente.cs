@@ -24,7 +24,7 @@ namespace Consultorio.Controller
 
             foreach(Paciente paciente in this.Pacientes)
             {
-                if(paciente.CPF.ToString() == entrada)
+                if(paciente.CPF == entrada)
                     return true;
             }
 
@@ -58,7 +58,7 @@ namespace Consultorio.Controller
             foreach (Paciente paciente in this.Pacientes) // Buscar o CPF.
             {
                 //Verifica se existe um Paciente com este CPF
-                if (paciente.CPF == long.Parse(cpf))
+                if (paciente.CPF == cpf)
                 {
                     return paciente;
                 }

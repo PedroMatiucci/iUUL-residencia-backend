@@ -46,7 +46,7 @@ namespace Consultorio.Controller
 
                             pacienteForm = ViewCadastro.CadastroPaciente(pacienteForm,gerenciaPaciente);
 
-                            Paciente p = new(pacienteForm.Nome, long.Parse(pacienteForm.CPF), DateTime.Parse(pacienteForm.DataNascimento));
+                            Paciente p = new(pacienteForm.Nome, pacienteForm.CPF, DateTime.Parse(pacienteForm.DataNascimento));
 
                             gerenciaPaciente.Pacientes.Add(p);
 
@@ -55,7 +55,7 @@ namespace Consultorio.Controller
                         break;
                     case 2:
                         {
-                            var cpfRemover = ViewCadastro.InsereCPFValido(); // Inserir um CPF.
+                            var cpfRemover = ViewCadastro.InsereCPFValidoExistente(gerenciaPaciente); // Inserir um CPF.
 
                             if (gerenciaPaciente.RemovePaciente(cpfRemover))
                             {
@@ -94,8 +94,7 @@ namespace Consultorio.Controller
                         {
                             ConsultaForm consultaForm = new();
                             consultaForm = ViewCadastro.InsereDadosConsulta(gerenciaPaciente, agenda, consultaForm);
-
-
+                            
                             // Método que retorna o objeto paciente a partir do CPF
                             Paciente? paciente = gerenciaPaciente.RetornaPaciente(consultaForm.CPF);
                             if (paciente == null)
@@ -119,7 +118,7 @@ namespace Consultorio.Controller
                             }
 
                             // Adicionando consulta na agenda
-                            agenda.Consultas.Add(consulta);
+                            Agenda.Consultas.Add(consulta);
 
                             // Exibir mensagem de sucesso
                             ViewMensagens.ExibeMensagemAgendamento(true);

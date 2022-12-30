@@ -37,7 +37,7 @@ namespace Consultorio.View
             Console.WriteLine("------------------------------------");
             Console.WriteLine("Data H.Ini H.Fim Tempo Nome Dt.Nasc.");
             Console.WriteLine("------------------------------------");
-            foreach (Consulta consulta in agenda.Consultas)
+            foreach (Consulta consulta in Agenda.Consultas)
             {
                 tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
                 Console.WriteLine("{0} {1} {2} {3} nome dtnascimento", consulta.DataConsulta, consulta.HoraInicial,consulta.HoraFinal, tempoConsulta);
@@ -51,7 +51,7 @@ namespace Consultorio.View
             Console.WriteLine("------------------------------------");
             Console.WriteLine("Data H.Ini H.Fim Tempo Nome Dt.Nasc.");
             Console.WriteLine("------------------------------------");
-            foreach (Consulta consulta in agenda.Consultas)
+            foreach (Consulta consulta in Agenda.Consultas)
             {
                 if(consulta.DataConsulta.CompareTo(
                     DateOnly.FromDateTime(DateTime.Parse(datas[0]))) > 0

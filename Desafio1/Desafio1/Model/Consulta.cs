@@ -9,12 +9,12 @@ namespace Consultorio.Model
 {
     internal class Consulta
     {
-        public long CPF { get; private set; }
+        public string CPF { get; private set; }
         public DateOnly DataConsulta { get; private set; }
         public string HoraInicial { get; private set; }
         public string HoraFinal { get; private set; }
 
-        public Consulta(long cpf, DateOnly data, string h1, string h2)
+        public Consulta(string cpf, DateOnly data, string h1, string h2)
         {
             this.CPF = cpf;
             this.DataConsulta = data;

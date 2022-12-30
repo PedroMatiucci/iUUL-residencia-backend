@@ -99,7 +99,7 @@ namespace Consultorio.Validators
         {
             try
             {
-                long cpf = long.Parse(entrada);
+                long.Parse(entrada);
             }
             catch (Exception) { return false; }
             return true;
