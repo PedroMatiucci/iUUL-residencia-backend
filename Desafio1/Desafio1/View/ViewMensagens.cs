@@ -31,7 +31,7 @@ namespace Consultorio.View
         internal static void ExibeMensagemAgendamento(bool v)
         {
             if(v) Console.WriteLine("\nAgendamento realizado com sucesso");
-            else Console.WriteLine("\nErro: já existe uma consulta agendada nesta hora.");
+            else Console.WriteLine("\nErro: paciente já possui uma consulta futura agendada.");
         }
         internal static void ExibeMensagemErroHorarioComercial()
         {

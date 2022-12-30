@@ -18,24 +18,35 @@ namespace Consultorio.Model
             get { return consulta; }
             set
             {
-                if(consulta == null)
+                if (consulta == null || value == null) // Para excluir a consulta, o value será null.
+                {
+                    // se for a marcação de uma consulta, verificar sobreposição
+                    if(value != null)
+                        if (Agenda.PossuiAgendamentoSobreposto(value))
+                            throw new Exception();
+                            
                     consulta = value;
+                } 
+
 
                 // Não pode existir agendamentos futuros
-                else if (DateOnly.FromDateTime(DateTime.Now).CompareTo(
-                    value.DataConsulta) < 0)
+                else if (Agenda.PossuiAgendamentoFuturo(value))
                     throw new Exception();
-                // Não pode haver consultas sobrepostas
-                else if (Agenda.HorarioIndisponivel(value)) 
+                    
+
+                // Não pode existir agendamentos sobrepostos
+                else if (Agenda.PossuiAgendamentoSobreposto(value))
                     throw new Exception();
+                    
 
                 else
                     consulta = value;
-            }
+            } //$END_SET
         }
 
         public Paciente(string nome, string cpf, DateTime data)
         {
+            consulta = null;
             Nome = nome;
             CPF = cpf;
             DataNascimento = data;

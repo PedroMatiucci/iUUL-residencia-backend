@@ -87,7 +87,6 @@ namespace Consultorio.View
         internal static ConsultaForm InsereDadosCancelamentoConsulta(GerenciaPaciente gerenciaPaciente, ConsultaForm consultaForm)
         {
             string? entrada;
-            bool v = true;
 
             /* CPF */
             entrada = InsereCPFValidoExistente(gerenciaPaciente);
