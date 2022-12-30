@@ -16,41 +16,41 @@ namespace Consultorio.View
         {
             int idade;
             //Metodo para listar pacientes, recebe uma lista ja ordenada pelo controlador e da o print nela
-            Console.WriteLine("------------------------------------");
-            Console.WriteLine("CPF         Nome     Dt.Nasc.  Idade");
-            Console.WriteLine("------------------------------------");
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine("CPF\t\tNome\tDt.Nasc.\tIdade\t");
+            Console.WriteLine("--------------------------------------------------");
             foreach (Paciente paciente in listaPacientes)
             {
                 idade = DateTime.Now.Year - paciente.DataNascimento.Year;
-                Console.WriteLine("{0} {1} {2} {3}", paciente.CPF, paciente.Nome, DateOnly.FromDateTime(paciente.DataNascimento), idade);
+                Console.WriteLine("{0}\t{1}\t{2}\t{3}\t", paciente.CPF, paciente.Nome, DateOnly.FromDateTime(paciente.DataNascimento), idade);
                 if(paciente.Consulta != null) {
-                    Console.WriteLine("Agendado Para: " + paciente.Consulta.DataConsulta);
-                    Console.WriteLine("{0} às {1}", paciente.Consulta.HoraInicial, paciente.Consulta.HoraFinal);
+                    Console.WriteLine("\t\tAgendado Para: " + paciente.Consulta.DataConsulta);
+                    Console.WriteLine("\t\t{0} às {1}", paciente.Consulta.HoraInicial, paciente.Consulta.HoraFinal);
                 }
             }
-            Console.WriteLine("------------------------------------");
+            Console.WriteLine("--------------------------------------------------");
         }
 
         internal static void ExibeAgenda(Agenda agenda)
         {
             int tempoConsulta;
-            Console.WriteLine("------------------------------------");
-            Console.WriteLine("Data H.Ini H.Fim Tempo Nome Dt.Nasc.");
-            Console.WriteLine("------------------------------------");
+            Console.WriteLine("-------------------------------------------------");
+            Console.WriteLine("Data\t\tH.Ini\tH.Fim\tTempo\tNome\tDt.Nasc.");
+            Console.WriteLine("-------------------------------------------------");
             foreach (Consulta consulta in Agenda.Consultas)
             {
                 tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                Console.WriteLine("{0} {1} {2} {3} nome dtnascimento", consulta.DataConsulta, consulta.HoraInicial,consulta.HoraFinal, tempoConsulta);
+                Console.WriteLine("{0}\t{1}\t{2}\t{3}\tnome\tdtnascimento", consulta.DataConsulta, consulta.HoraInicial, consulta.HoraFinal, tempoConsulta);
             }
-            Console.WriteLine("------------------------------------");
+            Console.WriteLine("-------------------------------------------------");
         }
 
         internal static void ExibeAgendaPeriodo(Agenda agenda, string[] datas)
         {
             int tempoConsulta;
-            Console.WriteLine("------------------------------------");
-            Console.WriteLine("Data H.Ini H.Fim Tempo Nome Dt.Nasc.");
-            Console.WriteLine("------------------------------------");
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine("Data\t\tH.Ini\tH.Fim\tTempo\tNome\tDt.Nasc.");
+            Console.WriteLine("-------------------------------------------------");
             foreach (Consulta consulta in Agenda.Consultas)
             {
                 if(consulta.DataConsulta.CompareTo(
@@ -60,7 +60,7 @@ namespace Consultorio.View
                         DateOnly.FromDateTime(DateTime.Parse(datas[1]))) < 0)
                 {
                     tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                    Console.WriteLine("{0} {1} {2} {3} nome dtnascimento", consulta.DataConsulta, consulta.HoraInicial, consulta.HoraFinal, tempoConsulta);
+                    Console.WriteLine("{0}\t{1}\t{2}\t{3}\tnome\tdtnascimento", consulta.DataConsulta, consulta.HoraInicial, consulta.HoraFinal, tempoConsulta);
                 }
                 if (consulta.DataConsulta.CompareTo(
                     DateOnly.FromDateTime(DateTime.Parse(datas[0]))) == 0
@@ -69,10 +69,10 @@ namespace Consultorio.View
                         DateOnly.FromDateTime(DateTime.Parse(datas[1]))) == 0)
                 {
                     tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                    Console.WriteLine("{0} {1} {2} {3} nome dtnascimento", consulta.DataConsulta, consulta.HoraInicial, consulta.HoraFinal, tempoConsulta);
+                    Console.WriteLine("{0}\t{1}\t{2}\t{3}\tnome\tdtnascimento", consulta.DataConsulta, consulta.HoraInicial, consulta.HoraFinal, tempoConsulta);
                 }
             }
-            Console.WriteLine("------------------------------------");
+            Console.WriteLine("-------------------------------------------------");
         }
     }
 }

@@ -103,7 +103,7 @@ namespace Consultorio.Controller
                                 break;
                             }
 
-                            Consulta consulta = new(long.Parse(consultaForm.CPF),
+                            Consulta consulta = new(consultaForm.CPF,
                                 DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta)),
                                 consultaForm.HoraInicial, consultaForm.HoraFinal);
                             try
