@@ -34,9 +34,9 @@ namespace Consultorio.View
         internal static void ExibeAgenda(GerenciaPaciente gp)
         {
             int tempoConsulta;
-            Console.WriteLine("-------------------------------------------------");
+            Console.WriteLine("---------------------------------------------------------------");
             Console.WriteLine("Data\t\tH.Ini\tH.Fim\tTempo\tNome\tDt.Nasc.");
-            Console.WriteLine("-------------------------------------------------");
+            Console.WriteLine("---------------------------------------------------------------");
             foreach (Consulta consulta in Agenda.Consultas)
             {
                 tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
@@ -46,17 +46,17 @@ namespace Consultorio.View
                     FormataData(consulta.HoraInicial), 
                     FormataData(consulta.HoraFinal), 
                     tempoConsulta, 
-                    paciente.Nome, paciente.DataNascimento);
+                    paciente.Nome, paciente.DataNascimento.ToString("dd/MM/yyyy"));
             }
-            Console.WriteLine("-------------------------------------------------");
+            Console.WriteLine("---------------------------------------------------------------");
         }
 
-        internal static void ExibeAgendaPeriodo(Agenda agenda, string[] datas)
+        internal static void ExibeAgendaPeriodo(Agenda agenda, string[] datas, GerenciaPaciente gp)
         {
             int tempoConsulta;
-            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine("Data\t\tH.Ini\tH.Fim\tTempo\tNome\tDt.Nasc.");
-            Console.WriteLine("-------------------------------------------------");
+            Console.WriteLine("---------------------------------------------------------------");
             foreach (Consulta consulta in Agenda.Consultas)
             {
                 if(consulta.DataConsulta.CompareTo(
@@ -66,7 +66,13 @@ namespace Consultorio.View
                         DateOnly.FromDateTime(DateTime.Parse(datas[1]))) < 0)
                 {
                     tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                    Console.WriteLine("{0}\t{1}\t{2}\t{3}\tnome\tdtnascimento", consulta.DataConsulta, FormataData(consulta.HoraInicial), FormataData(consulta.HoraFinal), tempoConsulta);
+                    var paciente = gp.RetornaPaciente(consulta.CPF);
+                    Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}",
+                        consulta.DataConsulta,
+                        FormataData(consulta.HoraInicial),
+                        FormataData(consulta.HoraFinal),
+                        tempoConsulta,
+                        paciente.Nome, paciente.DataNascimento.ToString("dd/MM/yyyy"));
                 }
                 if (consulta.DataConsulta.CompareTo(
                     DateOnly.FromDateTime(DateTime.Parse(datas[0]))) == 0
@@ -75,10 +81,16 @@ namespace Consultorio.View
                         DateOnly.FromDateTime(DateTime.Parse(datas[1]))) == 0)
                 {
                     tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                    Console.WriteLine("{0}\t{1}\t{2}\t{3}\tnome\tdtnascimento", consulta.DataConsulta, FormataData(consulta.HoraInicial), FormataData(consulta.HoraFinal), tempoConsulta);
+                    var paciente = gp.RetornaPaciente(consulta.CPF);
+                    Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}",
+                        consulta.DataConsulta,
+                        FormataData(consulta.HoraInicial),
+                        FormataData(consulta.HoraFinal),
+                        tempoConsulta,
+                        paciente.Nome, paciente.DataNascimento.ToString("dd/MM/yyyy"));
                 }
             }
-            Console.WriteLine("-------------------------------------------------");
+            Console.WriteLine("---------------------------------------------------------------");
         }
 
         //Metodo usado para formatar os horarios para o formato hh:mm
