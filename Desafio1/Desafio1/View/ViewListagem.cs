@@ -25,7 +25,7 @@ namespace Consultorio.View
                 Console.WriteLine("{0}\t{1}\t{2}\t{3}\t", paciente.CPF, paciente.Nome, DateOnly.FromDateTime(paciente.DataNascimento), idade);
                 if(paciente.Consulta != null) {
                     Console.WriteLine("\t\tAgendado Para: " + paciente.Consulta.DataConsulta);
-                    Console.WriteLine("\t\t{0} às {1}", paciente.Consulta.HoraInicial, paciente.Consulta.HoraFinal);
+                    Console.WriteLine("\t\t{0} às {1}", FormataData(paciente.Consulta.HoraInicial), FormataData(paciente.Consulta.HoraFinal));
                 }
             }
             Console.WriteLine("--------------------------------------------------");
@@ -40,7 +40,7 @@ namespace Consultorio.View
             foreach (Consulta consulta in Agenda.Consultas)
             {
                 tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                Console.WriteLine("{0}\t{1}\t{2}\t{3}\tnome\tdtnascimento", consulta.DataConsulta, consulta.HoraInicial, consulta.HoraFinal, tempoConsulta);
+                Console.WriteLine("{0}\t{1}\t{2}\t{3}\tnome\tdtnascimento", consulta.DataConsulta, FormataData(consulta.HoraInicial), FormataData(consulta.HoraFinal), tempoConsulta);
             }
             Console.WriteLine("-------------------------------------------------");
         }
@@ -60,7 +60,7 @@ namespace Consultorio.View
                         DateOnly.FromDateTime(DateTime.Parse(datas[1]))) < 0)
                 {
                     tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                    Console.WriteLine("{0}\t{1}\t{2}\t{3}\tnome\tdtnascimento", consulta.DataConsulta, consulta.HoraInicial, consulta.HoraFinal, tempoConsulta);
+                    Console.WriteLine("{0}\t{1}\t{2}\t{3}\tnome\tdtnascimento", consulta.DataConsulta, FormataData(consulta.HoraInicial), FormataData(consulta.HoraFinal), tempoConsulta);
                 }
                 if (consulta.DataConsulta.CompareTo(
                     DateOnly.FromDateTime(DateTime.Parse(datas[0]))) == 0
@@ -69,10 +69,18 @@ namespace Consultorio.View
                         DateOnly.FromDateTime(DateTime.Parse(datas[1]))) == 0)
                 {
                     tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                    Console.WriteLine("{0}\t{1}\t{2}\t{3}\tnome\tdtnascimento", consulta.DataConsulta, consulta.HoraInicial, consulta.HoraFinal, tempoConsulta);
+                    Console.WriteLine("{0}\t{1}\t{2}\t{3}\tnome\tdtnascimento", consulta.DataConsulta, FormataData(consulta.HoraInicial), FormataData(consulta.HoraFinal), tempoConsulta);
                 }
             }
             Console.WriteLine("-------------------------------------------------");
+        }
+
+        //Metodo usado para formatar os horarios para o formato hh:mm
+        internal static string FormataData(string horario)
+        {
+            string hora = horario.Substring(0, 2);//Separa a string em horario e minutos
+            string minutos = horario.Substring(2, 2);
+            return hora + ":" + minutos; //junta as horas e minutos no formato desejado
         }
     }
 }
