@@ -31,7 +31,7 @@ namespace Consultorio.View
             Console.WriteLine("--------------------------------------------------");
         }
 
-        internal static void ExibeAgenda(Agenda agenda)
+        internal static void ExibeAgenda(GerenciaPaciente gp)
         {
             int tempoConsulta;
             Console.WriteLine("-------------------------------------------------");
@@ -40,7 +40,13 @@ namespace Consultorio.View
             foreach (Consulta consulta in Agenda.Consultas)
             {
                 tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                Console.WriteLine("{0}\t{1}\t{2}\t{3}\tnome\tdtnascimento", consulta.DataConsulta, FormataData(consulta.HoraInicial), FormataData(consulta.HoraFinal), tempoConsulta);
+                var paciente = gp.RetornaPaciente(consulta.CPF);
+                Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", 
+                    consulta.DataConsulta, 
+                    FormataData(consulta.HoraInicial), 
+                    FormataData(consulta.HoraFinal), 
+                    tempoConsulta, 
+                    paciente.Nome, paciente.DataNascimento);
             }
             Console.WriteLine("-------------------------------------------------");
         }

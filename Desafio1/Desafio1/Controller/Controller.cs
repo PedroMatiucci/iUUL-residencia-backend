@@ -148,7 +148,7 @@ namespace Consultorio.Controller
                             {
                                 case 1:
                                     {
-                                        ViewListagem.ExibeAgenda(agenda);
+                                        ViewListagem.ExibeAgenda(gerenciaPaciente);
                                     }
                                     break;
                                 case 2:
