@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Consultorio.Model
 {
-    internal class Agenda : List<Consulta>
+    internal class Agenda
     {
         public static List<Consulta>? Consultas { get; private set; }
 
@@ -22,8 +22,6 @@ namespace Consultorio.Model
             {
                 foreach (var consulta in Consultas)
                 {
-                    // Obs: Não possui verificação de não deletar uma consulta já passada.
-
                     if(consulta.CPF == consultaForm.CPF
                         && consulta.DataConsulta == DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta))
                         && consulta.HoraInicial == consultaForm.HoraInicial)
