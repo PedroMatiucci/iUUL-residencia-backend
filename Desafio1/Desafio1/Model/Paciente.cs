@@ -22,7 +22,7 @@ namespace Consultorio.Model
                 {
                     // se for a marcação de uma consulta, verificar sobreposição
                     if(value != null)
-                        if (Agenda.PossuiAgendamentoSobreposto(value))
+                        if (value.PossuiAgendamentoSobreposto())
                             throw new Exception();
                             
                     consulta = value;
@@ -30,12 +30,12 @@ namespace Consultorio.Model
 
 
                 // Não pode existir agendamentos futuros
-                else if (Agenda.PossuiAgendamentoFuturo(value))
+                else if (value.PossuiAgendamentoFuturo())
                     throw new Exception();
                     
 
                 // Não pode existir agendamentos sobrepostos
-                else if (Agenda.PossuiAgendamentoSobreposto(value))
+                else if (value.PossuiAgendamentoSobreposto())
                     throw new Exception();
                     
 
@@ -50,6 +50,13 @@ namespace Consultorio.Model
             Nome = nome;
             CPF = cpf;
             DataNascimento = data;
+        }
+
+        internal bool ExisteAgendamento()
+        {
+            return (this.Consulta != null) &&
+                        (DateOnly.FromDateTime(DateTime.Now).CompareTo(
+                            this.Consulta.DataConsulta) < 0);
         }
     }
 }

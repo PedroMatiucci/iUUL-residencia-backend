@@ -38,7 +38,7 @@ namespace Consultorio.Controller
             if (paciente == null) return false;
 
             // Pacientes com consulta futura não podem ser removidos
-            if (this.ExisteAgendamento(paciente))
+            if (paciente.ExisteAgendamento())
                 return false;
 
             this.Pacientes.Remove(paciente);
@@ -46,12 +46,7 @@ namespace Consultorio.Controller
             return true;
         }
 
-        internal bool ExisteAgendamento(Paciente paciente)
-        {
-            return (paciente.Consulta != null) &&
-                        (DateOnly.FromDateTime(DateTime.Now).CompareTo(
-                            paciente.Consulta.DataConsulta) < 0);
-        }
+        
 
         internal Paciente? RetornaPaciente(string cpf)
         {
