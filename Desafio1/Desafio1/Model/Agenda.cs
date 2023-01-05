@@ -16,7 +16,7 @@ namespace Consultorio.Model
             Consultas = new List<Consulta>();
         }
 
-        internal bool RemoveConsulta(ConsultaForm consultaForm)
+        internal void RemoveConsulta(ConsultaForm consultaForm)
         {
             var dataAgora = DateOnly.FromDateTime(DateTime.Now);
             var dataForm = DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta));
@@ -32,13 +32,13 @@ namespace Consultorio.Model
                             && consulta.HoraInicial == consultaForm.HoraInicial)
                         {
                             Consultas.Remove(consulta);
-                            return true;
+                            return;
                         }
                     }
                 }
             }
 
-            return false;
+            throw new Exception();
         }
     }
 }

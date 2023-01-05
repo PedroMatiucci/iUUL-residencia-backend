@@ -57,15 +57,18 @@ namespace Consultorio.Controller
                         {
                             var cpfRemover = ViewCadastro.InsereCPFValidoExistente(gerenciaPaciente); // Inserir um CPF.
 
-                            if (gerenciaPaciente.RemovePaciente(cpfRemover))
+                            try
                             {
-                                ViewMensagens.ExibeMensagemRemocaoPaciente(true);
+                                gerenciaPaciente.RemovePaciente(cpfRemover);
+                            }
+                            catch
+                            {
+                                ViewMensagens.ExibeMensagemRemocaoPaciente(false);
                                 break;
                             }
-                            
-                            ViewMensagens.ExibeMensagemRemocaoPaciente(false);
-                            break;
+                            ViewMensagens.ExibeMensagemRemocaoPaciente(true);
                         }
+                        break;
                     case 3:
                         {
                             // ordena a lista de pacientes utilizando o Cpf como criterio de ordenacao
@@ -82,7 +85,7 @@ namespace Consultorio.Controller
                             ViewListagem.ExibeListaPacientes(gerenciaPaciente.Pacientes);
                         }
                         break;
-                   // default: return;
+                   default: break;
                 }
             }
 
@@ -129,16 +132,21 @@ namespace Consultorio.Controller
                             ConsultaForm consultaForm = new();
                             consultaForm = ViewCadastro.InsereDadosCancelamentoConsulta(gerenciaPaciente,consultaForm);
 
-                            if (!agenda.RemoveConsulta(consultaForm))
-                                ViewMensagens.ExibeMensagemCancelarConsulta(false);
-                            else
+                            try
                             {
-                                Paciente? pacienteRemoverConsulta = gerenciaPaciente.RetornaPaciente(consultaForm.CPF);
-                                if (pacienteRemoverConsulta.Consulta != null)
-                                    pacienteRemoverConsulta.Consulta = null;
-                                ViewMensagens.ExibeMensagemCancelarConsulta(true);
+                                agenda.RemoveConsulta(consultaForm);
                             }
-                                
+                            catch
+                            {
+                                ViewMensagens.ExibeMensagemCancelarConsulta(false);
+                                break;
+                            }
+
+                            Paciente? pacienteRemoverConsulta = gerenciaPaciente.RetornaPaciente(consultaForm.CPF);
+                            if (pacienteRemoverConsulta.Consulta != null)
+                                pacienteRemoverConsulta.Consulta = null;
+                            ViewMensagens.ExibeMensagemCancelarConsulta(true);
+
                         }
                         break;
                     case 3:
@@ -161,6 +169,7 @@ namespace Consultorio.Controller
                             }
                         }
                         break;
+                    default : break;
                 }
             }
 

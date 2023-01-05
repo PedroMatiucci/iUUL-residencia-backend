@@ -31,19 +31,17 @@ namespace Consultorio.Controller
             return false;
         }
 
-        internal bool RemovePaciente(string cpf)
+        internal void RemovePaciente(string cpf)
         {
             var paciente = this.RetornaPaciente(cpf);
 
-            if (paciente == null) return false;
+            if (paciente == null) throw new Exception();
 
             // Pacientes com consulta futura não podem ser removidos
             if (paciente.ExisteAgendamento())
-                return false;
+                throw new Exception();
 
             this.Pacientes.Remove(paciente);
-
-            return true;
         }
 
         
