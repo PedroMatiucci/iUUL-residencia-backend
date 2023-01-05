@@ -30,7 +30,7 @@ namespace Consultorio.View
                 if (v)
                     ViewMensagens.ExibeMensagemErroCPFCadastrado(true);
 
-                entrada = InsereCPFValido();
+                entrada = InsereCPFValido(pacienteForm);
                 v = gerenciaPaciente.ExistePaciente(entrada);
             } while (v);
             
@@ -38,12 +38,12 @@ namespace Consultorio.View
 
 
             /* NOME */
-            entrada = InsereNomeValido();
+            entrada = InsereNomeValido(pacienteForm);
             pacienteForm.Nome = entrada;
 
 
             /* DATA DE NASCIMENTO */
-            entrada = InsereDataNascimentoValido();
+            entrada = InsereDataNascimentoValido(pacienteForm);
             pacienteForm.DataNascimento = entrada;
 
 
@@ -54,13 +54,13 @@ namespace Consultorio.View
         /********************************************
          *      Agendamento de uma consulta!       *
          *******************************************/
-        public static ConsultaForm InsereDadosConsulta(GerenciaPaciente gerenciaPaciente, Agenda agenda, ConsultaForm consultaForm)
+        public static ConsultaForm InsereDadosConsulta(GerenciaPaciente gerenciaPaciente, ConsultaForm consultaForm,PacienteForm pf)
         {
             string? entrada;
 
 
             /* CPF DO PACIENTE */
-            entrada = InsereCPFValidoExistente(gerenciaPaciente);
+            entrada = InsereCPFValidoExistente(gerenciaPaciente,pf);
             consultaForm.CPF = entrada;
 
 
@@ -70,12 +70,23 @@ namespace Consultorio.View
 
 
             /* HORAS INICIAL E FINAL */
+            /****************
+             * SWITCH CASE
+             * 1 p/ INICIAL
+             * 2 p/ FINAL
+             ****************/
+            HORA:
             entrada = InsereHoraValida(1);
             consultaForm.HoraInicial = entrada;
 
             entrada = InsereHoraValida(2);
             consultaForm.HoraFinal = entrada;
 
+            if (!ValidaAgendaForm.HoraValida(consultaForm.HoraInicial, consultaForm.HoraFinal))
+            {
+                ViewMensagens.ExibeMensagemErroHora();
+                goto HORA;
+            }
 
             return consultaForm;
         }
@@ -84,12 +95,12 @@ namespace Consultorio.View
         /****************************************
          *    Cancelamento de uma consulta!     *
          ***************************************/
-        internal static ConsultaForm InsereDadosCancelamentoConsulta(GerenciaPaciente gerenciaPaciente, ConsultaForm consultaForm)
+        internal static ConsultaForm InsereDadosCancelamentoConsulta(GerenciaPaciente gerenciaPaciente, ConsultaForm consultaForm,PacienteForm pf)
         {
             string? entrada;
 
             /* CPF */
-            entrada = InsereCPFValidoExistente(gerenciaPaciente);
+            entrada = InsereCPFValidoExistente(gerenciaPaciente,pf);
             consultaForm.CPF = entrada;
 
             /* DATA DA CONSULTA */
@@ -111,7 +122,7 @@ namespace Consultorio.View
         /***************************************
          * FUNÇÕES DE INSERÇÃO com VALIDAÇÃO!! *
          **************************************/
-        private static string InsereDataNascimentoValido()
+        private static string InsereDataNascimentoValido(PacienteForm pf)
         {
             bool v = true;
             string? entrada;
@@ -124,12 +135,12 @@ namespace Consultorio.View
                 Console.Write("Data de Nascimento: ");
                 entrada = Console.ReadLine();
 
-                v = ValidaPacienteForm.IsDataNascimento(entrada);
+                v = pf.IsDataNascimento(entrada);
             } while (!v);
 
             return entrada;
         }
-        public static string InsereNomeValido()
+        public static string InsereNomeValido(PacienteForm pf)
         {
             bool v = true;
             string? entrada;
@@ -142,7 +153,7 @@ namespace Consultorio.View
                 Console.Write("Nome: ");
                 entrada = Console.ReadLine();
 
-                v = ValidaPacienteForm.IsNome(entrada);
+                v = pf.IsNome(entrada);
             } while (!v);
 
             return entrada;
@@ -150,7 +161,7 @@ namespace Consultorio.View
 
 
         /* ESTA FUNÇÃO RETORNA O VALOR SE ELE FOR UM CPF */
-        public static string InsereCPFValido()
+        public static string InsereCPFValido(PacienteForm pf)
         {
             bool v = true;
             string? entrada;
@@ -163,13 +174,13 @@ namespace Consultorio.View
                 Console.Write("\nCPF: ");
                 entrada = Console.ReadLine();
 
-                v = ValidaPacienteForm.ValidaCPF(entrada);
+                v = pf.ValidaCPF(entrada);
             } while (!v);
 
             return entrada;
         }
         /* ESTA FUNÇÃO RETORNA O VALOR SE ELE FOR UM CPF && EXISTENTE */
-        public static string InsereCPFValidoExistente(GerenciaPaciente gerenciaPaciente)
+        public static string InsereCPFValidoExistente(GerenciaPaciente gerenciaPaciente,PacienteForm pf)
         {
             string? entrada;
             bool v = true;
@@ -178,7 +189,7 @@ namespace Consultorio.View
                 if (!v)
                     ViewMensagens.ExibeMensagemErroCPFCadastrado(false);
 
-                entrada = InsereCPFValido();
+                entrada = InsereCPFValido(pf);
 
                 v = gerenciaPaciente.ExistePaciente(entrada);
             } while (!v);

@@ -23,7 +23,7 @@ namespace Consultorio.Model
 
             if (Consultas != null)
             {
-                if(dataAgora.CompareTo(dataForm) > 0 || dataAgora.CompareTo(dataForm) == 0)
+                if(dataAgora.CompareTo(dataForm) < 0 || dataAgora.CompareTo(dataForm) == 0)
                 {
                     foreach (var consulta in Consultas)
                     {

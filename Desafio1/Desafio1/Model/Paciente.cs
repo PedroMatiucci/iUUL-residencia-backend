@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Consultorio.Model
 {
-    internal class Paciente
+    internal class Paciente : IDisposable
     {
         public string Nome { get; private set; }
         public string CPF { get; private set; }
@@ -52,11 +52,17 @@ namespace Consultorio.Model
             DataNascimento = data;
         }
 
+
         internal bool ExisteAgendamento()
         {
             return (this.Consulta != null) &&
                         (DateOnly.FromDateTime(DateTime.Now).CompareTo(
                             this.Consulta.DataConsulta) < 0);
+        }
+
+        void IDisposable.Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

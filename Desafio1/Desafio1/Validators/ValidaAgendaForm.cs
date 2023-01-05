@@ -32,7 +32,7 @@ namespace Consultorio.Validators
         internal static bool ValidaHora(string? entrada,int s)
         {
             if (entrada == null) return false;
-            if (!HoraValida(entrada)) return false;
+            if (!HoraExistente(entrada)) return false;
 
             switch (s)
             {
@@ -59,7 +59,7 @@ namespace Consultorio.Validators
             return true;
         }
 
-        private static bool HoraValida(string entrada)
+        private static bool HoraExistente(string entrada)
         {
             try
             {
@@ -143,6 +143,14 @@ namespace Consultorio.Validators
             }
                 
 
+            return true;
+        }
+
+        /* Verificar se a hora final é anterior à hora inicial */
+        internal static bool HoraValida(string horaInicial, string horaFinal)
+        {
+            if (int.Parse(horaFinal.Substring(0, 2)) < int.Parse(horaInicial.Substring(0, 2)))
+                return false;
             return true;
         }
     }

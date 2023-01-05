@@ -56,7 +56,8 @@ namespace Consultorio.Controller
                         break;
                     case 2:
                         {
-                            var cpfRemover = ViewCadastro.InsereCPFValidoExistente(gerenciaPaciente); // Inserir um CPF.
+                            PacienteForm pf = new();
+                            var cpfRemover = ViewCadastro.InsereCPFValidoExistente(gerenciaPaciente,pf); // Inserir um CPF.
 
                             try
                             {
@@ -97,9 +98,10 @@ namespace Consultorio.Controller
                     case 1:
                         {
                             ConsultaForm consultaForm = new();
-                            consultaForm = ViewCadastro.InsereDadosConsulta(gerenciaPaciente, agenda, consultaForm);
-                            
-                            // Método que retorna o objeto paciente a partir do CPF
+                            PacienteForm pf = new();
+                            consultaForm = ViewCadastro.InsereDadosConsulta(gerenciaPaciente, consultaForm,pf);
+
+                            //Verificar se o cpf inserido para consulta está cadastrado no sistema
                             Paciente? paciente = gerenciaPaciente.RetornaPaciente(consultaForm.CPF);
                             if (paciente == null)
                             {
@@ -107,6 +109,7 @@ namespace Consultorio.Controller
                                 break;
                             }
 
+                            // Se estiver, verificar sobreposição de consultas
                             Consulta consulta = new(consultaForm.CPF,
                                 DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta)),
                                 consultaForm.HoraInicial, consultaForm.HoraFinal);
@@ -131,7 +134,8 @@ namespace Consultorio.Controller
                     case 2:
                         {
                             ConsultaForm consultaForm = new();
-                            consultaForm = ViewCadastro.InsereDadosCancelamentoConsulta(gerenciaPaciente,consultaForm);
+                            PacienteForm pf = new();
+                            consultaForm = ViewCadastro.InsereDadosCancelamentoConsulta(gerenciaPaciente,consultaForm,pf);
 
                             try
                             {
@@ -143,11 +147,14 @@ namespace Consultorio.Controller
                                 break;
                             }
 
+                            // Se o try for realizado com sucesso,
+                            // removemos a consulta associada ao paciente.
                             Paciente? pacienteRemoverConsulta = gerenciaPaciente.RetornaPaciente(consultaForm.CPF);
-                            if (pacienteRemoverConsulta.Consulta != null)
+                            
+                            if(pacienteRemoverConsulta != null)
                                 pacienteRemoverConsulta.Consulta = null;
-                            ViewMensagens.ExibeMensagemCancelarConsulta(true);
 
+                            ViewMensagens.ExibeMensagemCancelarConsulta(true);
                         }
                         break;
                     case 3:
