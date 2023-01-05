@@ -19,19 +19,20 @@ namespace Consultorio.Controller
             int escolhaMenuPrincipal;
             int? escolhaCadastroPaciente;
             int? escolhaAgenda;
+            var vm = new ViewMenu();
         MENU:
             escolhaCadastroPaciente = null;
             escolhaAgenda = null;
 
-            escolhaMenuPrincipal = ViewMenu.MenuPrincipal();
+            escolhaMenuPrincipal = vm.MenuPrincipal();
 
             switch (escolhaMenuPrincipal)
             {
                 case 1:
-                    escolhaCadastroPaciente = ViewMenu.MenuCadastroPaciente();
+                    escolhaCadastroPaciente = vm.MenuCadastroPaciente();
                     break;
                 case 2:
-                    escolhaAgenda = ViewMenu.MenuAgenda();
+                    escolhaAgenda = vm.MenuAgenda();
                     break;
                 default: return;
             }
@@ -151,7 +152,7 @@ namespace Consultorio.Controller
                         break;
                     case 3:
                         {
-                            int escolha = ViewMenu.MenuListaAgenda();
+                            int escolha = vm.MenuListagemAgenda();
                             switch(escolha)
                             {
                                 case 1:

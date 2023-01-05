@@ -7,9 +7,9 @@ using Consultorio.Validators;
 
 namespace Consultorio.View
 {
-    internal static class ViewMenu
+    public class ViewMenu : IMenuViewValidavel
     {
-        public static int MenuPrincipal()
+        public int MenuPrincipal()
         {
             string? escolha;
             do
@@ -21,12 +21,12 @@ namespace Consultorio.View
 
                 escolha = Console.ReadLine();
             }
-            while (!ValidaMenusView.ValidaEscolha(escolha,3));
+            while (!ValidaEscolha(escolha,3));
 
             return int.Parse(escolha);
         }
 
-        public static int MenuCadastroPaciente()
+        public int MenuCadastroPaciente()
         {
             string? escolha;
             do
@@ -40,12 +40,12 @@ namespace Consultorio.View
 
                 escolha = Console.ReadLine();
             }
-            while (!ValidaMenusView.ValidaEscolha(escolha, 5));
+            while (!ValidaEscolha(escolha, 5));
 
             return int.Parse(escolha);
         }
 
-        public static int MenuAgenda()
+        public int MenuAgenda()
         {
             string? escolha;
             do
@@ -58,12 +58,12 @@ namespace Consultorio.View
 
                 escolha = Console.ReadLine();
             }
-            while (!ValidaMenusView.ValidaEscolha(escolha, 4));
+            while (!ValidaEscolha(escolha, 4));
 
             return int.Parse(escolha);
         }
 
-        public static int MenuListaAgenda()
+        public int MenuListagemAgenda()
         {
             string? escolha;
             do
@@ -75,9 +75,41 @@ namespace Consultorio.View
 
                 escolha = Console.ReadLine();
             }
-            while (!ValidaMenusView.ValidaEscolha(escolha, 3));
+            while (!ValidaEscolha(escolha, 3));
 
             return int.Parse(escolha);
         }
-    }
+
+        public bool ValidaEscolha(string? entrada, int tipoMenu)
+        {
+            if(entrada == null) return false;
+
+            int escolha;
+            try
+            {
+                escolha = int.Parse(entrada);
+            }
+            catch
+            {
+                return false;
+            }
+
+            switch (tipoMenu)
+            {
+                case 3:
+                {
+                    return escolha >= 1 && escolha <= tipoMenu;
+                }
+                case 4:
+                {
+                    return escolha >= 1 && escolha <= tipoMenu;
+                }
+                case 5:
+                {
+                    return escolha >= 1 && escolha <= tipoMenu;
+                }
+                default: return false;
+            }
+        }
+}
 }
