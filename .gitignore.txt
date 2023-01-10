@@ -1,7 +1,0 @@
-*.sln
-/.vs
-*.vsidx
-*.suo
-*.dll
-*.pdb
-*.cache
