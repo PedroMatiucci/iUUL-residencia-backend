@@ -1,4 +1,5 @@
-﻿using CurrencyExchangeAPI_RESTful.Model;
+﻿using CurrencyExchangeAPI_RESTful.Exceptions;
+using CurrencyExchangeAPI_RESTful.Model;
 using CurrencyExchangeAPI_RESTful.Validators;
 using System;
 using System.Collections.Generic;
@@ -11,26 +12,43 @@ namespace CurrencyExchangeAPI_RESTful.View
 {
     internal static class UI
     {
-        public static Exchange Form(FormValidator formValidator)
+        public static Exchange? Form(FormValidator formValidator)
         {
             UI.PrintCurrencies();
 
+            
+            FROM:
             Console.Write("\nFrom: ");
             string? from = Console.ReadLine();
+            try
+            {
+                formValidator.IsCurrencyValid(from);
+            }
+            catch (ArgumentNullException) { return null; }
+            catch(MyCurrencyExchangeAPIException){ goto FROM; }
 
-            formValidator.IsValid(from);
 
+            TO:
             Console.Write("\nTo: ");
             string? to = Console.ReadLine();
+            try
+            {
+                formValidator.IsCurrencyValid(to);
+            }
+            catch (MyCurrencyExchangeAPIException) { goto TO; }
 
-            formValidator.IsValid(to);
-
+            
+            AMOUNT:
             Console.Write("\nAmount: ");
             string? amount = Console.ReadLine();
+            try
+            {
+                formValidator.IsAmountValid(amount);
+            }
+            catch (MyCurrencyExchangeAPIException) { goto AMOUNT; }
 
-            //...
 
-            return new Exchange();
+            return new Exchange(from,to,float.Parse(amount));
         }
 
         public static void PrintCurrencies()

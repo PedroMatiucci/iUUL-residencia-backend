@@ -1,4 +1,5 @@
 ﻿using CurrencyExchangeAPI_RESTful.Model;
+using CurrencyExchangeAPI_RESTful.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,15 @@ namespace CurrencyExchangeAPI_RESTful.Validators
     internal class FormValidator
     {
         private static string? OriginChoice { get; set; }
-        internal bool IsValid(string? choice)
+        
+        internal bool IsCurrencyValid(string? choice)
         {
-            if(choice == null) return false;
-            if(choice.Length != 3) return false;
-            if(!IsValidCurrency(choice)) return false;
-            if (OriginChoice != null)
-                if (OriginChoice == choice) return false;
-            else OriginChoice = choice;
+            if(choice == null) throw new ArgumentNullException("[ERROR] Currency cannot be null.");
+            if(choice.Length != 3) throw new ArgumentLenghtException("[ERROR] Invalid currency code lenght.");
+            if(!IsValidCurrency(choice)) throw new CurrencyNotValidException("[ERROR] Currency code unexistent.");
+            if (FormValidator.OriginChoice != null)
+                if (FormValidator.OriginChoice == choice) throw new SameCurrencyException("[ERROR] Currencies cannot be of the same type for conversion.");
+            else FormValidator.OriginChoice = choice;
 
             return true;
         }
@@ -29,6 +31,12 @@ namespace CurrencyExchangeAPI_RESTful.Validators
                 if(c.Code == choice) return true;
             }
             return false;
+        }
+
+        internal void IsAmountValid(string? amount)
+        {
+            if (!float.TryParse(amount, out float value)) throw new InvalidAmountException();
+            if (value < 0) throw new NegativeAmountException();
         }
     }
 }

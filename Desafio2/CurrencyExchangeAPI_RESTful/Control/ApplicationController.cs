@@ -23,7 +23,8 @@ namespace CurrencyExchangeAPI_RESTful.Control
 
             // Get user inputs, do conversion and generate object
             FormValidator fv = new();
-            Exchange exchangeParams = UI.Form(fv);
+            var exchangeParams = UI.Form(fv);
+            if (exchangeParams == null) return; // Terminate program
             Conversion conversion = await client.ConvertAsync(exchangeParams);
 
             // Finally, print stuff in a human-readable-format
