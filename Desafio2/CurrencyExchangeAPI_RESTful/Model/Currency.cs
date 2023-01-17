@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,14 +9,15 @@ namespace CurrencyExchangeAPI_RESTful.Model
 {
     internal class Currency
     {
-        public List<Symbol> Symbols { get; private set; }
+        private IList<Symbol> symbols;
+        public IList<Symbol> Symbols { get { return new ReadOnlyCollection<Symbol>(symbols); } }
 
         public Currency(List<Symbol> s)
         {
-            Symbols = s;
+            symbols = s;
         }
 
-        public List<Symbol> GetSymbols()
+        public IList<Symbol> GetSymbols()
         {
             return Symbols;
         }
