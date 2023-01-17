@@ -12,56 +12,59 @@ namespace CurrencyExchangeAPI_RESTful.View
 {
     internal static class UI
     {
-        public static Exchange? Form(FormValidator formValidator)
+        public static Exchange? Form(FormValidator formValidator, Currency c)
         {
-            UI.PrintCurrencies();
+            UI.PrintCurrencies(c);
 
             
             FROM:
             Console.Write("\nFrom: ");
-            string? from = Console.ReadLine();
+            var from = Console.ReadLine();
             try
             {
-                formValidator.IsCurrencyValid(from);
+                formValidator.TryValidateCurrency(from,c);
             }
-            catch (ArgumentNullException) { return null; }
+            catch (ExitApplicationCodeException) { return null; }
             catch(MyCurrencyExchangeAPIException){ goto FROM; }
 
 
             TO:
             Console.Write("\nTo: ");
-            string? to = Console.ReadLine();
+            var to = Console.ReadLine();
             try
             {
-                formValidator.IsCurrencyValid(to);
+                formValidator.TryValidateCurrency(to,c);
             }
             catch (MyCurrencyExchangeAPIException) { goto TO; }
+            formValidator.OriginChoice = null;
 
             
             AMOUNT:
             Console.Write("\nAmount: ");
-            string? amount = Console.ReadLine();
+            var amount = Console.ReadLine();
             try
             {
-                formValidator.IsAmountValid(amount);
+                FormValidator.TryValidateAmount(amount);
             }
             catch (MyCurrencyExchangeAPIException) { goto AMOUNT; }
 
 
-            return new Exchange(from,to,float.Parse(amount));
+            return new Exchange(from,to,float.Parse(String.Format("{0:0.0}", amount)));
         }
 
-        public static void PrintCurrencies()
+
+
+
+        public static void PrintCurrencies(Currency c)
         {
             int count = 1;
-            foreach (var s in Currency.Symbols)
+            foreach (var s in c.GetSymbols())
             {
                 Console.Write($"[{s.Code}]\t");
                 if (count % 4 == 0) Console.WriteLine();
                 ++count;
             }
         }
-
         internal static void Print(Exchange ex,Conversion cv)
         {
             Console.WriteLine($"----{ex.Origin} to {ex.Destiny}----");

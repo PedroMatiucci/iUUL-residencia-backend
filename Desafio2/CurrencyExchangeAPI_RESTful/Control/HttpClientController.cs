@@ -12,7 +12,7 @@ namespace CurrencyExchangeAPI_RESTful.Control
 {
     internal class HttpClientController
     {
-        public HttpClient Client { get; private set; }
+        public HttpClient Client { get; set; }
 
         public HttpClientController()
         {
@@ -26,11 +26,12 @@ namespace CurrencyExchangeAPI_RESTful.Control
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        internal async Task<List<Symbol>?> GetSymbolsAsync()
+        internal async Task<List<Symbol>> GetSymbolsAsync()
         {
-            await using Stream stream =
+            await using Stream stream = 
                 await this.Client.GetStreamAsync("https://api.exchangerate.host/symbols");
-            var symbols =
+
+            var symbols = 
                 await JsonSerializer.DeserializeAsync<List<Symbol>>(stream);
 
             return symbols ?? new();
@@ -38,12 +39,12 @@ namespace CurrencyExchangeAPI_RESTful.Control
 
         internal async Task<Conversion> ConvertAsync(Exchange exchange)
         {
-            await using Stream stream =
+            await using Stream stream = 
                 await this.Client.GetStreamAsync("https://api.exchangerate.host/convert?" +
-                "from=" + exchange.Origin +
-                "&to=" + exchange.Destiny +
-                "&amount=" + exchange.Amount);
-            var conversion =
+                "from="     + exchange.Origin   +
+                "&to="      + exchange.Destiny  +
+                "&amount="  + exchange.Amount);
+            var conversion = 
                 await JsonSerializer.DeserializeAsync<Conversion>(stream);
 
             return conversion;

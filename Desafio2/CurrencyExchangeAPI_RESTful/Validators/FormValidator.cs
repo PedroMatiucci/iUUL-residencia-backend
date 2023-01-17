@@ -10,33 +10,22 @@ namespace CurrencyExchangeAPI_RESTful.Validators
 {
     internal class FormValidator
     {
-        private static string? OriginChoice { get; set; }
+        public string? OriginChoice { get; set; }
         
-        internal bool IsCurrencyValid(string? choice)
+        internal void TryValidateCurrency(string choice,Currency c)
         {
-            if(choice == null) throw new ArgumentNullException("[ERROR] Currency cannot be null.");
+            if (choice == "") throw new ExitApplicationCodeException();
             if(choice.Length != 3) throw new ArgumentLenghtException("[ERROR] Invalid currency code lenght.");
-            if(!IsValidCurrency(choice)) throw new CurrencyNotValidException("[ERROR] Currency code unexistent.");
-            if (FormValidator.OriginChoice != null)
-                if (FormValidator.OriginChoice == choice) throw new SameCurrencyException("[ERROR] Currencies cannot be of the same type for conversion.");
-            else FormValidator.OriginChoice = choice;
-
-            return true;
+            if(!c.IsValidSymbol(choice)) throw new CurrencyNotValidException("[ERROR] Currency code unexistent.");
+            if (OriginChoice != null)
+                if (OriginChoice == choice) throw new SameCurrencyException("[ERROR] Currencies cannot be of the same type for conversion.");
+            else OriginChoice = choice;
         }
 
-        private static bool IsValidCurrency(string choice)
-        {
-            foreach (var c in Currency.Symbols)
-            {
-                if(c.Code == choice) return true;
-            }
-            return false;
-        }
-
-        internal void IsAmountValid(string? amount)
+        internal static void TryValidateAmount(string amount)
         {
             if (!float.TryParse(amount, out float value)) throw new InvalidAmountException();
-            if (value < 0) throw new NegativeAmountException();
+            if (value <= 0) throw new InsufficientAmountException();
         }
     }
 }
