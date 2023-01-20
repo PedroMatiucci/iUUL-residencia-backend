@@ -1,0 +1,3 @@
+﻿using ConsultorioDB;
+
+Controller.Start();
