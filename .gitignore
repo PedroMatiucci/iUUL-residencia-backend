@@ -42,8 +42,6 @@
 *.idb
 *.pdb
 
-*.sln
-
 *.deps\*
 
 *.runtime\*
