@@ -62,5 +62,3 @@ dkms.conf
 .vs/
 
 obj/
-
-*.csproj
