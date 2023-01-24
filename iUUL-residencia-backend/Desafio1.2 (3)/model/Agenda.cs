@@ -9,13 +9,11 @@ namespace ConsultorioDB
 {
     public class Agenda
     {
-        public List<Consulta>? Consultas { get; private set; }
+        public List<Consulta> Consultas { get; set; }
 
         public Agenda()
         {
             Consultas = new List<Consulta>();
         }
-
-
     }
 }

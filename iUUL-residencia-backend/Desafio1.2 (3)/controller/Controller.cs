@@ -7,16 +7,16 @@ namespace ConsultorioDB
 {
     internal static class Controller
     {
+        /*******************************************
+        * Criaremos a lista de Consultas e Pacientes
+        * apenas uma única vez durante a execução
+        * do programa.
+        ******************************************/
+        internal static Agenda agenda = new();
+        internal static ListaPaciente listaPacientes = new();
+
         public static void Start()
         {
-            /*******************************************
-             * Criaremos a lista de Consultas e Pacientes
-             * apenas uma única vez durante a execução
-             * do programa.
-             ******************************************/
-            Agenda agenda = new();
-            ListaPaciente listaPacientes = new();
-
             int escolhaMenuPrincipal;
             int? escolhaCadastroPaciente;
             int? escolhaAgenda;
@@ -65,10 +65,11 @@ namespace ConsultorioDB
                         {
                             PacienteForm pf = new();
                             var cpfRemover = ViewCadastro.InsereCPFValidoExistente(listaPacientes,pf); // Inserir um CPF.
-
+                            var paciente = PacienteDAO.RetornaPaciente(cpfRemover, listaPacientes.Pacientes);
+                            if (paciente == null) throw new Exception();
                             try
                             {
-                                PacienteDAO.RemovePaciente(cpfRemover,listaPacientes.Pacientes);
+                                PacienteDAO.RemovePaciente(paciente,listaPacientes.Pacientes);
                             }
                             catch
                             {
@@ -137,7 +138,7 @@ namespace ConsultorioDB
                             }
 
                             // Adicionando consulta na agenda
-                            agenda.Consultas.Add(consulta);
+                            AgendaDAO.AdicionaConsultaNaAgenda(agenda, consulta);
 
                             // Exibir mensagem de sucesso
                             ViewMensagens.ExibeMensagemAgendamento(true);
@@ -151,10 +152,12 @@ namespace ConsultorioDB
                             ConsultaForm consultaForm = new();
                             PacienteForm pf = new();
                             consultaForm = ViewCadastro.InsereDadosCancelamentoConsulta(listaPacientes,consultaForm,pf);
+                            var consultas = AgendaDAO.RetornaAgenda(agenda);
 
                             try
                             {
-                                consultaForm.RemoveConsulta(agenda);
+                                var novaListaConsultas = ConsultaDAO.DeletarConsulta(consultas,consultaForm);
+                                AgendaDAO.AtualizaAgenda(agenda, novaListaConsultas);
                             }
                             catch
                             {
@@ -164,7 +167,7 @@ namespace ConsultorioDB
 
                             // Se o try for realizado com sucesso,
                             // removemos a consulta associada ao paciente.
-                            Paciente? pacienteRemoverConsulta = PacienteDAO.RetornaPaciente(consultaForm.CPF,listaPacientes.Pacientes);
+                            var pacienteRemoverConsulta = PacienteDAO.RetornaPaciente(consultaForm.CPF,listaPacientes.Pacientes);
                             
                             if(pacienteRemoverConsulta != null)
                                 pacienteRemoverConsulta.Consulta = null;
@@ -183,16 +186,16 @@ namespace ConsultorioDB
                                 //COMPLETA
                                 case 1:
                                     {
-                                        // Aqui entra um dao...
-                                        ViewListagem.ExibeAgenda(listaPacientes);
+                                        var a = AgendaDAO.RetornaAgenda(agenda);
+                                        ViewListagem.ExibeAgenda(a,listaPacientes.Pacientes);
                                     }
                                     break;
                                 //PERÍODO
                                 case 2:
                                     {
                                         var datas = ViewCadastro.InsereDataInicialFinalValida();
-                                        // Aqui entra um dao...
-                                        ViewListagem.ExibeAgendaPeriodo(agenda, datas, listaPacientes);
+                                        var a = AgendaDAO.RetornaAgenda(agenda);
+                                        ViewListagem.ExibeAgendaPeriodo(a, datas, listaPacientes.Pacientes);
                                     }
                                     break;
                                 default: break;

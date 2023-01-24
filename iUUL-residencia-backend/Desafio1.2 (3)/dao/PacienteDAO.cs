@@ -21,12 +21,8 @@ namespace ConsultorioDB.dao
             return false;
         }
 
-        public static void RemovePaciente(string cpf, List<Paciente> pacientes)
+        public static void RemovePaciente(Paciente paciente, List<Paciente> pacientes)
         {
-            var paciente = RetornaPaciente(cpf,pacientes);
-
-            if (paciente == null) throw new Exception();
-
             // Pacientes com consulta futura não podem ser removidos
             if (paciente.ExisteAgendamento())
                 throw new Exception();
@@ -38,12 +34,12 @@ namespace ConsultorioDB.dao
 
         public static Paciente? RetornaPaciente(string cpf, List<Paciente> pacientes)
         {
-            foreach (Paciente paciente in pacientes) // Buscar o CPF.
+            foreach (var p in pacientes) // Buscar o CPF.
             {
                 //Verifica se existe um Paciente com este CPF
-                if (paciente.CPF == cpf)
+                if (p.CPF == cpf)
                 {
-                    return paciente;
+                    return p;
                 }
             }
             return null;

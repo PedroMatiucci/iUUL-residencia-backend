@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ConsultorioDB.dao;
 using ConsultorioDB.model;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -30,34 +31,34 @@ namespace ConsultorioDB
             Console.WriteLine("--------------------------------------------------");
         }
 
-        /*
-        internal static void ExibeAgenda(ListaPaciente gp)
+        
+        internal static void ExibeAgenda(List<Consulta> consultas,List<Paciente> pacientes)
         {
             int tempoConsulta;
             Console.WriteLine("---------------------------------------------------------------");
             Console.WriteLine("Data\t\tH.Ini\tH.Fim\tTempo\tNome\tDt.Nasc.");
             Console.WriteLine("---------------------------------------------------------------");
-            foreach (Consulta consulta in Agenda.Consultas)
+            foreach (var c in consultas)
             {
-                tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                var paciente = gp.RetornaPaciente(consulta.CPF);
+                tempoConsulta = int.Parse(c.HoraFinal) - int.Parse(c.HoraInicial);
+                var paciente = PacienteDAO.RetornaPaciente(c.CPF,pacientes);
                 Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", 
-                    consulta.DataConsulta, 
-                    FormataData(consulta.HoraInicial), 
-                    FormataData(consulta.HoraFinal), 
+                    c.DataConsulta, 
+                    FormataData(c.HoraInicial), 
+                    FormataData(c.HoraFinal), 
                     tempoConsulta, 
                     paciente.Nome, paciente.DataNascimento.ToString("dd/MM/yyyy"));
             }
             Console.WriteLine("---------------------------------------------------------------");
         }
-
-        internal static void ExibeAgendaPeriodo(Agenda agenda, string[] datas, ListaPaciente gp)
+        
+        internal static void ExibeAgendaPeriodo(List<Consulta> consultas, string[] datas, List<Paciente> pacientes)
         {
             int tempoConsulta;
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine("Data\t\tH.Ini\tH.Fim\tTempo\tNome\tDt.Nasc.");
             Console.WriteLine("---------------------------------------------------------------");
-            foreach (Consulta consulta in Agenda.Consultas)
+            foreach (Consulta consulta in consultas)
             {
                 if(consulta.DataConsulta.CompareTo(
                     DateOnly.FromDateTime(DateTime.Parse(datas[0]))) > 0
@@ -66,7 +67,7 @@ namespace ConsultorioDB
                         DateOnly.FromDateTime(DateTime.Parse(datas[1]))) < 0)
                 {
                     tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                    var paciente = gp.RetornaPaciente(consulta.CPF);
+                    var paciente = PacienteDAO.RetornaPaciente(consulta.CPF,pacientes);
                     Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}",
                         consulta.DataConsulta,
                         FormataData(consulta.HoraInicial),
@@ -81,7 +82,7 @@ namespace ConsultorioDB
                         DateOnly.FromDateTime(DateTime.Parse(datas[1]))) == 0)
                 {
                     tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                    var paciente = gp.RetornaPaciente(consulta.CPF);
+                    var paciente = PacienteDAO.RetornaPaciente(consulta.CPF, pacientes);
                     Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}",
                         consulta.DataConsulta,
                         FormataData(consulta.HoraInicial),
@@ -92,7 +93,6 @@ namespace ConsultorioDB
             }
             Console.WriteLine("---------------------------------------------------------------");
         }
-        */
 
         //Metodo usado para formatar os horarios para o formato hh:mm
         private static string FormataData(string horario)
