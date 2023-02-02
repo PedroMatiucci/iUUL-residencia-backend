@@ -49,8 +49,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtensionGenericList", "Ext
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consultorio", "Desafio1\Consultorio.csproj", "{63AD6139-8D2E-4C08-9F5F-96E396BBAE56}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsultorioDB", "Desafio1.2 (3)\ConsultorioDB.csproj", "{C6DB483C-8024-4C37-820E-DAC1A441A864}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,10 +119,6 @@ Global
 		{63AD6139-8D2E-4C08-9F5F-96E396BBAE56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63AD6139-8D2E-4C08-9F5F-96E396BBAE56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63AD6139-8D2E-4C08-9F5F-96E396BBAE56}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C6DB483C-8024-4C37-820E-DAC1A441A864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C6DB483C-8024-4C37-820E-DAC1A441A864}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C6DB483C-8024-4C37-820E-DAC1A441A864}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C6DB483C-8024-4C37-820E-DAC1A441A864}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,7 +145,6 @@ Global
 		{F1D5F054-B931-4B18-A53C-5915FC3687FC} = {C4864193-1C39-489F-9A4A-827B633097B7}
 		{05178008-EEF4-4671-9481-8F3938B6DBB1} = {C4864193-1C39-489F-9A4A-827B633097B7}
 		{63AD6139-8D2E-4C08-9F5F-96E396BBAE56} = {ECE1CD2D-500D-4AE2-937F-36733AAC2884}
-		{C6DB483C-8024-4C37-820E-DAC1A441A864} = {ECE1CD2D-500D-4AE2-937F-36733AAC2884}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28E59F6B-172C-4236-8E76-F2BEEE3ADA6D}

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Consultorio.DB.Mappings;
 using Consultorio.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace Agenda_Consultorio_Odontologico.model
+namespace Consultorio.DB
 {
     internal class ApplicationDbContext : DbContext
     {
@@ -17,6 +18,12 @@ namespace Agenda_Consultorio_Odontologico.model
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AgendaConsultorioOdontologicoDb;Trusted_Connection=True;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new PacienteMap());
+            modelBuilder.ApplyConfiguration(new ConsultaMap());
         }
     }
 }

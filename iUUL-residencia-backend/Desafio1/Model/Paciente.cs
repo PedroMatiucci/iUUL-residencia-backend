@@ -8,6 +8,7 @@ namespace Consultorio.Model
 {
     internal class Paciente
     {
+        public int PacienteId { get; set; }
         public string Nome { get; private set; }
         public string CPF { get; private set; }
         public DateTime DataNascimento { get; private set; }

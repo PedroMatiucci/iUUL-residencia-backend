@@ -9,6 +9,8 @@ namespace Consultorio.Model
 {
     internal class Consulta
     {
+
+        public int ConsultaId { get; set; }
         public string CPF { get; private set; }
         public DateOnly DataConsulta { get; private set; }
         public string HoraInicial { get; private set; }

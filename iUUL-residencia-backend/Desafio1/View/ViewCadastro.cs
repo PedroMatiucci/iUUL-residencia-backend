@@ -114,11 +114,6 @@ namespace Consultorio.View
             return consultaForm;
         }
 
-
-
-
-
-
         /***************************************
          * FUNÇÕES DE INSERÇÃO com VALIDAÇÃO!! *
          **************************************/
