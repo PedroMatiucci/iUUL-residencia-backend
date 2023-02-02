@@ -11,7 +11,7 @@ namespace Consultorio.DB
 {
     internal class ApplicationDbContext : DbContext
     {
-        public DbSet<Paciente> Patientes { get; set; }
+        public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<Consulta> Consultas { get; set; }
         public DbSet<Agenda> Agenda { get; set; }
 
