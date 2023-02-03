@@ -49,7 +49,8 @@ namespace Consultorio.Controller
 
                             Paciente p = new(pacienteForm.Nome, pacienteForm.CPF, DateTime.Parse(pacienteForm.DataNascimento));
 
-                            gerenciaPaciente.Pacientes.Add(p);
+                            gerenciaPaciente.AdicionaPaciente(p);
+                            
 
                             ViewMensagens.ExibeMensagemCadastroPaciente();
                         }

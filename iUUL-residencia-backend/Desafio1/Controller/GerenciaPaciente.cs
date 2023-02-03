@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Consultorio.Form;
 using Consultorio.Model;
+using Consultorio.Model.Daos;
 using Consultorio.View;
 
 namespace Consultorio.Controller
 {
     internal class GerenciaPaciente
     {
+
+        PacienteDAO pacienteDAO = new PacienteDAO();
         public List<Paciente> Pacientes { get; private set; }
 
         public GerenciaPaciente()
@@ -29,6 +32,12 @@ namespace Consultorio.Controller
             }
 
             return false;
+        }
+
+        internal void AdicionaPaciente(Paciente p)
+        {
+            pacienteDAO.Adicionar(p);
+            Pacientes.Add(p);
         }
 
         internal void RemovePaciente(string cpf)

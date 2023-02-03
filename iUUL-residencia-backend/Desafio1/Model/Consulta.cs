@@ -11,6 +11,8 @@ namespace Consultorio.Model
     {
 
         public int ConsultaId { get; set; }
+
+        public Paciente Paciente { get; set; }
         public string CPF { get; private set; }
         public DateOnly DataConsulta { get; private set; }
         public string HoraInicial { get; private set; }
