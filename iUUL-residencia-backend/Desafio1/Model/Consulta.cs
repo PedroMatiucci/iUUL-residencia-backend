@@ -9,9 +9,8 @@ namespace Consultorio.Model
 {
     internal class Consulta
     {
-
+        public int PacienteId { get; set; }
         public int ConsultaId { get; set; }
-
         public Paciente Paciente { get; set; }
         public string CPF { get; private set; }
         public DateOnly DataConsulta { get; private set; }
@@ -24,6 +23,11 @@ namespace Consultorio.Model
             this.DataConsulta = data;
             this.HoraInicial = h1;
             this.HoraFinal = h2;
+        }
+
+        public Consulta()
+        {
+              
         }
 
         internal bool PossuiAgendamentoSobreposto()

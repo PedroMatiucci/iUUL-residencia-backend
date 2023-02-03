@@ -53,6 +53,11 @@ namespace Consultorio.Model
             DataNascimento = data;
         }
 
+        public Paciente()
+        {
+
+        }
+
 
         internal bool ExisteAgendamento()
         {

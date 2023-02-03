@@ -8,22 +8,25 @@ namespace Consultorio.DB.Mappings
     {
         public void Configure(EntityTypeBuilder<Paciente> builder)
         {
-            builder.ToTable("Paciente");
 
-            builder.Property(p => p.PacienteId);
+            //builder.Property(p => p.Nome)
+            //.IsRequired();
 
-            builder.Property(p => p.Nome)
-            .IsRequired();
+            //builder.Property(p => p.CPF);
 
-            builder.Property(p => p.CPF);
+            //builder.Property(p => p.DataNascimento)
+            //.HasColumnType("datetime")
+            //.IsRequired();
 
-            builder.Property(p => p.DataNascimento)
-            .HasColumnType("datetime")
-            .IsRequired();
+            //builder.Property(p => p.Consulta);
 
-            builder.Property(p => p.Consulta);
+            //builder.HasKey(p => p.PacienteId);
 
-            builder.HasKey(p => p.PacienteId);
+            //builder.Property(p => p.PacienteId);
+
+            builder.HasOne(p => p.Consulta)
+            .WithOne(c => c.Paciente)
+            .HasForeignKey<Consulta>(c => c.PacienteId);
 
         }
     }

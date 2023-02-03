@@ -1,4 +1,5 @@
 ﻿using Consultorio.Model;
+using Consultorio.Util;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -13,23 +14,24 @@ namespace Consultorio.DB.Mappings
     {
         public void Configure(EntityTypeBuilder<Consulta> builder)
            {
-            builder.ToTable("Consulta");
+            //builder.Property(c => c.ConsultaId);
 
-            builder.Property(c => c.ConsultaId);
+            //builder.Property(c => c.CPF)
+            //.IsRequired();
 
-            builder.Property(c => c.CPF)
-            .IsRequired();
-            
             builder.Property(c => c.DataConsulta)
+            .HasConversion<DateOnlyConverter>()
             .IsRequired();
 
-            builder.Property(c => c.HoraInicial)
-            .IsRequired();
-            
-            builder.Property(c => c.HoraFinal)
-            .IsRequired();
 
-            builder.HasKey(c => c.ConsultaId);
+
+            //builder.Property(c => c.HoraInicial)
+            //.IsRequired();
+
+            //builder.Property(c => c.HoraFinal)
+            //.IsRequired();
+
+
 
         }
     }
