@@ -24,14 +24,8 @@ namespace Consultorio.Controller
         internal bool ExistePaciente(string? entrada)
         {
             if(entrada == null) return false;
-
-            foreach(Paciente paciente in this.Pacientes)
-            {
-                if(paciente.CPF == entrada)
-                    return true;
-            }
-
-            return false;
+            IEnumerable<Paciente> Pacientes = pacienteDAO.RetornaPacientes().Where(p => p.CPF == entrada); 
+            return Pacientes.Count() != 0;
         }
 
         internal void AdicionaPaciente(Paciente p)
@@ -49,23 +43,15 @@ namespace Consultorio.Controller
             // Pacientes com consulta futura não podem ser removidos
             if (paciente.ExisteAgendamento())
                 throw new Exception();
-
-            this.Pacientes.Remove(paciente);
+            pacienteDAO.Remover(paciente);
         }
 
         
 
         internal Paciente? RetornaPaciente(string cpf)
         {
-            foreach (Paciente paciente in this.Pacientes) // Buscar o CPF.
-            {
-                //Verifica se existe um Paciente com este CPF
-                if (paciente.CPF == cpf)
-                {
-                    return paciente;
-                }
-            }
-            return null;
+            Paciente? paciente = pacienteDAO.RetornaPacientes().Where(p => p.CPF == cpf).FirstOrDefault();
+            return paciente;
         }
     }
 }
