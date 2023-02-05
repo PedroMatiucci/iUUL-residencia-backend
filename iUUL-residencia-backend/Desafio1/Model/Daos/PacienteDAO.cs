@@ -24,12 +24,12 @@ namespace Consultorio.Model.Daos
             contexto.SaveChanges();
         }
 
-        public IList<Paciente> ListarPorCpf()
+        public List<Paciente> ListarPorCpf()
         {
             return contexto.Pacientes.OrderBy(p => p.CPF).ToList();
         }
 
-        public IList<Paciente> ListarPorNome()
+        public List<Paciente> ListarPorNome()
         {
             return contexto.Pacientes.OrderBy(p => p.Nome).ToList();
         }

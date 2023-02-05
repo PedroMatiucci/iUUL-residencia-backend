@@ -47,11 +47,20 @@ namespace Consultorio.Controller
         }
 
         
-
         internal Paciente? RetornaPaciente(string cpf)
         {
             Paciente? paciente = pacienteDAO.RetornaPacientes().Where(p => p.CPF == cpf).FirstOrDefault();
             return paciente;
+        }
+
+        internal List<Paciente> RetornaPacientesPorCPF()
+        {
+            return pacienteDAO.ListarPorCpf();
+        }
+
+        internal List<Paciente> RetornaPacientesPorNome()
+        {
+            return pacienteDAO.ListarPorNome();
         }
     }
 }

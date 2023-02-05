@@ -15,9 +15,9 @@ namespace Consultorio.Util
 
         IList<Paciente> RetornaPacientes();
 
-        IList<Paciente> ListarPorNome();
+        List<Paciente> ListarPorNome();
 
-        IList<Paciente> ListarPorCpf();  
+        List<Paciente> ListarPorCpf();  
 
     }
 }
