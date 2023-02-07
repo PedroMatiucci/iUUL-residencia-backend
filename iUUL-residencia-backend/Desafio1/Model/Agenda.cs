@@ -16,29 +16,29 @@ namespace Consultorio.Model
             Consultas = new List<Consulta>();
         }
 
-        internal void RemoveConsulta(ConsultaForm consultaForm)
-        {
-            var dataAgora = DateOnly.FromDateTime(DateTime.Now);
-            var dataForm = DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta));
+        //internal void RemoveConsulta(ConsultaForm consultaForm)
+        //{
+        //    var dataAgora = DateOnly.FromDateTime(DateTime.Now);
+        //    var dataForm = DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta));
 
-            if (Consultas != null)
-            {
-                if(dataAgora.CompareTo(dataForm) < 0 || dataAgora.CompareTo(dataForm) == 0)
-                {
-                    foreach (var consulta in Consultas)
-                    {
-                        if (consulta.CPF == consultaForm.CPF
-                            && consulta.DataConsulta == dataForm
-                            && consulta.HoraInicial == consultaForm.HoraInicial)
-                        {
-                            Consultas.Remove(consulta);
-                            return;
-                        }
-                    }
-                }
-            }
+        //    if (Consultas != null)
+        //    {
+        //        if(dataAgora.CompareTo(dataForm) < 0 || dataAgora.CompareTo(dataForm) == 0)
+        //        {
+        //            foreach (var consulta in Consultas)
+        //            {
+        //                if (consulta.CPF == consultaForm.CPF
+        //                    && consulta.DataConsulta == dataForm
+        //                    && consulta.HoraInicial == consultaForm.HoraInicial)
+        //                {
+        //                    Consultas.Remove(consulta);
+        //                    return;
+        //                }
+        //            }
+        //        }
+        //    }
 
-            throw new Exception();
-        }
+         //   throw new Exception();
+       // }
     }
 }

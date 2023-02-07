@@ -9,9 +9,9 @@ namespace Consultorio.Util
 {
     internal interface IConsultaDAO
     {
-        void Adicionar(Consulta c);
+        void AdicionarConsulta(DateOnly data, string horaInicial, string horaFinal, string cpf);
 
-        void Remover(Consulta c);
+        void RemoverConsulta(Consulta c);
 
         IList<Consulta> RetornaConsultas();
 

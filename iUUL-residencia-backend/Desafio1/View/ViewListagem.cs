@@ -40,7 +40,7 @@ namespace Consultorio.View
             foreach (Consulta consulta in Agenda.Consultas)
             {
                 tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                var paciente = gp.RetornaPaciente(consulta.CPF);
+                var paciente = consulta.Paciente;
                 Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", 
                     consulta.DataConsulta, 
                     FormataData(consulta.HoraInicial), 
@@ -66,7 +66,7 @@ namespace Consultorio.View
                         DateOnly.FromDateTime(DateTime.Parse(datas[1]))) < 0)
                 {
                     tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                    var paciente = gp.RetornaPaciente(consulta.CPF);
+                    var paciente = consulta.Paciente;
                     Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}",
                         consulta.DataConsulta,
                         FormataData(consulta.HoraInicial),
@@ -81,7 +81,7 @@ namespace Consultorio.View
                         DateOnly.FromDateTime(DateTime.Parse(datas[1]))) == 0)
                 {
                     tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                    var paciente = gp.RetornaPaciente(consulta.CPF);
+                    var paciente = consulta.Paciente;
                     Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}",
                         consulta.DataConsulta,
                         FormataData(consulta.HoraInicial),

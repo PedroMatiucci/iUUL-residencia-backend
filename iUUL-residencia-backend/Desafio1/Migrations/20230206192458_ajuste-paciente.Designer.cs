@@ -4,6 +4,7 @@ using Consultorio.DB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Consultorio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230206192458_ajuste-paciente")]
+    partial class ajustepaciente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,11 +27,11 @@ namespace Consultorio.Migrations
 
             modelBuilder.Entity("Consultorio.Model.Consulta", b =>
                 {
-                    b.Property<int>("ConsultaId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("PacienteId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConsultaId"));
+                    b.Property<int>("ConsultaId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataConsulta")
                         .HasColumnType("datetime2");
@@ -41,15 +44,9 @@ namespace Consultorio.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PacienteId")
-                        .HasColumnType("int");
+                    b.HasKey("PacienteId");
 
-                    b.HasKey("ConsultaId");
-
-                    b.HasIndex("PacienteId")
-                        .IsUnique();
-
-                    b.ToTable("Consultas", (string)null);
+                    b.ToTable("Consultas");
                 });
 
             modelBuilder.Entity("Consultorio.Model.Paciente", b =>
@@ -73,7 +70,7 @@ namespace Consultorio.Migrations
 
                     b.HasKey("PacienteId");
 
-                    b.ToTable("Pacientes", (string)null);
+                    b.ToTable("Pacientes");
                 });
 
             modelBuilder.Entity("Consultorio.Model.Consulta", b =>

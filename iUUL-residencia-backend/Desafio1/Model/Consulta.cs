@@ -12,14 +12,13 @@ namespace Consultorio.Model
         public int PacienteId { get; set; }
         public int ConsultaId { get; set; }
         public Paciente Paciente { get; set; }
-        public string CPF { get; private set; }
         public DateOnly DataConsulta { get; private set; }
         public string HoraInicial { get; private set; }
         public string HoraFinal { get; private set; }
 
-        public Consulta(string cpf, DateOnly data, string h1, string h2)
+        public Consulta(Paciente paciente, DateOnly data, string h1, string h2)
         {
-            this.CPF = cpf;
+            this.Paciente = paciente;
             this.DataConsulta = data;
             this.HoraInicial = h1;
             this.HoraFinal = h2;
@@ -56,7 +55,7 @@ namespace Consultorio.Model
         {
             foreach (var c in Agenda.Consultas)
             {
-                if (c.CPF == this.CPF)
+                if (c.Paciente.CPF == this.Paciente.CPF)
                 {
                     // 1 - Se a data de agora for exatamente igual à data
                     // que já estava marcada (consulta hoje)

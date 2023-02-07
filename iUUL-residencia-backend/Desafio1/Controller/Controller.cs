@@ -1,5 +1,7 @@
-﻿using Consultorio.Form;
+﻿using Consultorio.DB;
+using Consultorio.Form;
 using Consultorio.Model;
+using Consultorio.Model.Daos;
 using Consultorio.View;
 
 namespace Consultorio.Controller
@@ -15,6 +17,7 @@ namespace Consultorio.Controller
              ******************************************/
             Agenda agenda = new();
             GerenciaPaciente gerenciaPaciente = new();
+            ConsultasController consultasController = new();
 
             int escolhaMenuPrincipal;
             int? escolhaCadastroPaciente;
@@ -107,12 +110,12 @@ namespace Consultorio.Controller
                             }
 
                             // Se estiver, verificar sobreposição de consultas
-                            Consulta consulta = new(consultaForm.CPF,
+                            Consulta consulta = new(paciente,
                                 DateOnly.FromDateTime(DateTime.Parse(consultaForm.DataConsulta)),
                                 consultaForm.HoraInicial, consultaForm.HoraFinal);
                             try
                             {
-                                paciente.Consulta = consulta;
+                               paciente.Consulta = consulta;
                             }
                             catch
                             {
@@ -122,7 +125,10 @@ namespace Consultorio.Controller
                             }
 
                             // Adicionando consulta na agenda
-                            Agenda.Consultas.Add(consulta);
+                            //Agenda.Consultas.Add(consulta);
+                            consultasController.AdicionaConsulta(consulta.DataConsulta,consulta.HoraInicial ,consulta.HoraFinal,paciente.CPF);
+
+                            
 
                             // Exibir mensagem de sucesso
                             ViewMensagens.ExibeMensagemAgendamento(true);
@@ -136,7 +142,7 @@ namespace Consultorio.Controller
 
                             try
                             {
-                                agenda.RemoveConsulta(consultaForm);
+                               // agenda.RemoveConsulta(consultaForm);
                             }
                             catch
                             {

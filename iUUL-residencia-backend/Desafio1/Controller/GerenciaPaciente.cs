@@ -13,25 +13,19 @@ namespace Consultorio.Controller
     internal class GerenciaPaciente
     {
 
-        PacienteDAO pacienteDAO = new PacienteDAO();
-        public List<Paciente> Pacientes { get; private set; }
+        PacienteDAO DAO = new PacienteDAO();
 
-        public GerenciaPaciente()
-        {
-            Pacientes = new List<Paciente>();
-        }
 
         internal bool ExistePaciente(string? entrada)
         {
             if(entrada == null) return false;
-            IEnumerable<Paciente> Pacientes = pacienteDAO.RetornaPacientes().Where(p => p.CPF == entrada); 
+            IEnumerable<Paciente> Pacientes = DAO.RetornaPacientes().Where(p => p.CPF == entrada); 
             return Pacientes.Count() != 0;
         }
 
         internal void AdicionaPaciente(Paciente p)
         {
-            pacienteDAO.Adicionar(p);
-            Pacientes.Add(p);
+            DAO.AdicionarPaciente(p);
         }
 
         internal void RemovePaciente(string cpf)
@@ -43,24 +37,24 @@ namespace Consultorio.Controller
             // Pacientes com consulta futura não podem ser removidos
             if (paciente.ExisteAgendamento())
                 throw new Exception();
-            pacienteDAO.Remover(paciente);
+            DAO.RemoverPaciente(paciente);
         }
 
         
         internal Paciente? RetornaPaciente(string cpf)
         {
-            Paciente? paciente = pacienteDAO.RetornaPacientes().Where(p => p.CPF == cpf).FirstOrDefault();
+            Paciente? paciente = DAO.RetornaPacientes().Where(p => p.CPF == cpf).FirstOrDefault();
             return paciente;
         }
 
         internal List<Paciente> RetornaPacientesPorCPF()
         {
-            return pacienteDAO.ListarPorCpf();
+            return DAO.ListarPorCpf();
         }
 
         internal List<Paciente> RetornaPacientesPorNome()
         {
-            return pacienteDAO.ListarPorNome();
+            return DAO.ListarPorNome();
         }
     }
 }

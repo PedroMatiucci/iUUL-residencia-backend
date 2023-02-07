@@ -9,7 +9,6 @@ namespace Consultorio.DB.Mappings
     {
         public void Configure(EntityTypeBuilder<Consulta> builder)
         {
-
             builder.Property(c => c.DataConsulta)
             .HasConversion<DateOnlyConverter>()
             .IsRequired();

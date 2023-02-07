@@ -3,7 +3,7 @@ using Consultorio.Util;
 
 namespace Consultorio.Model.Daos
 {
-    internal class PacienteDAO : IPacienteDAO, IDisposable
+    internal class PacienteDAO : IPacienteDAO,IConsultaDAO, IDisposable
     {
 
         private ApplicationDbContext contexto;
@@ -12,13 +12,13 @@ namespace Consultorio.Model.Daos
         {
                 this.contexto = new ApplicationDbContext();
         }
-        public void Adicionar(Paciente p)
+        public void AdicionarPaciente(Paciente p)
         {
             contexto.Pacientes.Add(p);
             contexto.SaveChanges();
 
         }
-        public void Remover(Paciente p)
+        public void RemoverPaciente(Paciente p)
         {
             contexto.Pacientes.Remove(p);
             contexto.SaveChanges();
@@ -38,6 +38,31 @@ namespace Consultorio.Model.Daos
         {
             return contexto.Pacientes.ToList();
 
+        }
+
+        public void AdicionarConsulta(DateOnly data, string horaInicial, string horaFinal, string cpf)
+        {
+            Paciente? paciente = contexto.Pacientes.Where(p => p.CPF == cpf).FirstOrDefault();
+            Consulta consulta = new(paciente, data, horaInicial, horaFinal);
+            contexto.Consultas.Add(consulta);
+            contexto.SaveChanges();
+        }
+
+
+        public void RemoverConsulta(Consulta c)
+        {
+            contexto.Consultas.Remove(c);
+            contexto.SaveChanges();
+        }
+
+        public IList<Consulta> RetornaConsultas()
+        {
+            return contexto.Consultas.ToList();
+        }
+
+        public IList<Paciente> RetornaConsultasPeriodo()
+        {
+            throw new NotImplementedException();
         }
 
         public void Dispose()

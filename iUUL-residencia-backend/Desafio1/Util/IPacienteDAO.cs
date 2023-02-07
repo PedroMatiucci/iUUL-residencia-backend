@@ -9,9 +9,9 @@ namespace Consultorio.Util
 {
     internal interface IPacienteDAO
     {
-        void Adicionar(Paciente p);
+        void AdicionarPaciente(Paciente p);
 
-        void Remover(Paciente p);
+        void RemoverPaciente(Paciente p);
 
         IList<Paciente> RetornaPacientes();
 
