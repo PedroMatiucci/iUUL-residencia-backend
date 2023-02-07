@@ -10,10 +10,10 @@ using Consultorio.View;
 
 namespace Consultorio.Controller
 {
-    internal class GerenciaPaciente
+    internal class PacienteController
     {
 
-        PacienteDAO DAO = new PacienteDAO();
+        DAO DAO = new DAO();
 
 
         internal bool ExistePaciente(string? entrada)

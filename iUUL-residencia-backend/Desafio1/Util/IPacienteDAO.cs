@@ -13,7 +13,7 @@ namespace Consultorio.Util
 
         void RemoverPaciente(Paciente p);
 
-        IList<Paciente> RetornaPacientes();
+        List<Paciente> RetornaPacientes();
 
         List<Paciente> ListarPorNome();
 

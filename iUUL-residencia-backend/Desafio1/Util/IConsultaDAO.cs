@@ -13,9 +13,9 @@ namespace Consultorio.Util
 
         void RemoverConsulta(Consulta c);
 
-        IList<Consulta> RetornaConsultas();
+        List<Consulta> RetornaConsultas();
 
-        IList<Paciente> RetornaConsultasPeriodo();
+        List<Paciente> RetornaConsultasPeriodo();
 
     }
 }

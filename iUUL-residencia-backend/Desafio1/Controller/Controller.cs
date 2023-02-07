@@ -16,7 +16,7 @@ namespace Consultorio.Controller
              * do programa.
              ******************************************/
             Agenda agenda = new();
-            GerenciaPaciente gerenciaPaciente = new();
+            PacienteController gerenciaPaciente = new();
             ConsultasController consultasController = new();
 
             int escolhaMenuPrincipal;
@@ -125,10 +125,7 @@ namespace Consultorio.Controller
                             }
 
                             // Adicionando consulta na agenda
-                            //Agenda.Consultas.Add(consulta);
                             consultasController.AdicionaConsulta(consulta.DataConsulta,consulta.HoraInicial ,consulta.HoraFinal,paciente.CPF);
-
-                            
 
                             // Exibir mensagem de sucesso
                             ViewMensagens.ExibeMensagemAgendamento(true);
@@ -167,7 +164,8 @@ namespace Consultorio.Controller
                             {
                                 case 1:
                                     {
-                                        ViewListagem.ExibeAgenda(gerenciaPaciente);
+
+                                        ViewListagem.ExibeAgenda(consultasController.RetornaConsultas());
                                     }
                                     break;
                                 case 2:

@@ -18,7 +18,7 @@ namespace Consultorio.View
         /********************************************
          *      Cadastramento de um paciente!       *
          *******************************************/
-        public static PacienteForm CadastroPaciente(PacienteForm pacienteForm, GerenciaPaciente gerenciaPaciente)
+        public static PacienteForm CadastroPaciente(PacienteForm pacienteForm, PacienteController gerenciaPaciente)
         {
             string? entrada;
             bool v = false;
@@ -54,7 +54,7 @@ namespace Consultorio.View
         /********************************************
          *      Agendamento de uma consulta!       *
          *******************************************/
-        public static ConsultaForm InsereDadosConsulta(GerenciaPaciente gerenciaPaciente, ConsultaForm consultaForm,PacienteForm pf)
+        public static ConsultaForm InsereDadosConsulta(PacienteController gerenciaPaciente, ConsultaForm consultaForm,PacienteForm pf)
         {
             string? entrada;
 
@@ -95,7 +95,7 @@ namespace Consultorio.View
         /****************************************
          *    Cancelamento de uma consulta!     *
          ***************************************/
-        internal static ConsultaForm InsereDadosCancelamentoConsulta(GerenciaPaciente gerenciaPaciente, ConsultaForm consultaForm,PacienteForm pf)
+        internal static ConsultaForm InsereDadosCancelamentoConsulta(PacienteController gerenciaPaciente, ConsultaForm consultaForm,PacienteForm pf)
         {
             string? entrada;
 
@@ -175,7 +175,7 @@ namespace Consultorio.View
             return entrada;
         }
         /* ESTA FUNÇÃO RETORNA O VALOR SE ELE FOR UM CPF && EXISTENTE */
-        public static string InsereCPFValidoExistente(GerenciaPaciente gerenciaPaciente,PacienteForm pf)
+        public static string InsereCPFValidoExistente(PacienteController gerenciaPaciente,PacienteForm pf)
         {
             string? entrada;
             bool v = true;

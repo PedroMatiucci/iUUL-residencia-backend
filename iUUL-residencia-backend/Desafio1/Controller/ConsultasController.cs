@@ -12,7 +12,7 @@ namespace Consultorio.Controller
 {
     internal class ConsultasController
     {
-        PacienteDAO DAO = new PacienteDAO();
+        DAO DAO = new DAO();
 
         public void AdicionaConsulta(DateOnly data, string horaInicial, string horaFinal, string cpf)
         {
@@ -22,6 +22,11 @@ namespace Consultorio.Controller
         public void RemoveConsulta(Consulta c)
         {
 
+        }
+
+        public List<Consulta> RetornaConsultas()
+        {
+            return DAO.RetornaConsultas();
         }
     }
 }

@@ -1,14 +1,15 @@
 ﻿using Consultorio.DB;
 using Consultorio.Util;
+using Microsoft.EntityFrameworkCore;
 
 namespace Consultorio.Model.Daos
 {
-    internal class PacienteDAO : IPacienteDAO,IConsultaDAO, IDisposable
+    internal class DAO : IPacienteDAO,IConsultaDAO, IDisposable
     {
 
         private ApplicationDbContext contexto;
 
-        public PacienteDAO()
+        public DAO()
         {
                 this.contexto = new ApplicationDbContext();
         }
@@ -34,7 +35,7 @@ namespace Consultorio.Model.Daos
             return contexto.Pacientes.OrderBy(p => p.Nome).ToList();
         }
 
-        public IList<Paciente> RetornaPacientes()
+        public List<Paciente> RetornaPacientes()
         {
             return contexto.Pacientes.ToList();
 
@@ -42,6 +43,7 @@ namespace Consultorio.Model.Daos
 
         public void AdicionarConsulta(DateOnly data, string horaInicial, string horaFinal, string cpf)
         {
+        
             Paciente? paciente = contexto.Pacientes.Where(p => p.CPF == cpf).FirstOrDefault();
             Consulta consulta = new(paciente, data, horaInicial, horaFinal);
             contexto.Consultas.Add(consulta);
@@ -55,12 +57,12 @@ namespace Consultorio.Model.Daos
             contexto.SaveChanges();
         }
 
-        public IList<Consulta> RetornaConsultas()
+        public List<Consulta> RetornaConsultas()
         {
-            return contexto.Consultas.ToList();
+            return contexto.Consultas.Include(c => c.Paciente).ToList();
         }
 
-        public IList<Paciente> RetornaConsultasPeriodo()
+        public List<Paciente> RetornaConsultasPeriodo()
         {
             throw new NotImplementedException();
         }
