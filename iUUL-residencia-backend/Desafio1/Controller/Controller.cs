@@ -10,11 +10,6 @@ namespace Consultorio.Controller
     {
         public static void Start()
         {
-            /*******************************************
-             * Criaremos a lista de Consultas e Pacientes
-             * apenas uma única vez durante a execução
-             * do programa.
-             ******************************************/
             PacienteController gerenciaPaciente = new();
             ConsultasController consultasController = new();
 

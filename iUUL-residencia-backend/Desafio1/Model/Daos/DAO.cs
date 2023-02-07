@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Consultorio.Model.Daos
 {
-    internal class DAO : IPacienteDAO,IConsultaDAO, IDisposable
+    internal class DAO : IPacienteDAO, IConsultaDAO, IDisposable
     {
 
         private ApplicationDbContext contexto;
 
         public DAO()
         {
-                this.contexto = new ApplicationDbContext();
+            contexto = new ApplicationDbContext();
         }
         public void AdicionarPaciente(Paciente p)
         {
@@ -43,7 +43,7 @@ namespace Consultorio.Model.Daos
 
         public void AdicionarConsulta(DateOnly data, string horaInicial, string horaFinal, string cpf)
         {
-        
+
             Paciente? paciente = contexto.Pacientes.Where(p => p.CPF == cpf).FirstOrDefault();
             Consulta consulta = new(paciente, data, horaInicial, horaFinal);
             contexto.Consultas.Add(consulta);
