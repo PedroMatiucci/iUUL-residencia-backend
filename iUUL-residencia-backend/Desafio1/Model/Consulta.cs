@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Consultorio.Controller;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace Consultorio.Model
         public string HoraInicial { get; private set; }
         public string HoraFinal { get; private set; }
 
+        ConsultasController consultasController = new();
+
         public Consulta(Paciente paciente, DateOnly data, string h1, string h2)
         {
             this.Paciente = paciente;
@@ -31,7 +34,7 @@ namespace Consultorio.Model
 
         internal bool PossuiAgendamentoSobreposto()
         {
-            foreach (var c in Agenda.Consultas)
+            foreach (var c in consultasController.RetornaConsultas())
             {
                 if (c.DataConsulta == this.DataConsulta)
                 {
@@ -53,7 +56,7 @@ namespace Consultorio.Model
 
         internal bool PossuiAgendamentoFuturo()
         {
-            foreach (var c in Agenda.Consultas)
+            foreach (var c in consultasController.RetornaConsultas())
             {
                 if (c.Paciente.CPF == this.Paciente.CPF)
                 {

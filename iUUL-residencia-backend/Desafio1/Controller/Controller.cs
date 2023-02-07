@@ -15,7 +15,6 @@ namespace Consultorio.Controller
              * apenas uma única vez durante a execução
              * do programa.
              ******************************************/
-            Agenda agenda = new();
             PacienteController gerenciaPaciente = new();
             ConsultasController consultasController = new();
 
