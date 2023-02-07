@@ -15,7 +15,5 @@ namespace Consultorio.Util
 
         List<Consulta> RetornaConsultas();
 
-        List<Paciente> RetornaConsultasPeriodo();
-
     }
 }

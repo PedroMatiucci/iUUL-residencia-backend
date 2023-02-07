@@ -62,11 +62,6 @@ namespace Consultorio.Model.Daos
             return contexto.Consultas.Include(c => c.Paciente).ToList();
         }
 
-        public List<Paciente> RetornaConsultasPeriodo()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Dispose()
         {
             contexto.Dispose();

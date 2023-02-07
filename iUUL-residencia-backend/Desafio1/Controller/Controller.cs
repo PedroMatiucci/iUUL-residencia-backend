@@ -171,7 +171,7 @@ namespace Consultorio.Controller
                                 case 2:
                                     {
                                         var datas = ViewCadastro.InsereDataInicialFinalValida();
-                                        ViewListagem.ExibeAgendaPeriodo(agenda, datas, gerenciaPaciente);
+                                        ViewListagem.ExibeAgendaPeriodo(datas, consultasController.RetornaConsultas());
                                     }
                                     break;
                                 default: break;

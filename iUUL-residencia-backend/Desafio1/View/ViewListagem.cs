@@ -50,13 +50,13 @@ namespace Consultorio.View
             Console.WriteLine("---------------------------------------------------------------");
         }
 
-        internal static void ExibeAgendaPeriodo(Agenda agenda, string[] datas, PacienteController gp)
+        internal static void ExibeAgendaPeriodo(string[] datas, List<Consulta> consultas)
         {
             int tempoConsulta;
             Console.WriteLine("--------------------------------------------------------------");
             Console.WriteLine("Data\t\tH.Ini\tH.Fim\tTempo\tNome\tDt.Nasc.");
             Console.WriteLine("---------------------------------------------------------------");
-            foreach (Consulta consulta in Agenda.Consultas)
+            foreach (Consulta consulta in consultas)
             {
                 if(consulta.DataConsulta.CompareTo(
                     DateOnly.FromDateTime(DateTime.Parse(datas[0]))) > 0
@@ -65,13 +65,12 @@ namespace Consultorio.View
                         DateOnly.FromDateTime(DateTime.Parse(datas[1]))) < 0)
                 {
                     tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                    var paciente = consulta.Paciente;
                     Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}",
                         consulta.DataConsulta,
                         FormataData(consulta.HoraInicial),
                         FormataData(consulta.HoraFinal),
                         tempoConsulta,
-                        paciente.Nome, paciente.DataNascimento.ToString("dd/MM/yyyy"));
+                        consulta.Paciente.Nome, consulta.Paciente.DataNascimento.ToString("dd/MM/yyyy"));
                 }
                 if (consulta.DataConsulta.CompareTo(
                     DateOnly.FromDateTime(DateTime.Parse(datas[0]))) == 0
@@ -80,13 +79,12 @@ namespace Consultorio.View
                         DateOnly.FromDateTime(DateTime.Parse(datas[1]))) == 0)
                 {
                     tempoConsulta = int.Parse(consulta.HoraFinal) - int.Parse(consulta.HoraInicial);
-                    var paciente = consulta.Paciente;
                     Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}",
                         consulta.DataConsulta,
                         FormataData(consulta.HoraInicial),
                         FormataData(consulta.HoraFinal),
                         tempoConsulta,
-                        paciente.Nome, paciente.DataNascimento.ToString("dd/MM/yyyy"));
+                        consulta.Paciente.Nome, consulta.Paciente.DataNascimento.ToString("dd/MM/yyyy"));
                 }
             }
             Console.WriteLine("---------------------------------------------------------------");
