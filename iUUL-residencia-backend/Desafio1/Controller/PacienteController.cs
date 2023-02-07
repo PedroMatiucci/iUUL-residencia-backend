@@ -30,7 +30,7 @@ namespace Consultorio.Controller
 
         internal void RemovePaciente(string cpf)
         {
-            var paciente = this.RetornaPaciente(cpf);
+            var paciente = RetornaPaciente(cpf);
 
             if (paciente == null) throw new Exception();
 
