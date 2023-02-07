@@ -27,17 +27,17 @@ namespace Consultorio.Model.Daos
 
         public List<Paciente> ListarPorCpf()
         {
-            return contexto.Pacientes.OrderBy(p => p.CPF).ToList();
+            return contexto.Pacientes.Include(p => p.Consulta).OrderBy(p => p.CPF).ToList();
         }
 
         public List<Paciente> ListarPorNome()
         {
-            return contexto.Pacientes.OrderBy(p => p.Nome).ToList();
+            return contexto.Pacientes.Include(p => p.Consulta).OrderBy(p => p.Nome).ToList();
         }
 
         public List<Paciente> RetornaPacientes()
         {
-            return contexto.Pacientes.ToList();
+            return contexto.Pacientes.Include(p => p.Consulta).ToList();
 
         }
 

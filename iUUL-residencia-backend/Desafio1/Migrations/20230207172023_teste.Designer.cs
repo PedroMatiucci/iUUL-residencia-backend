@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Consultorio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230206204443_mudanca-nome")]
-    partial class mudancanome
+    [Migration("20230207172023_teste")]
+    partial class teste
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace Consultorio.Migrations
 
             modelBuilder.Entity("Consultorio.Model.Consulta", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ConsultaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConsultaId"));
 
                     b.Property<DateTime>("DataConsulta")
                         .HasColumnType("datetime2");
@@ -47,7 +47,7 @@ namespace Consultorio.Migrations
                     b.Property<int>("PacienteId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConsultaId");
 
                     b.HasIndex("PacienteId")
                         .IsUnique();
@@ -57,11 +57,11 @@ namespace Consultorio.Migrations
 
             modelBuilder.Entity("Consultorio.Model.Paciente", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PacienteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PacienteId"));
 
                     b.Property<string>("CPF")
                         .IsRequired()
@@ -74,7 +74,7 @@ namespace Consultorio.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PacienteId");
 
                     b.ToTable("Pacientes");
                 });

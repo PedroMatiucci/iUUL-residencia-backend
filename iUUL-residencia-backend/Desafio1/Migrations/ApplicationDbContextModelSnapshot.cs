@@ -49,7 +49,7 @@ namespace Consultorio.Migrations
                     b.HasIndex("PacienteId")
                         .IsUnique();
 
-                    b.ToTable("Consultas", (string)null);
+                    b.ToTable("Consultas");
                 });
 
             modelBuilder.Entity("Consultorio.Model.Paciente", b =>
@@ -73,7 +73,7 @@ namespace Consultorio.Migrations
 
                     b.HasKey("PacienteId");
 
-                    b.ToTable("Pacientes", (string)null);
+                    b.ToTable("Pacientes");
                 });
 
             modelBuilder.Entity("Consultorio.Model.Consulta", b =>

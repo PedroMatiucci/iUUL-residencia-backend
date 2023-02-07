@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Consultorio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230206192458_ajuste-paciente")]
-    partial class ajustepaciente
+    [Migration("20230207164931_Ajustes-Tabela")]
+    partial class AjustesTabela
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace Consultorio.Migrations
 
             modelBuilder.Entity("Consultorio.Model.Consulta", b =>
                 {
-                    b.Property<int>("PacienteId")
+                    b.Property<int>("ConsultaId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ConsultaId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConsultaId"));
 
                     b.Property<DateTime>("DataConsulta")
                         .HasColumnType("datetime2");
@@ -44,7 +44,13 @@ namespace Consultorio.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PacienteId");
+                    b.Property<int>("PacienteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ConsultaId");
+
+                    b.HasIndex("PacienteId")
+                        .IsUnique();
 
                     b.ToTable("Consultas");
                 });

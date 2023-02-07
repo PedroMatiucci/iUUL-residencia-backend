@@ -19,9 +19,29 @@ namespace Consultorio.Controller
             DAO.AdicionarConsulta(data,horaInicial,horaFinal,cpf);
         }
 
-        public void RemoveConsulta(Consulta c)
+        public void RemoveConsulta(ConsultaForm c)
         {
+                var dataAgora = DateOnly.FromDateTime(DateTime.Now);
+                var dataForm = DateOnly.FromDateTime(DateTime.Parse(c.DataConsulta));
+                List<Consulta> consultas = DAO.RetornaConsultas();
+                if (consultas != null)
+                {
+                    if (dataAgora.CompareTo(dataForm) < 0 || dataAgora.CompareTo(dataForm) == 0)
+                    {
+                        foreach (var consulta in consultas)
+                        {
+                            if (consulta.Paciente.CPF == c.CPF
+                                && consulta.DataConsulta == dataForm
+                                && consulta.HoraInicial == c.HoraInicial)
+                            {
+                                DAO.RemoverConsulta(consulta);
+                                return;
+                            }
+                        }
+                    }
+                }
 
+                throw new Exception();
         }
 
         public List<Consulta> RetornaConsultas()

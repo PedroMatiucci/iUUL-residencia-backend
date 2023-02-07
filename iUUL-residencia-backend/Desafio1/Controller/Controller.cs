@@ -139,7 +139,7 @@ namespace Consultorio.Controller
 
                             try
                             {
-                               // agenda.RemoveConsulta(consultaForm);
+                                consultasController.RemoveConsulta(consultaForm);
                             }
                             catch
                             {
